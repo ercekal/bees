@@ -20,7 +20,6 @@ const Header = ({ navbar }) => {
       }
     }
   } = navbar
-  console.log('bgColor: ', bgColor);
   return (
     <header
       style={{
