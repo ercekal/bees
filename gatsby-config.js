@@ -1,8 +1,8 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    title: `Bees`,
+    description: `Bees`,
+    author: `@ercekal`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -12,6 +12,13 @@ module.exports = {
       options: {
         name: `images`,
         path: `${__dirname}/src/images`,
+      },
+    },
+    {
+      resolve: `gatsby-source-contentful`,
+      options: {
+        spaceId: `4mu0gs3qubdb`,
+        accessToken: 'c4RqaSuOYjbB83XfuFFON3XkoWZF_9qx_0P7unwchFg',
       },
     },
     `gatsby-transformer-sharp`,
