@@ -1,6 +1,5 @@
 import * as React from "react"
-import { Link, graphql } from "gatsby"
-import { StaticImage } from "gatsby-plugin-image"
+import { graphql } from "gatsby"
 import styled from 'styled-components'
 import Header from "../components/header"
 import Hero from "../components/hero"
@@ -25,8 +24,7 @@ return (
     <SEO title="Home" />
     <Header navbar={navbar} />
     <Hero hero={hero} />
-    <p>Now go build something great.</p>
-    {itemsList.map(item => <SecondContentType item={item} />)}
+    {itemsList.map(item => <SecondContentType item={item} key={item}/>)}
   </Container>
 )
 }
@@ -64,16 +62,67 @@ export const pageQuery = graphql`
             itemsList {
               headerDescriptionSecond
               headerLogo {
-                description
+                file {
+                  url
+                }
+              }
+              secondaryContentImage {
+                file {
+                  url
+                }
+              }
+              headerSubtitleFirst
+              headerDescriptionFirst
+              headerSubtitleSecond
+              headerTitle
+              leftBgColor
+            }
+          }
+          third {
+            imageWithTextList {
+              text
+              textBgColor
+              image {
+                file {
+                  url
+                }
+              }
+            }
+            mainText
+          }
+          grow {
+            bgColor
+            bgImage {
+              file {
+                url
+              }
+              title
+            }
+            text {
+              text
+            }
+          }
+          findOutMore {
+            title
+            subtitle
+            button
+          }
+          footer {
+            getInTouchTitle
+            getInTouchElements {
+              icon {
                 file {
                   url
                 }
                 title
               }
-              headerSubtitleSecond
-              headerTitle
-              leftBgColor
             }
+            countriesTitle
+            countries {
+              countryName
+              path
+            }
+            tradeMark
           }
         }
       }
