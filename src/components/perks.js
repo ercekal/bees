@@ -1,22 +1,47 @@
-import React from 'react';
+import React from 'react'
 import styled from 'styled-components'
+import BarlowText from './BarlowText'
+import ImageWithTextAndSubtitle from './ImageWithTextAndSubtitle'
 
 const Container = styled.section`
   display: flex;
   flex-direction: column;
-  background-color: green;
   width: 100%;
   height: 100vh;
 `
 
-const Perks = ({perks}) => {
-    const {title} = perks 
+const Upper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40%;
+  margin: 0 auto;
+  text-align: center;
+`
+const Lower = styled.div`
+  display: flex;
+  justify-content: center;
+`
 
-    return (
-        <Container>
-            {title}
-        </Container>
-    );
-};
+const Perks = ({ perks }) => {
+  const { title, imageWithTitleAndSubtitles } = perks
 
-export default Perks;
+  const renderImageBoxes = () => {
+    return imageWithTitleAndSubtitles.map((item, i) => (
+      <ImageWithTextAndSubtitle item={item} key={i} />
+    ))
+  }
+
+  return (
+    <Container>
+      <Upper>
+        <BarlowText size="3rem" lineHeight="58px">
+          {title}
+        </BarlowText>
+      </Upper>
+      <Lower>{renderImageBoxes()}</Lower>
+    </Container>
+  )
+}
+
+export default Perks

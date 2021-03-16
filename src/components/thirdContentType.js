@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import ImageWithText from './imageWithText'
+import ImageWithText from './ImageWithText'
 
 const Container = styled.section`
   display: flex;

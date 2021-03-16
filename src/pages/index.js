@@ -1,15 +1,15 @@
 import * as React from 'react'
 import { graphql } from 'gatsby'
 import styled from 'styled-components'
-import Header from '../components/header'
-import Hero from '../components/hero'
+import Header from '../components/Header'
+import Hero from '../components/Hero'
 import SEO from '../components/seo'
-import Perks from '../components/perks'
-import Grow from '../components/grow'
-import FindOutMore from '../components/findOutMore'
-import Footer from '../components/footer'
-import SecondContentType from '../components/secondContentType'
-import ThirdContentType from '../components/thirdContentType'
+import Perks from '../components/Perks'
+import Grow from '../components/Grow'
+import FindOutMore from '../components/FindOutMore'
+import Footer from '../components/Footer'
+import SecondContentType from '../components/SecondContentType'
+import ThirdContentType from '../components/ThirdContentType'
 
 const Container = styled.div`
   display: flex;

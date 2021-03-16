@@ -1,8 +1,8 @@
-import * as React from "react"
-import PropTypes from "prop-types"
-import { Link } from "gatsby"
+import * as React from 'react'
+import PropTypes from 'prop-types'
+import { Link } from 'gatsby'
 import styled from 'styled-components'
-import Button from './button'
+import Button from './Button'
 
 const Container = styled.div`
   padding: 0.5rem 1rem;
@@ -15,21 +15,19 @@ const Header = ({ navbar }) => {
     bgColor,
     button,
     logo: {
-      file: {
-        url
-      }
-    }
+      file: { url },
+    },
   } = navbar
   return (
     <header
       style={{
         background: bgColor,
-        height: '60px'
+        height: '60px',
       }}
     >
       <Container>
-        <Link to='/'>
-          <img src={url} alt='#' />
+        <Link to="/">
+          <img src={url} alt="#" />
         </Link>
         <Button>{button}</Button>
       </Container>

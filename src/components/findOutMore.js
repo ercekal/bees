@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import BarlowText from './BarlowText'
-import Button from './button'
+import Button from './Button'
 
 const Container = styled.section`
   display: flex;
