@@ -8,12 +8,19 @@ module.exports = {
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-image`,
     {
-      resolve: "gatsby-plugin-react-svg",
+      resolve: `gatsby-plugin-google-fonts`,
+      options: {
+        fonts: [`Work Sans`],
+        display: 'swap',
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-react-svg',
       options: {
         rule: {
-          include: /assets/ // See below to configure properly
-        }
-      }
+          include: /assets/, // See below to configure properly
+        },
+      },
     },
     {
       resolve: `gatsby-source-filesystem`,

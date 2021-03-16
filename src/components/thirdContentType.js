@@ -1,10 +1,10 @@
-import React from 'react';
+import React from 'react'
 import styled from 'styled-components'
 import ImageWithText from './imageWithText'
 
 const Container = styled.section`
-    display: flex;
-    height: 100vh;
+  display: flex;
+  height: 100vh;
 `
 
 const Left = styled.div`
@@ -31,21 +31,21 @@ const Right = styled.div`
   align-items: center;
 `
 
+const ThirdContentType = ({ third }) => {
+  const { mainText, imageWithTextList } = third
 
-const ThirdContentType = ({third}) => {
-    const { mainText, imageWithTextList } = third
-    console.log('third: ', third);
-    
-    const renderImageBoxes = () => {
-        return imageWithTextList.map((item, i) => <ImageWithText item={item} key={i} />)
-    }
+  const renderImageBoxes = () => {
+    return imageWithTextList.map((item, i) => (
+      <ImageWithText item={item} key={i} />
+    ))
+  }
 
-    return (
-      <Container>
-        <Left>{mainText}</Left>
-        <Right>{renderImageBoxes()}</Right>
-      </Container>
-    )
-};
+  return (
+    <Container>
+      <Left>{mainText}</Left>
+      <Right>{renderImageBoxes()}</Right>
+    </Container>
+  )
+}
 
-export default ThirdContentType;
+export default ThirdContentType

@@ -3,8 +3,9 @@ import styled from 'styled-components'
 
 const Container = styled.section`
   display: flex;
-  background: url(${({ image }) => (image ? 'http:' + image : '')}) 
-    center no-repeat, linear-gradient(
+  background: url(${({ image }) => (image ? 'http:' + image : '')})
+      center no-repeat,
+    linear-gradient(
       to right,
       ${({ leftBgColor }) => (leftBgColor ? leftBgColor : 'red')} 0%,
       ${({ leftBgColor }) => (leftBgColor ? leftBgColor : 'red')} 38%,
@@ -27,11 +28,6 @@ const SecondContentType = ({ item }) => {
     headerTitle,
     leftBgColor,
   } = item
-  console.log(
-    'secondaryContentImage.file.url: ',
-    'http:' + secondaryContentImage.file.url,
-  )
-  console.log('type : ', typeof secondaryContentImage.file.url)
   return (
     <Container
       leftBgColor={leftBgColor}

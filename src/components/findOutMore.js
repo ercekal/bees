@@ -24,7 +24,6 @@ const Left = styled.div`
 
 const FindOutMore = ({ findOutMore }) => {
   const { title, subtitle, button, bgColor, bgImage } = findOutMore
-  console.log('bgImage: ', bgImage)
 
   return (
     <Container bgColor={bgColor}>

@@ -16,8 +16,6 @@ const Container = styled.section`
 
 const Grow = ({ grow }) => {
   const { bgColor, text, bgImage } = grow
-  console.log('bgColor, text, bgImage: ', bgColor, text, bgImage)
-  console.log('text: ', text)
 
   return (
     <Container bgColor={bgColor} bgImage={'http:' + bgImage.file.url}>
