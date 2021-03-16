@@ -19,7 +19,9 @@ const Grow = ({ grow }) => {
 
   return (
     <Container bgColor={bgColor} bgImage={'http:' + bgImage.file.url}>
-      <BarlowText size="5rem">{text.text}</BarlowText>
+      <BarlowText size="5rem" lineHeight="6rem">
+        {text.text}
+      </BarlowText>
     </Container>
   )
 }

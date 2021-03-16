@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import Button from './Button'
 import BarlowText from './BarlowText'
+import WorkSans from './WorkSans'
 
 const Container = styled.div`
   height: calc(100vh - 60px);
@@ -35,10 +36,7 @@ const HeroColoredText = styled.div`
 `
 
 const Description = styled.div`
-  width: 440px;
-  font-family: Work Sans;
-  font-size: 1rem;
-  line-height: 24px;
+  width: 45%;
   display: flex;
   align-items: center;
   text-align: center;
@@ -61,10 +59,14 @@ function Hero({ hero }) {
     <Container bgColor={bgColor}>
       <img src={url} alt="#" />
       <TitleContainer>
-        <BarlowText lineHeight="6rem">{heroText}</BarlowText>{' '}
+        <BarlowText lineHeight="6rem" size="5rem">
+          {heroText}
+        </BarlowText>{' '}
         <HeroColoredText> {heroColoredText}</HeroColoredText>
       </TitleContainer>
-      <Description>{heroDescription}</Description>
+      <Description>
+        <WorkSans>{heroDescription}</WorkSans>
+      </Description>
       <Button>{heroButton}</Button>
     </Container>
   )

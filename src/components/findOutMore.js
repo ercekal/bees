@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import BarlowText from './BarlowText'
+import WorkSans from './WorkSans'
 import Button from './Button'
 
 const Container = styled.section`
@@ -28,8 +29,10 @@ const FindOutMore = ({ findOutMore }) => {
   return (
     <Container bgColor={bgColor}>
       <Left>
-        <BarlowText size="4rem">{title}</BarlowText>
-        <p>{subtitle}</p>
+        <BarlowText size="4rem" lineHeight="77px">
+          {title}
+        </BarlowText>
+        <WorkSans lineHeight="30px">{subtitle}</WorkSans>
         <Button>{button}</Button>
       </Left>
       <img src={'http:' + bgImage.file.url} />
