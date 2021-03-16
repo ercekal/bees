@@ -1,38 +1,27 @@
-import React from 'react';
-import { Link } from "gatsby"
+import React from 'react'
+import { Link } from 'gatsby'
 import styled from 'styled-components'
+import BarlowText from './BarlowText'
 
 const Container = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #000000;
-    padding: 0 5px;
-    height: 39px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000000;
+  padding: 0 5px;
+  height: 39px;
 `
 
-const Text = styled.div`
-    font-family: Barlow Semi Condensed;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 24px;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    letter-spacing: -0.05em;
-    color: #FFFF00;
-    margin-bottom: 0;
-`
+const Button = ({ children }) => {
+  return (
+    <Container>
+      <Link to="/contact">
+        <BarlowText size="1.25rem" color="#ffff00">
+          {children}
+        </BarlowText>
+      </Link>
+    </Container>
+  )
+}
 
-const Button = ({children}) => {
-    return (
-        <Container>
-            <Link to='/contact'>
-                <Text>{children}</Text>
-            </Link>
-        </Container>
-    );
-};
-
-export default Button;
+export default Button

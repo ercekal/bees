@@ -5,15 +5,11 @@ import Header from '../components/header'
 import Hero from '../components/hero'
 import SEO from '../components/seo'
 import Perks from '../components/perks'
+import Grow from '../components/grow'
+import FindOutMore from '../components/findOutMore'
 import Footer from '../components/footer'
 import SecondContentType from '../components/secondContentType'
 import ThirdContentType from '../components/thirdContentType'
-
-import {
-  jsonToArray,
-  unNestArray,
-  unNestJson,
-} from '../helpers/contentful'
 
 const Container = styled.div`
   display: flex;
@@ -30,6 +26,8 @@ const IndexPage = ({ data }) => {
     secondList: { itemsList },
     third,
     perks,
+    grow,
+    findOutMore,
     footer,
   } = node
   console.log('footer: ', footer)
@@ -44,6 +42,8 @@ const IndexPage = ({ data }) => {
       ))}
       <ThirdContentType third={third} />
       <Perks perks={perks} />
+      <Grow grow={grow} />
+      <FindOutMore findOutMore={findOutMore} />
       <Footer footer={footer} />
     </Container>
   )
@@ -127,7 +127,6 @@ export const pageQuery = graphql`
               file {
                 url
               }
-              title
             }
             text {
               text
@@ -137,6 +136,12 @@ export const pageQuery = graphql`
             title
             subtitle
             button
+            bgColor
+            bgImage {
+              file {
+                url
+              }
+            }
           }
           footer {
             getInTouchTitle

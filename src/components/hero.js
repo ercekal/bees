@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components'
 import Button from './button'
+import BarlowText from './BarlowText'
 
 const Container = styled.div`
     height: calc(100vh - 60px);
@@ -17,29 +18,20 @@ const TitleContainer = styled.div`
     margin-bottom: 2rem;
 `
 
-const HeroText = styled.div`
-    font-family: Barlow Semi Condensed;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 5rem;
-    line-height: 96px;
-    letter-spacing: -0.05em;
-    color: #000000;
-`
-
 const HeroColoredText = styled.div`
-    font-family: Barlow Semi Condensed;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 5rem;
-    letter-spacing: -0.05em;
-    background-color: black;
-    color: #fff;
-    height: 90px;
-    display: flex;
-    align-items: center;
-    margin-left: 0.5rem;
-    padding: 0 0.5rem;
+  font-family: Barlow Semi Condensed;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 5rem;
+  line-height: 96px;
+  letter-spacing: -0.05em;
+  background-color: black;
+  color: #fff;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  margin-left: 0.5rem;
+  padding: 0 0.5rem;
 `
 
 const Description = styled.div`
@@ -70,7 +62,7 @@ function Hero({ hero }) {
         <Container bgColor={bgColor}>
             <img src={url} alt='#' />
             <TitleContainer>
-                <HeroText>{heroText}</HeroText>{' '}<HeroColoredText>{' '}{heroColoredText}</HeroColoredText>
+                <BarlowText>{heroText}</BarlowText>{' '}<HeroColoredText>{' '}{heroColoredText}</HeroColoredText>
             </TitleContainer>
             <Description>{heroDescription}</Description>
             <Button>{heroButton}</Button>

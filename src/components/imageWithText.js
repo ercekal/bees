@@ -12,11 +12,11 @@ const Container = styled.div`
 const imageWithText = ({item}) => {
     const { text, textBgColor, image: { file: { url } } } = item
     return (
-        <Container>
-            <img src={url} />
-            <div style={{background:{textBgColor}}}>{text}</div>
-        </Container>
-    );
+      <Container>
+        <img src={url} />
+        <div style={{ background: textBgColor }}>{text}</div>
+      </Container>
+    )
 };
 
 export default imageWithText;
