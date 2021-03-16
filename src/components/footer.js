@@ -50,7 +50,6 @@ const Footer = ({ footer }) => {
     tradeMark,
     bottomLinks,
   } = footer
-  console.log('bottomLinks: ', bottomLinks)
 
   const renderLinks = () => {
     return bottomLinks.map(link => (

@@ -11,6 +11,7 @@ const Container = styled.section`
       white 38%,
       white 100%
     );
+  transition: background-color 1s linear;
   height: 100vh;
   width: 100vh;
 `
