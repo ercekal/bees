@@ -41,7 +41,12 @@ const IndexPage = ({ data }) => {
       <Header navbar={navbar} />
       <Hero hero={hero} />
       {itemsList.map((item, i) => (
-        <SecondContentType item={item} key={i} />
+        <SecondContentType
+          item={item}
+          key={i}
+          number={i}
+          total={itemsList.length}
+        />
       ))}
       <ThirdContentType third={third} />
       <Perks perks={perks} />

@@ -18,7 +18,8 @@ const Container = styled.section`
       white 50%,
       white 100%
     );
-  background-size: 500px;
+  background-size: ${({ number }) =>
+    number === 1 ? '300px' : '500px'};
   @media (min-width: 768px) {
     background: url(${({ image }) => (image ? 'http:' + image : '')})
         center no-repeat,
@@ -52,7 +53,15 @@ const Lower = styled.div`
   display: flex;
 `
 
-const SecondContentType = ({ item }) => {
+const Number = styled.div`
+  display: flex;
+`
+
+const Slash = styled.p`
+  padding: 0 0.25rem 0 0.5rem;
+`
+
+const SecondContentType = ({ item, number, total }) => {
   const {
     headerLogo,
     secondaryContentImage,
@@ -67,23 +76,34 @@ const SecondContentType = ({ item }) => {
     <Container
       leftBgColor={leftBgColor}
       image={secondaryContentImage.file.url}
+      number={number}
     >
       <Upper>
+        {number}
         <Logo src={headerLogo.file.url} />
         <BarlowText size="28px" lineHeight="34px">
           {headerTitle}
         </BarlowText>
       </Upper>
-      <Lower>
-        <Upper>
-          <WorkSans size="20px">{headerSubtitleFirst}</WorkSans>
-          <WorkSans size="14px">{headerDescriptionFirst}</WorkSans>
-        </Upper>
-        <Upper>
-          <WorkSans size="20px">{headerSubtitleSecond}</WorkSans>
-          <WorkSans size="14px">{headerDescriptionSecond}</WorkSans>
-        </Upper>
-      </Lower>
+      <Upper>
+        <Lower>
+          <Upper>
+            <WorkSans size="20px">{headerSubtitleFirst}</WorkSans>
+            <WorkSans size="14px">{headerDescriptionFirst}</WorkSans>
+          </Upper>
+          <Upper>
+            <WorkSans size="20px">{headerSubtitleSecond}</WorkSans>
+            <WorkSans size="14px">{headerDescriptionSecond}</WorkSans>
+          </Upper>
+        </Lower>
+        <Number>
+          <WorkSans fontWeight="600" size="14px">
+            {number + 1}
+          </WorkSans>
+          <Slash>/</Slash>
+          <WorkSans size="14px">{total}</WorkSans>
+        </Number>
+      </Upper>
     </Container>
 
     // <Container

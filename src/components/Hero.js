@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import Button from './Button'
 import BarlowText from './BarlowText'
 import WorkSans from './WorkSans'
+import Chevron from '../../public/icons/chevron.svg'
 
 const Container = styled.div`
   height: calc(100vh - 60px);
@@ -14,13 +15,16 @@ const Container = styled.div`
 `
 
 const HeroImage = styled.div`
-  height: 300px;
-  width: 90%;
+  height: 450px;
+  width: 100%;
   margin: 0 auto;
+  padding-bottom: 3rem;
   background: url(${({ heroImageMobile }) =>
       heroImageMobile ? 'http:' + heroImageMobile : ''})
     center no-repeat;
   @media (min-width: 768px) {
+    width: 90%;
+    padding-bottom: 0;
     background: url(${({ heroImageDesktop }) =>
         heroImageDesktop ? 'http:' + heroImageDesktop : ''})
       center no-repeat;

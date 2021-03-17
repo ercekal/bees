@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import ImageWithText from './ImageWithText'
+import BarlowText from './BarlowText'
 
 const Container = styled.section`
   display: flex;
@@ -42,7 +43,9 @@ const ThirdContentType = ({ third }) => {
 
   return (
     <Container>
-      <Left>{mainText}</Left>
+      <BarlowText size="36px" lineHeight="43.2px">
+        {mainText}
+      </BarlowText>
       <Right>{renderImageBoxes()}</Right>
     </Container>
   )
