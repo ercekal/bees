@@ -9,25 +9,24 @@ const Container = styled.section`
   justify-content: space-between;
   align-items: center;
   padding: 3rem;
-  background: url(${({ image }) => (image ? 'http:' + image : '')})
+  background: url(${({ image }) => (image ? `http:${image}` : '')})
       center no-repeat,
     linear-gradient(
       to bottom,
-      ${({ leftBgColor }) => (leftBgColor ? leftBgColor : 'red')} 0%,
-      ${({ leftBgColor }) => (leftBgColor ? leftBgColor : 'red')} 50%,
+      ${({ leftBgColor }) => leftBgColor || 'red'} 0%,
+      ${({ leftBgColor }) => leftBgColor || 'red'} 50%,
       white 50%,
       white 100%
     );
   background-size: ${({ number }) =>
     number === 1 ? '300px' : '500px'};
   @media (min-width: 768px) {
-    background: url(${({ image }) => (image ? 'http:' + image : '')})
+    background: url(${({ image }) => (image ? `http:${image}` : '')})
         center no-repeat,
       linear-gradient(
         to right,
-        ${({ leftBgColor }) => (leftBgColor ? leftBgColor : 'red')} 0%,
-        ${({ leftBgColor }) => (leftBgColor ? leftBgColor : 'red')}
-          38%,
+        ${({ leftBgColor }) => leftBgColor || 'red'} 0%,
+        ${({ leftBgColor }) => leftBgColor || 'red'} 38%,
         white 38%,
         white 100%
       );

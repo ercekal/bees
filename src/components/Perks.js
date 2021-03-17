@@ -26,11 +26,10 @@ const Lower = styled.div`
 const Perks = ({ perks }) => {
   const { title, imageWithTitleAndSubtitles } = perks
 
-  const renderImageBoxes = () => {
-    return imageWithTitleAndSubtitles.map((item, i) => (
+  const renderImageBoxes = () =>
+    imageWithTitleAndSubtitles.map((item, i) => (
       <ImageWithTextAndSubtitle item={item} key={i} />
     ))
-  }
 
   return (
     <Container>

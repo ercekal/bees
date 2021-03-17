@@ -22,7 +22,7 @@ const Container = styled.div`
 `
 
 const IndexPage = ({ data }) => {
-  const node = data.allContentfulFrontPage.edges[0].node
+  const { node } = data.allContentfulFrontPage.edges[0]
   const {
     navbar,
     hero,

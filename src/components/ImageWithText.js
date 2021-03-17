@@ -13,7 +13,7 @@ const TextContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: ${({ bgColor }) => (bgColor ? bgColor : '')};
+  background: ${({ bgColor }) => bgColor || ''};
   height: 70px;
   padding: 2rem 3rem 2rem 2rem;
 `

@@ -12,16 +12,14 @@ const Container = styled.div`
   height: 39px;
 `
 
-const Button = ({ children }) => {
-  return (
-    <Container>
-      <Link to="/contact">
-        <BarlowText size="1.25rem" color="#ffff00">
-          {children}
-        </BarlowText>
-      </Link>
-    </Container>
-  )
-}
+const Button = ({ children }) => (
+  <Container>
+    <Link to="/contact">
+      <BarlowText size="1.25rem" color="#ffff00">
+        {children}
+      </BarlowText>
+    </Link>
+  </Container>
+)
 
 export default Button

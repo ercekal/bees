@@ -51,13 +51,12 @@ const Footer = ({ footer }) => {
     bottomLinks,
   } = footer
 
-  const renderLinks = () => {
-    return bottomLinks.map(link => (
+  const renderLinks = () =>
+    bottomLinks.map(link => (
       <LinkItem to={link.path} key={link.path}>
         <Text>{link.title}</Text>
       </LinkItem>
     ))
-  }
   return (
     <Container>
       <Upper>test</Upper>

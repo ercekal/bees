@@ -8,7 +8,7 @@ const Container = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: ${({ bgColor }) => (bgColor ? bgColor : '')};
+  background: ${({ bgColor }) => bgColor || ''};
   width: 100%;
   height: 30rem;
   padding: 0 5rem 0 0;
@@ -35,7 +35,7 @@ const FindOutMore = ({ findOutMore }) => {
         <WorkSans lineHeight="30px">{subtitle}</WorkSans>
         <Button>{button}</Button>
       </Left>
-      <img src={'http:' + bgImage.file.url} />
+      <img src={`http:${bgImage.file.url}`} />
     </Container>
   )
 }

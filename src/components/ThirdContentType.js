@@ -35,11 +35,10 @@ const Right = styled.div`
 const ThirdContentType = ({ third }) => {
   const { mainText, imageWithTextList } = third
 
-  const renderImageBoxes = () => {
-    return imageWithTextList.map((item, i) => (
+  const renderImageBoxes = () =>
+    imageWithTextList.map((item, i) => (
       <ImageWithText item={item} key={i} />
     ))
-  }
 
   return (
     <Container>

@@ -7,7 +7,7 @@ import Chevron from '../../public/icons/chevron.svg'
 
 const Container = styled.div`
   height: calc(100vh - 60px);
-  background-color: ${({ bgColor }) => (bgColor ? bgColor : 'white')};
+  background-color: ${({ bgColor }) => bgColor || 'white'};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -20,13 +20,13 @@ const HeroImage = styled.div`
   margin: 0 auto;
   padding-bottom: 3rem;
   background: url(${({ heroImageMobile }) =>
-      heroImageMobile ? 'http:' + heroImageMobile : ''})
+      heroImageMobile ? `http:${heroImageMobile}` : ''})
     center no-repeat;
   @media (min-width: 768px) {
     width: 90%;
     padding-bottom: 0;
     background: url(${({ heroImageDesktop }) =>
-        heroImageDesktop ? 'http:' + heroImageDesktop : ''})
+        heroImageDesktop ? `http:${heroImageDesktop}` : ''})
       center no-repeat;
   }
 `
