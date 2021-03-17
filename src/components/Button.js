@@ -3,10 +3,10 @@ import { Link } from 'gatsby'
 import styled from 'styled-components'
 import BarlowText from './BarlowText'
 
-const Container = styled.div`
-  display: flex;
+const Container = styled.button`
+  /* display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
   background: #000000;
   padding: 0 5px;
   height: 39px;

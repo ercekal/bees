@@ -45,14 +45,11 @@ const DesktopText = styled.div`
     display: flex;
     flex-direction: column;
     margin-left: 4rem;
+    margin-bottom: 2rem;
     height: 150px;
     justify-content: space-around;
   }
-  /* width: 30%;
-  text-align: center; */
 `
-
-const ButtonContainer = styled(Button)``
 
 const Image = styled.img`
   height: 200px;
@@ -78,9 +75,8 @@ const FindOutMore = ({ findOutMore }) => {
             {title}
           </BarlowText>
           <WorkSans lineHeight="30px">{subtitle}</WorkSans>
-          {/* <ButtonContainer>{button}</ButtonContainer> */}
+          <Button>{button}</Button>
         </DesktopText>
-        <ButtonContainer>{button}</ButtonContainer>
       </Left>
       <Image src={`http:${bgImage.file.url}`} />
     </Container>
