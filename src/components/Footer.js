@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'gatsby'
+import BarlowText from './BarlowText'
+import WorkSans from './WorkSans'
 
 const Container = styled.div`
   display: flex;
@@ -9,7 +11,9 @@ const Container = styled.div`
   padding: 1rem;
   justify-content: center;
   align-items: center;
-  /* height: 350px; */
+  @media (min-width: 768px) {
+    height: 350px;
+  }
   background: #000000;
 `
 
@@ -20,10 +24,22 @@ const Upper = styled.div`
 const Lower = styled.div`
   display: flex;
   justify-content: space-between;
+  flex-direction: column-reverse;
+  align-items: center;
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
 `
 
 const Links = styled.div`
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1rem;
+  @media (min-width: 768px) {
+    margin-bottom: 0;
+    flex-direction: row;
+  }
 `
 
 const Middle = styled.div`
@@ -90,13 +106,32 @@ const Footer = ({ footer }) => {
       </Upper>
       <Middle>
         <List>
-          <p>{countriesTitle}</p>
+          <BarlowText size="18px" lineHeight="22px" color="#FFFFFF">
+            {countriesTitle}
+          </BarlowText>
           {countries.map(c => (
-            <p key={c.countryName}>{c.countryName}</p>
+            <WorkSans
+              fontWeight="400"
+              size="14px"
+              lineHeight="16.42px"
+              color="#FFFFFF"
+              key={c.countryName}
+            >
+              {c.countryName}
+            </WorkSans>
           ))}
         </List>
         <List>
-          <p>{getInTouchTitle}</p>
+          <Link to="/contact">
+            <WorkSans
+              fontWeight="600"
+              size="1rem"
+              lineHeight="1.5rem"
+              color="#FFFFFF"
+            >
+              {getInTouchTitle}
+            </WorkSans>
+          </Link>
           {getInTouchElements.map(c => (
             <Icon
               key={c.icon.title}
