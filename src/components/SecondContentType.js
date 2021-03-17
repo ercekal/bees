@@ -78,7 +78,6 @@ const SecondContentType = ({ item, number, total }) => {
       number={number}
     >
       <Upper>
-        {number}
         <Logo src={headerLogo.file.url} />
         <BarlowText size="28px" lineHeight="34px">
           {headerTitle}

@@ -19,6 +19,11 @@ const Container = styled.div`
 
 const Upper = styled.div`
   display: flex;
+  justify-content: center;
+  align-items: center;
+  @media (min-width: 768px) {
+    padding-bottom: 5rem;
+  }
 `
 
 const Lower = styled.div`
@@ -42,17 +47,48 @@ const Links = styled.div`
   }
 `
 
+const MobileTopContainer = styled.div`
+  width: 90%;
+  @media (min-width: 768px) {
+    display: none;
+  }
+`
+
+const DesktopTopContainer = styled.div`
+  display: none;
+  @media (min-width: 768px) {
+    display: flex;
+    height: 140px;
+    width: 80%;
+  }
+`
+
 const Middle = styled.div`
   display: flex;
-  justify-content: space-around;
-  width: 80%;
+  justify-content: flex-start;
+  width: 90%;
   margin: 1rem 0;
+  @media (min-width: 768px) {
+    margin-left: 3rem;
+  }
 `
 
 const List = styled.div`
   display: flex;
   flex-direction: column;
   color: white;
+  width: 50%;
+  @media (min-width: 768px) {
+    width: initial;
+  }
+`
+
+const CountriesList = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  height: 90px;
+  width: 350px;
 `
 
 const Text = styled.p`
@@ -72,7 +108,10 @@ const LinkItem = styled(Link)`
   text-decoration: none;
 `
 
-const Image = styled.img``
+const Image = styled.img`
+  padding: 2rem 0;
+  width: 100px;
+`
 
 const Icon = styled.img`
   width: 15px;
@@ -89,9 +128,6 @@ const Footer = ({ footer }) => {
     tradeMark,
     bottomLinks,
   } = footer
-  // console.log('getInTouchElements: ', getInTouchElements)
-  // console.log('getInTouchElements: ', getInTouchElements[0].file)
-  // console.log('getInTouchElements: ', getInTouchElements[0].file.url)
 
   const renderLinks = () =>
     bottomLinks.map(link => (
@@ -99,47 +135,73 @@ const Footer = ({ footer }) => {
         <Text>{link.title}</Text>
       </LinkItem>
     ))
+
+  const rendercountries = () =>
+    countries.map(c => (
+      <WorkSans
+        fontWeight="400"
+        size="14px"
+        lineHeight="16.42px"
+        color="#FFFFFF"
+        key={c.countryName}
+      >
+        {c.countryName}
+      </WorkSans>
+    ))
+
+  const renderGetInTouch = () => (
+    <>
+      <Link to="/contact">
+        <WorkSans
+          fontWeight="600"
+          size="1rem"
+          lineHeight="1.5rem"
+          color="#FFFFFF"
+        >
+          {getInTouchTitle}
+        </WorkSans>
+      </Link>
+      {getInTouchElements.map(c => (
+        <Icon key={c.icon.title} src={'http:' + c.icon.file.url} />
+      ))}
+    </>
+  )
   return (
     <Container>
-      <Upper>
-        <Image src={'http:' + logo.file.url} />
-      </Upper>
-      <Middle>
-        <List>
-          <BarlowText size="18px" lineHeight="22px" color="#FFFFFF">
-            {countriesTitle}
-          </BarlowText>
-          {countries.map(c => (
-            <WorkSans
-              fontWeight="400"
-              size="14px"
-              lineHeight="16.42px"
-              color="#FFFFFF"
-              key={c.countryName}
-            >
-              {c.countryName}
-            </WorkSans>
-          ))}
-        </List>
-        <List>
-          <Link to="/contact">
-            <WorkSans
-              fontWeight="600"
-              size="1rem"
-              lineHeight="1.5rem"
-              color="#FFFFFF"
-            >
-              {getInTouchTitle}
-            </WorkSans>
-          </Link>
-          {getInTouchElements.map(c => (
-            <Icon
-              key={c.icon.title}
-              src={'http:' + c.icon.file.url}
-            />
-          ))}
-        </List>
-      </Middle>
+      <MobileTopContainer>
+        <Upper>
+          <Image src={'http:' + logo.file.url} />
+        </Upper>
+        <Middle>
+          <List>
+            <div>
+              <BarlowText
+                size="18px"
+                lineHeight="22px"
+                color="#FFFFFF"
+              >
+                {countriesTitle}
+              </BarlowText>
+            </div>
+            {rendercountries()}
+          </List>
+          <List>{renderGetInTouch()}</List>
+        </Middle>
+      </MobileTopContainer>
+      <DesktopTopContainer>
+        <Upper>
+          <Image src={'http:' + logo.file.url} />
+        </Upper>
+        <Middle>
+          <List>
+            <BarlowText size="18px" lineHeight="22px" color="#FFFFFF">
+              {countriesTitle}
+            </BarlowText>
+            <CountriesList>{rendercountries()}</CountriesList>
+          </List>
+          <List>{renderGetInTouch()}</List>
+        </Middle>
+      </DesktopTopContainer>
       <Lower>
         <Text>{tradeMark}</Text>
         <Links>{renderLinks()}</Links>
