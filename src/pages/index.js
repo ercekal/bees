@@ -157,6 +157,11 @@ export const pageQuery = graphql`
             }
           }
           footer {
+            logo {
+              file {
+                url
+              }
+            }
             getInTouchTitle
             getInTouchElements {
               icon {

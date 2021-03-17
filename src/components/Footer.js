@@ -6,8 +6,10 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 350px;
-  left: 0px;
+  padding: 1rem;
+  justify-content: center;
+  align-items: center;
+  /* height: 350px; */
   background: #000000;
 `
 
@@ -22,6 +24,19 @@ const Lower = styled.div`
 
 const Links = styled.div`
   display: flex;
+`
+
+const Middle = styled.div`
+  display: flex;
+  justify-content: space-around;
+  width: 80%;
+  margin: 1rem 0;
+`
+
+const List = styled.div`
+  display: flex;
+  flex-direction: column;
+  color: white;
 `
 
 const Text = styled.p`
@@ -41,8 +56,16 @@ const LinkItem = styled(Link)`
   text-decoration: none;
 `
 
+const Image = styled.img``
+
+const Icon = styled.img`
+  width: 15px;
+  height: 15px;
+`
+
 const Footer = ({ footer }) => {
   const {
+    logo,
     getInTouchTitle,
     getInTouchElements,
     countriesTitle,
@@ -50,6 +73,9 @@ const Footer = ({ footer }) => {
     tradeMark,
     bottomLinks,
   } = footer
+  // console.log('getInTouchElements: ', getInTouchElements)
+  // console.log('getInTouchElements: ', getInTouchElements[0].file)
+  // console.log('getInTouchElements: ', getInTouchElements[0].file.url)
 
   const renderLinks = () =>
     bottomLinks.map(link => (
@@ -59,7 +85,26 @@ const Footer = ({ footer }) => {
     ))
   return (
     <Container>
-      <Upper>test</Upper>
+      <Upper>
+        <Image src={'http:' + logo.file.url} />
+      </Upper>
+      <Middle>
+        <List>
+          <p>{countriesTitle}</p>
+          {countries.map(c => (
+            <p key={c.countryName}>{c.countryName}</p>
+          ))}
+        </List>
+        <List>
+          <p>{getInTouchTitle}</p>
+          {getInTouchElements.map(c => (
+            <Icon
+              key={c.icon.title}
+              src={'http:' + c.icon.file.url}
+            />
+          ))}
+        </List>
+      </Middle>
       <Lower>
         <Text>{tradeMark}</Text>
         <Links>{renderLinks()}</Links>
