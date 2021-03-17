@@ -10,7 +10,10 @@ const Container = styled.section`
   background: url(${({ bgImage }) => bgImage || ''}) center no-repeat,
     ${({ bgColor }) => bgColor || ''};
   width: 100%;
-  height: 100vh;
+  background-size: cover;
+  @media (min-width: 768px) {
+    height: 100vh;
+  }
 `
 
 const Grow = ({ grow }) => {

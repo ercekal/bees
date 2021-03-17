@@ -6,14 +6,17 @@ import Button from './Button'
 
 const Container = styled.section`
   display: flex;
+  flex-direction: column-reverse;
   justify-content: center;
   align-items: center;
+  padding: 3rem 0;
+  @media (min-width: 768px) {
+    height: 30rem;
+    padding: 0 5rem 0 0;
+  }
   background: ${({ bgColor }) => bgColor || ''};
   width: 100%;
-  height: 30rem;
-  padding: 0 5rem 0 0;
 `
-
 const Left = styled.div`
   display: flex;
   flex-direction: column;

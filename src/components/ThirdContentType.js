@@ -8,6 +8,14 @@ const Container = styled.section`
   height: 100vh;
 `
 
+const ContainerMobile = styled.section`
+  display: flex;
+  flex-direction: column;
+  @media (min-width: 768px) {
+    height: 100vh;
+  }
+`
+
 const Left = styled.div`
   width: 38%;
   display: flex;
@@ -23,6 +31,16 @@ const Left = styled.div`
   letter-spacing: -0.05em;
   padding-left: 3rem;
 `
+
+const Upper = styled.div`
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin: 0 auto 3rem;
+`
+
+const Lower = styled.div``
 
 const Right = styled.div`
   width: auto;
@@ -41,12 +59,19 @@ const ThirdContentType = ({ third }) => {
     ))
 
   return (
-    <Container>
-      <BarlowText size="36px" lineHeight="43.2px">
+    <ContainerMobile>
+      <Upper>
+        <BarlowText size="36px" lineHeight="43.2px">
+          {mainText}
+        </BarlowText>
+      </Upper>
+      {renderImageBoxes()}
+      {/* <BarlowText size="36px" lineHeight="43.2px">
         {mainText}
-      </BarlowText>
-      <Right>{renderImageBoxes()}</Right>
-    </Container>
+      </BarlowText> */}
+      {/* <Right>{renderImageBoxes()}</Right> */}
+      {/* <Right>{renderImageBoxes()}</Right> */}
+    </ContainerMobile>
   )
 }
 

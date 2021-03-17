@@ -4,9 +4,13 @@ import styled from 'styled-components'
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  width: 15rem;
-  height: 280px;
-  margin: 2rem;
+  width: 80%;
+  margin: 0 auto 2rem;
+  @media (min-width: 768px) {
+    width: 15rem;
+    height: 280px;
+    margin: 2rem;
+  }
 `
 
 const TextContainer = styled.div`
@@ -16,6 +20,7 @@ const TextContainer = styled.div`
   background: ${({ bgColor }) => bgColor || ''};
   height: 70px;
   padding: 2rem 3rem 2rem 2rem;
+  margin-bottom: 2rem;
 `
 
 const Text = styled.div`
@@ -28,6 +33,10 @@ const Text = styled.div`
   color: #000000;
 `
 
+const Image = styled.img`
+  width: 100%;
+`
+
 const imageWithText = ({ item }) => {
   const {
     text,
@@ -38,7 +47,7 @@ const imageWithText = ({ item }) => {
   } = item
   return (
     <Container>
-      <img src={url} />
+      <Image src={url} />
       <TextContainer bgColor={textBgColor}>
         <Text>{text}</Text>
       </TextContainer>
