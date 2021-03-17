@@ -4,12 +4,9 @@ import styled from 'styled-components'
 import BarlowText from './BarlowText'
 
 const Container = styled.button`
-  /* display: flex;
-  justify-content: center;
-  align-items: center; */
   background: #000000;
-  padding: 0 5px;
-  height: 39px;
+  width: fit-content;
+  padding: 1rem 0.5rem;
 `
 
 const Button = ({ children }) => (

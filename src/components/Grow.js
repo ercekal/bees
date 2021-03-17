@@ -6,7 +6,7 @@ const Container = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 5rem;
+  padding: 4rem;
   background: url(${({ bgImage }) => bgImage || ''}) center no-repeat,
     ${({ bgColor }) => bgColor || ''};
   width: 100%;

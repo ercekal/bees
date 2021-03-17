@@ -28,11 +28,11 @@ const Left = styled.div`
 `
 
 const MobileText = styled.div`
-  width: 30%;
-  height: 150px;
+  width: 35%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  align-items: center;
   text-align: center;
   @media (min-width: 768px) {
     display: none;
@@ -69,6 +69,7 @@ const FindOutMore = ({ findOutMore }) => {
             {title}
           </BarlowText>
           <WorkSans lineHeight="20px">{subtitle}</WorkSans>
+          <Button>{button}</Button>
         </MobileText>
         <DesktopText>
           <BarlowText size="4rem" lineHeight="77px">
