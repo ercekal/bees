@@ -9,10 +9,6 @@ const Container = styled.div`
   margin: 2rem;
 `
 
-const Image = styled.img`
-  margin-bottom: 0;
-`
-
 const TextContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -42,7 +38,7 @@ const imageWithText = ({ item }) => {
   } = item
   return (
     <Container>
-      <Image src={url} />
+      <img src={url} />
       <TextContainer bgColor={textBgColor}>
         <Text>{text}</Text>
       </TextContainer>

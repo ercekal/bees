@@ -13,6 +13,20 @@ const Container = styled.div`
   flex-direction: column;
 `
 
+const HeroImage = styled.div`
+  height: 300px;
+  width: 90%;
+  margin: 0 auto;
+  background: url(${({ heroImageMobile }) =>
+      heroImageMobile ? 'http:' + heroImageMobile : ''})
+    center no-repeat;
+  @media (min-width: 768px) {
+    background: url(${({ heroImageDesktop }) =>
+        heroImageDesktop ? 'http:' + heroImageDesktop : ''})
+      center no-repeat;
+  }
+`
+
 const TitleContainer = styled.div`
   display: flex;
   align-items: center;
@@ -49,15 +63,17 @@ function Hero({ hero }) {
     heroDescription,
     heroText,
     heroColoredText,
-    hero: {
-      file: { url },
-    },
+    heroImageMobile,
+    heroImageDesktop,
     bgColor,
   } = hero
 
   return (
     <Container bgColor={bgColor}>
-      <img src={url} alt="#" />
+      <HeroImage
+        heroImageDesktop={heroImageDesktop.file.url}
+        heroImageMobile={heroImageMobile.file.url}
+      />
       <TitleContainer>
         <BarlowText lineHeight="6rem" size="5rem">
           {heroText}

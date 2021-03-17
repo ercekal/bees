@@ -14,8 +14,11 @@ import ThirdContentType from '../components/ThirdContentType'
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
   height: 100%;
+  width: 100vh;
+  @media (min-width: 768px) {
+    width: 100%;
+  }
 `
 
 const IndexPage = ({ data }) => {
@@ -71,7 +74,12 @@ export const pageQuery = graphql`
             heroDescription
             heroText
             heroColoredText
-            hero {
+            heroImageDesktop {
+              file {
+                url
+              }
+            }
+            heroImageMobile {
               file {
                 url
               }

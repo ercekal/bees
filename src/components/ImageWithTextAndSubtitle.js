@@ -11,10 +11,6 @@ const Container = styled.div`
   margin: 2rem;
 `
 
-const Image = styled.img`
-  margin-bottom: 0;
-`
-
 const ImageWithTextAndSubtitle = ({ item }) => {
   console.log('item: ', item)
   const {
@@ -26,7 +22,7 @@ const ImageWithTextAndSubtitle = ({ item }) => {
   } = item
   return (
     <Container>
-      <Image src={url} />
+      <img src={url} />
       <BarlowText
         size="2.25rem"
         lineHeight="43px"
