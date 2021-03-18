@@ -24,8 +24,7 @@ const TextContainer = styled.div`
   align-items: center;
   background: ${({ bgColor }) => bgColor || ''};
   height: 70px;
-  padding: 2rem 2rem 0 0;
-  margin-bottom: 2rem;
+  justify-content: flex-start;
   @media (min-width: 768px) {
     padding: 0;
     justify-content: flex-start;
@@ -54,7 +53,6 @@ const Image = styled.img`
 `
 
 const IconWithText = ({ item }) => {
-  console.log('item: ', item)
   const {
     text,
     image: {

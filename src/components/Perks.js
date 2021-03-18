@@ -17,6 +17,9 @@ const Upper = styled.div`
   width: 40%;
   margin: 0 auto;
   text-align: center;
+  @media (min-width: 768px) {
+    padding-top: 3rem;
+  }
 `
 const Lower = styled.div`
   display: flex;

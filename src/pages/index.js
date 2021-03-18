@@ -6,6 +6,7 @@ import Hero from '../components/Hero'
 import SEO from '../components/seo'
 import Perks from '../components/Perks'
 import Products from '../components/Products'
+import Testemonials from '../components/Testemonials'
 import Grow from '../components/Grow'
 import FindOutMore from '../components/FindOutMore'
 import Footer from '../components/Footer'
@@ -30,12 +31,14 @@ const IndexPage = ({ data }) => {
     secondList: { itemsList },
     third,
     products,
+    testemonials,
     perks,
     grow,
     findOutMore,
     footer,
   } = node
 
+  console.log('testemonials: ', testemonials)
   return (
     <Container>
       <SEO title="Home" />
@@ -51,6 +54,7 @@ const IndexPage = ({ data }) => {
       ))}
       <ThirdContentType third={third} />
       <Products products={products} />
+      <Testemonials testemonials={testemonials} />
       <Perks perks={perks} />
       <Grow grow={grow} />
       <FindOutMore findOutMore={findOutMore} />
@@ -135,6 +139,14 @@ export const pageQuery = graphql`
                 }
               }
             }
+          }
+          testemonials {
+            testemonialsList {
+              clientName
+              clientDetail
+              text
+            }
+            bgColor
           }
           perks {
             imageWithTitleAndSubtitles {
