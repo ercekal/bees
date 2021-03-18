@@ -65,7 +65,7 @@ const IndexPage = ({ data }) => {
 export default IndexPage
 
 export const pageQuery = graphql`
-  query MyQuery {
+  query FrontPageQuery {
     allContentfulFrontPage {
       edges {
         node {

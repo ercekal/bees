@@ -1,15 +1,11 @@
 import * as React from 'react'
-import { Link } from 'gatsby'
 import { graphql } from 'gatsby'
-import styled from 'styled-components'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
-import Header from '../components/Header'
-import Footer from '../components/Footer'
 
 const ContactPage = ({ data }) => {
   const { node } = data.allContentfulContactPage.edges[0]
-  const { navbar, contactPageButtonList, footer } = node
+  const { contactPageButtonList } = node
   console.log('contactPageButtonList: ', contactPageButtonList)
   return (
     <Layout>

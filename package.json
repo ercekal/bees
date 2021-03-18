@@ -1,14 +1,14 @@
 {
   "name": "gatsby-starter-default",
   "private": true,
-  "description": "A simple starter to get up and developing quickly with Gatsby",
+  "description": "Bees design",
   "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "erce kal",
   "dependencies": {
     "@contentful/rich-text-html-renderer": "^14.1.2",
     "@fontsource/barlow-semi-condensed": "^4.2.2",
     "contentful": "^8.2.0",
-    "gatsby": "^3.0.1",
+    "gatsby": "^3.1.1",
     "gatsby-plugin-gatsby-cloud": "^2.0.0",
     "gatsby-plugin-google-fonts": "^1.0.1",
     "gatsby-plugin-image": "^1.0.0",
@@ -50,7 +50,6 @@
     "clean": "gatsby clean",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
     "lint": "eslint --fix --ext .js,.jsx ."
-
   },
   "repository": {
     "type": "git",
