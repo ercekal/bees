@@ -22,7 +22,7 @@ const Container = styled.section`
     number === 1 ? '300px' : '500px'};
   @media (min-width: 768px) {
     background: url(${({ image }) => (image ? `http:${image}` : '')})
-        center no-repeat,
+        left no-repeat,
       linear-gradient(
         to right,
         ${({ leftBgColor }) => leftBgColor || 'red'} 0%,
@@ -30,6 +30,9 @@ const Container = styled.section`
         white 38%,
         white 100%
       );
+    /* background-position: 28% 50%; */
+    width: 100%;
+    position: relative;
   }
   transition: background-color 1s linear;
   height: 100vh;
@@ -54,6 +57,44 @@ const Lower = styled.div`
 
 const Number = styled.div`
   display: flex;
+  @media (min-width: 768px) {
+    display: none;
+  }
+`
+
+const Mobile = styled.div`
+  display: initial;
+  @media (min-width: 768px) {
+    display: none;
+  }
+`
+
+const Desktop = styled.div`
+  display: none;
+  @media (min-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    right: 200px;
+    top: 150px;
+  }
+`
+
+const DesktopList = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+  height: 100px;
+  align-items: baseline;
+  margin: 2rem 0;
+`
+
+const DesktopUpper = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+const Title = styled.div`
+  margin-bottom: 1rem;
 `
 
 const Slash = styled.p`
@@ -77,31 +118,61 @@ const SecondContentType = ({ item, number, total }) => {
       image={secondaryContentImage.file.url}
       number={number}
     >
-      <Upper>
-        <Logo src={headerLogo.file.url} />
-        <BarlowText size="28px" lineHeight="34px">
-          {headerTitle}
-        </BarlowText>
-      </Upper>
-      <Upper>
-        <Lower>
-          <Upper>
-            <WorkSans size="20px">{headerSubtitleFirst}</WorkSans>
-            <WorkSans size="14px">{headerDescriptionFirst}</WorkSans>
-          </Upper>
-          <Upper>
-            <WorkSans size="20px">{headerSubtitleSecond}</WorkSans>
-            <WorkSans size="14px">{headerDescriptionSecond}</WorkSans>
-          </Upper>
-        </Lower>
-        <Number>
-          <WorkSans fontWeight="600" size="14px">
-            {number + 1}
-          </WorkSans>
-          <Slash>/</Slash>
-          <WorkSans size="14px">{total}</WorkSans>
-        </Number>
-      </Upper>
+      <Mobile>
+        <Upper>
+          <Logo src={headerLogo.file.url} />
+          <BarlowText size="28px" lineHeight="34px">
+            {headerTitle}
+          </BarlowText>
+        </Upper>
+        <Upper>
+          <Lower>
+            <Upper>
+              <WorkSans size="20px">{headerSubtitleFirst}</WorkSans>
+              <WorkSans size="14px">
+                {headerDescriptionFirst}
+              </WorkSans>
+            </Upper>
+            <Upper>
+              <WorkSans size="20px">{headerSubtitleSecond}</WorkSans>
+              <WorkSans size="14px">
+                {headerDescriptionSecond}
+              </WorkSans>
+            </Upper>
+          </Lower>
+          <Number>
+            <WorkSans fontWeight="600" size="14px">
+              {number + 1}
+            </WorkSans>
+            <Slash>/</Slash>
+            <WorkSans size="14px">{total}</WorkSans>
+          </Number>
+        </Upper>
+      </Mobile>
+      <Desktop>
+        <DesktopUpper>
+          <Logo src={headerLogo.file.url} />
+          <BarlowText size="28px" lineHeight="34px">
+            {headerTitle}
+          </BarlowText>
+        </DesktopUpper>
+        <DesktopList>
+          <Title>
+            <WorkSans size="24px" lineHeight="2rem" fontWeight="600">
+              {headerSubtitleFirst}
+            </WorkSans>
+          </Title>
+          <WorkSans size="16px">{headerDescriptionFirst}</WorkSans>
+        </DesktopList>
+        <DesktopList>
+          <Title>
+            <WorkSans size="24px" lineHeight="2rem" fontWeight="600">
+              {headerSubtitleSecond}
+            </WorkSans>
+          </Title>
+          <WorkSans size="16px">{headerDescriptionSecond}</WorkSans>
+        </DesktopList>
+      </Desktop>
     </Container>
 
     // <Container

@@ -21,14 +21,6 @@ const Left = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: Barlow Semi Condensed;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 48px;
-  line-height: 58px;
-  display: flex;
-  align-items: center;
-  letter-spacing: -0.05em;
   padding-left: 3rem;
 `
 
@@ -40,7 +32,17 @@ const Upper = styled.div`
   margin: 0 auto 3rem;
 `
 
-const Lower = styled.div``
+const Mobile = styled.div`
+  @media (min-width: 768px) {
+    display: none;
+  }
+`
+const Desktop = styled.div`
+  display: none;
+  @media (min-width: 768px) {
+    display: flex;
+  }
+`
 
 const Right = styled.div`
   width: auto;
@@ -55,22 +57,27 @@ const ThirdContentType = ({ third }) => {
 
   const renderImageBoxes = () =>
     imageWithTextList.map((item, i) => (
-      <ImageWithText item={item} key={i} />
+      <ImageWithText item={item} key={i} number={i} />
     ))
 
   return (
     <ContainerMobile>
-      <Upper>
-        <BarlowText size="36px" lineHeight="43.2px">
-          {mainText}
-        </BarlowText>
-      </Upper>
-      {renderImageBoxes()}
-      {/* <BarlowText size="36px" lineHeight="43.2px">
-        {mainText}
-      </BarlowText> */}
-      {/* <Right>{renderImageBoxes()}</Right> */}
-      {/* <Right>{renderImageBoxes()}</Right> */}
+      <Mobile>
+        <Upper>
+          <BarlowText size="36px" lineHeight="43.2px">
+            {mainText}
+          </BarlowText>
+        </Upper>
+        {renderImageBoxes()}
+      </Mobile>
+      <Desktop>
+        <Left>
+          <BarlowText size="3rem" lineHeight="48.6px">
+            {mainText}
+          </BarlowText>
+        </Left>
+        <Right>{renderImageBoxes()}</Right>
+      </Desktop>
     </ContainerMobile>
   )
 }

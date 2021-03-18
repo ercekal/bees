@@ -12,7 +12,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   @media (min-width: 768px) {
-    height: 350px;
+    height: 250px;
   }
   background: #000000;
 `
@@ -33,6 +33,7 @@ const Lower = styled.div`
   align-items: center;
   @media (min-width: 768px) {
     flex-direction: row;
+    width: 90%;
   }
 `
 
@@ -59,17 +60,18 @@ const DesktopTopContainer = styled.div`
   @media (min-width: 768px) {
     display: flex;
     height: 140px;
-    width: 80%;
+    width: 90%;
   }
 `
 
 const Middle = styled.div`
   display: flex;
-  justify-content: flex-start;
+  /* justify-content: flex-start; */
   width: 90%;
   margin: 1rem 0;
   @media (min-width: 768px) {
     margin-left: 3rem;
+    justify-content: space-evenly;
   }
 `
 
