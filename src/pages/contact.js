@@ -1,23 +1,25 @@
 import * as React from 'react'
 import { graphql } from 'gatsby'
-import Layout from '../components/layout'
-import SEO from '../components/seo'
+import Footer from '../components/Footer'
+import Header from '../components/Header'
+import ContactPageButtonList from '../components/ContactPageButtonList'
 
 const ContactPage = ({ data }) => {
   const { node } = data.allContentfulContactPage.edges[0]
-  const { contactPageButtonList } = node
+  const { contactPageButtonList, navbar, footer } = node
   console.log('contactPageButtonList: ', contactPageButtonList)
   return (
-    <Layout>
-      <SEO title="Page two" />
-      test
-    </Layout>
+    <div>
+      <Header navbar={navbar} />
+      <ContactPageButtonList list={contactPageButtonList} />
+      <Footer footer={footer} />
+    </div>
   )
 }
 
 export default ContactPage
 
-export const pageQuery = graphql`
+export const query = graphql`
   query ContactPageQuery {
     allContentfulContactPage {
       edges {

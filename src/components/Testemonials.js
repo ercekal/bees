@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import Arrow from './Arrow'
-import WorkSans from './WorkSans'
 import Testemonial from './Testemonial'
 
 const Container = styled.section`

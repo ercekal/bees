@@ -64,7 +64,7 @@ const IndexPage = ({ data }) => {
 
 export default IndexPage
 
-export const pageQuery = graphql`
+export const query = graphql`
   query FrontPageQuery {
     allContentfulFrontPage {
       edges {
