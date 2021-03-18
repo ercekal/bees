@@ -14,9 +14,9 @@ const Container = styled.div`
   margin-left: 2rem;
 `
 
-const Arrow = ({ degrees, color, onClick }) => {
+const Arrow = ({ degrees, color, onClick, bgColor }) => {
   return (
-    <Container degrees={degrees} onClick={onClick}>
+    <Container degrees={degrees} onClick={onClick} bgColor={bgColor}>
       <img src={color === 'yellow' ? YellowChevron : Chevron} />
     </Container>
   )

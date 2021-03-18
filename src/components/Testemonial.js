@@ -22,7 +22,6 @@ const Lower = styled.div`
 
 const Testemonial = ({ testemonial }) => {
   const { clientName, clientDetail, text } = testemonial
-  console.log('testemonial, bgColor: ', testemonial)
 
   return (
     <Container>

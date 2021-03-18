@@ -38,7 +38,6 @@ const IndexPage = ({ data }) => {
     footer,
   } = node
 
-  console.log('testemonials: ', testemonials)
   return (
     <Container>
       <SEO title="Home" />

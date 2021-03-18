@@ -7,12 +7,14 @@ import WorkSans from './WorkSans'
 import Chevron from '../../public/icons/chevron.svg'
 
 const Container = styled.div`
-  height: calc(100vh - 60px);
   background-color: ${({ bgColor }) => bgColor || 'white'};
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  @media (min-width: 768px) {
+    height: calc(100vh - 60px);
+  }
 `
 
 const HeroImage = styled.div`
@@ -24,6 +26,7 @@ const HeroImage = styled.div`
       heroImageMobile ? `http:${heroImageMobile}` : ''})
     center no-repeat;
   @media (min-width: 768px) {
+    height: 350px;
     width: 90%;
     padding-bottom: 0;
     background: url(${({ heroImageDesktop }) =>
@@ -62,6 +65,21 @@ const Description = styled.div`
   margin-bottom: 2rem;
 `
 
+const Mobile = styled.div`
+  display: flex;
+  padding-bottom: 3rem;
+  @media (min-width: 768px) {
+    display: none;
+  }
+`
+
+const Desktop = styled.div`
+  display: none;
+  @media (min-width: 768px) {
+    display: flex;
+  }
+`
+
 function Hero({ hero }) {
   const {
     heroButton,
@@ -88,7 +106,12 @@ function Hero({ hero }) {
       <Description>
         <WorkSans>{heroDescription}</WorkSans>
       </Description>
-      <Button>{heroButton}</Button>
+      <Desktop>
+        <Button>{heroButton}</Button>
+      </Desktop>
+      <Mobile>
+        <img src={Chevron} />
+      </Mobile>
     </Container>
   )
 }

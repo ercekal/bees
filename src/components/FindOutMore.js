@@ -58,6 +58,10 @@ const Image = styled.img`
   }
 `
 
+const MobileElement = styled.div`
+  margin: 1rem 0;
+`
+
 const FindOutMore = ({ findOutMore }) => {
   const { title, subtitle, button, bgColor, bgImage } = findOutMore
 
@@ -68,8 +72,12 @@ const FindOutMore = ({ findOutMore }) => {
           <BarlowText size="2.6rem" lineHeight="50px">
             {title}
           </BarlowText>
-          <WorkSans lineHeight="20px">{subtitle}</WorkSans>
-          <Button>{button}</Button>
+          <MobileElement>
+            <WorkSans lineHeight="20px">{subtitle}</WorkSans>
+          </MobileElement>
+          <MobileElement>
+            <Button>{button}</Button>
+          </MobileElement>
         </MobileText>
         <DesktopText>
           <BarlowText size="4rem" lineHeight="77px">

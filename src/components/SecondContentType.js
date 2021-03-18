@@ -53,6 +53,12 @@ const Upper = styled.div`
 
 const Lower = styled.div`
   display: flex;
+  justify-content: space-between;
+  width: 100%;
+`
+
+const LowerContent = styled(Upper)`
+  width: 40%;
 `
 
 const Number = styled.div`
@@ -63,7 +69,10 @@ const Number = styled.div`
 `
 
 const Mobile = styled.div`
-  display: initial;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
   @media (min-width: 768px) {
     display: none;
   }
@@ -127,18 +136,18 @@ const SecondContentType = ({ item, number, total }) => {
         </Upper>
         <Upper>
           <Lower>
-            <Upper>
+            <LowerContent>
               <WorkSans size="20px">{headerSubtitleFirst}</WorkSans>
               <WorkSans size="14px">
                 {headerDescriptionFirst}
               </WorkSans>
-            </Upper>
-            <Upper>
+            </LowerContent>
+            <LowerContent>
               <WorkSans size="20px">{headerSubtitleSecond}</WorkSans>
               <WorkSans size="14px">
                 {headerDescriptionSecond}
               </WorkSans>
-            </Upper>
+            </LowerContent>
           </Lower>
           <Number>
             <WorkSans fontWeight="600" size="14px">
