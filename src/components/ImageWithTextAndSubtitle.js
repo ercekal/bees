@@ -12,7 +12,6 @@ const Container = styled.div`
 `
 
 const ImageWithTextAndSubtitle = ({ item }) => {
-  console.log('item: ', item)
   const {
     title,
     subtitle,
