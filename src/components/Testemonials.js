@@ -72,8 +72,8 @@ const Testemonials = ({ testemonials }) => {
     <Container leftBgColor={bgColor}>
       {list[number]}
       <Arrows>
-        <Arrow color="yellow" degrees="0" onClick={previous} />
-        <Arrow color="yellow" degrees="180" onClick={next} />
+        <Arrow degrees="0" onClick={previous} />
+        <Arrow degrees="180" onClick={next} />
       </Arrows>
     </Container>
   )

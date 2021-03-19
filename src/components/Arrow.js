@@ -1,7 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import Chevron from '../../public/icons/chevron.svg'
-import YellowChevron from '../../public/icons/chevron-yellow.svg'
 
 const Container = styled.div`
   background: ${({ bgColor }) => bgColor || 'black'};
@@ -14,10 +12,10 @@ const Container = styled.div`
   margin-left: 2rem;
 `
 
-const Arrow = ({ degrees, color, onClick, bgColor }) => {
+const Arrow = ({ degrees, onClick, bgColor }) => {
   return (
     <Container degrees={degrees} onClick={onClick} bgColor={bgColor}>
-      <img src={color === 'yellow' ? YellowChevron : Chevron} />
+      <img src="../../chevron-yellow.svg" />
     </Container>
   )
 }
