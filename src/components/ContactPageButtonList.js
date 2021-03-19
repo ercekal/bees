@@ -20,7 +20,6 @@ const ContactPageButtonList = ({ list }) => {
   const [hover, setHover] = useState(false)
   const [hoverIconsList, setHoverIconsList] = useState([])
   const [colorsList, setColorsList] = useState([])
-  console.log('colorsList: ', colorsList)
 
   useEffect(() => {
     const hList = list.map((t, i) => (
