@@ -9,11 +9,12 @@ const Container = styled.div`
   background: ${({ bgColor, hoverColor, selected, hover }) =>
     hover ? (selected ? 'white' : hoverColor) : bgColor || 'white'};
   margin-bottom: 1rem;
-  width: 350px;
+  width: 330px;
 `
 
 const Icon = styled.img`
-  padding: 1rem;
+  padding: 0.5rem;
+  width: 50px;
 `
 
 const ContactPageButton = ({
