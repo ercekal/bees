@@ -6,6 +6,8 @@ import HoverElement from '../components/HoverElement'
 const Container = styled.div`
   display: flex;
   background: ${({ bgColor }) => bgColor || 'white'};
+  height: calc(100vh - 310px);
+  padding: 2rem 5rem;
 `
 
 const List = styled.div`
@@ -33,8 +35,8 @@ const ContactPageButtonList = ({ list }) => {
   }, [])
 
   const onHover = n => {
-    setHover(true)
     setNumber(n)
+    setHover(true)
   }
 
   const onLeave = () => {
