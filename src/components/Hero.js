@@ -4,7 +4,6 @@ import styled from 'styled-components'
 import Button from './Button'
 import BarlowText from './BarlowText'
 import WorkSans from './WorkSans'
-import Chevron from '../../public/icons/chevron.svg'
 
 const Container = styled.div`
   background-color: ${({ bgColor }) => bgColor || 'white'};
@@ -110,7 +109,7 @@ function Hero({ hero }) {
         <Button>{heroButton}</Button>
       </Desktop>
       <Mobile>
-        <img src={Chevron} />
+        <img src="../../chevron.svg" />
       </Mobile>
     </Container>
   )
