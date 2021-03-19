@@ -50,6 +50,7 @@ const Right = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  width: 75%;
 `
 
 const ThirdContentType = ({ third }) => {

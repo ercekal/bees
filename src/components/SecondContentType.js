@@ -22,7 +22,7 @@ const Container = styled.section`
     number === 1 ? '300px' : '500px'};
   @media (min-width: 768px) {
     background: url(${({ image }) => (image ? `http:${image}` : '')})
-        left no-repeat,
+        33% no-repeat,
       linear-gradient(
         to right,
         ${({ leftBgColor }) => leftBgColor || 'red'} 0%,
@@ -30,7 +30,6 @@ const Container = styled.section`
         white 38%,
         white 100%
       );
-    /* background-position: 28% 50%; */
     width: 100%;
     position: relative;
   }
@@ -82,11 +81,16 @@ const Desktop = styled.div`
   display: none;
   @media (min-width: 768px) {
     display: flex;
-    flex-direction: column;
-    position: absolute;
-    right: 200px;
-    top: 150px;
+    position: relative;
+    width: 100%;
   }
+`
+const DesktopRight = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  right: 125px;
+  top: 150px;
 `
 
 const DesktopList = styled.div`
@@ -102,6 +106,28 @@ const DesktopUpper = styled.div`
   display: flex;
   flex-direction: column;
 `
+
+const DesktopSlider = styled.div`
+  display: flex;
+  width: 5px;
+  height: 200px;
+  background: linear-gradient(
+    to bottom,
+    black 0%,
+    black ${({ ratio }) => ratio || 0}%,
+    rgba(0, 0, 0, 0.1) ${({ ratio }) => ratio || 0}%,
+    rgba(0, 0, 0, 0.1) 100%
+  );
+`
+
+const DesktopSliderContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  left: 100px;
+  top: 150px;
+`
+
 const Title = styled.div`
   margin-bottom: 1rem;
 `
@@ -159,43 +185,45 @@ const SecondContentType = ({ item, number, total }) => {
         </Upper>
       </Mobile>
       <Desktop>
-        <DesktopUpper>
-          <Logo src={headerLogo.file.url} />
-          <BarlowText size="28px" lineHeight="34px">
-            {headerTitle}
-          </BarlowText>
-        </DesktopUpper>
-        <DesktopList>
-          <Title>
-            <WorkSans size="24px" lineHeight="2rem" fontWeight="600">
-              {headerSubtitleFirst}
-            </WorkSans>
-          </Title>
-          <WorkSans size="16px">{headerDescriptionFirst}</WorkSans>
-        </DesktopList>
-        <DesktopList>
-          <Title>
-            <WorkSans size="24px" lineHeight="2rem" fontWeight="600">
-              {headerSubtitleSecond}
-            </WorkSans>
-          </Title>
-          <WorkSans size="16px">{headerDescriptionSecond}</WorkSans>
-        </DesktopList>
+        <DesktopSliderContainer>
+          <WorkSans>{number + 1}</WorkSans>
+          <DesktopSlider ratio={((number + 1) / total) * 100} />
+          <WorkSans>{total}</WorkSans>
+        </DesktopSliderContainer>
+        <DesktopRight>
+          <DesktopUpper>
+            <Logo src={headerLogo.file.url} />
+            <BarlowText size="28px" lineHeight="34px">
+              {headerTitle}
+            </BarlowText>
+          </DesktopUpper>
+          <DesktopList>
+            <Title>
+              <WorkSans
+                size="24px"
+                lineHeight="2rem"
+                fontWeight="600"
+              >
+                {headerSubtitleFirst}
+              </WorkSans>
+            </Title>
+            <WorkSans size="16px">{headerDescriptionFirst}</WorkSans>
+          </DesktopList>
+          <DesktopList>
+            <Title>
+              <WorkSans
+                size="24px"
+                lineHeight="2rem"
+                fontWeight="600"
+              >
+                {headerSubtitleSecond}
+              </WorkSans>
+            </Title>
+            <WorkSans size="16px">{headerDescriptionSecond}</WorkSans>
+          </DesktopList>
+        </DesktopRight>
       </Desktop>
     </Container>
-
-    // <Container
-    //   leftBgColor={leftBgColor}
-    //   image={secondaryContentImage.file.url}
-    // >
-    //   <Logo src={headerLogo.file.url} />
-    //   {headerTitle}
-    //   {/* <img src={secondaryContentImage.file.url} /> */}
-    //   <p>{headerSubtitleFirst}</p>
-    //   <p>{headerDescriptionFirst}</p>
-    //   <p>{headerSubtitleSecond}</p>
-    //   <p>{headerDescriptionSecond}</p>
-    // </Container>
   )
 }
 
