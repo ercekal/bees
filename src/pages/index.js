@@ -8,6 +8,7 @@ import Perks from '../components/Perks'
 import Products from '../components/Products'
 import Testemonials from '../components/Testemonials'
 import Grow from '../components/Grow'
+import Map from '../components/Map'
 import FindOutMore from '../components/FindOutMore'
 import Footer from '../components/Footer'
 import SecondContentType from '../components/SecondContentType'
@@ -56,6 +57,7 @@ const IndexPage = ({ data }) => {
       <Testemonials testemonials={testemonials} />
       <Perks perks={perks} />
       <Grow grow={grow} />
+      <Map />
       <FindOutMore findOutMore={findOutMore} />
       <Footer footer={footer} />
     </Container>
