@@ -35,6 +35,7 @@ const IndexPage = ({ data }) => {
     testemonials,
     perks,
     grow,
+    map,
     findOutMore,
     footer,
   } = node
@@ -57,7 +58,7 @@ const IndexPage = ({ data }) => {
       <Testemonials testemonials={testemonials} />
       <Perks perks={perks} />
       <Grow grow={grow} />
-      <Map />
+      <Map mapBoxes={map} />
       <FindOutMore findOutMore={findOutMore} />
       <Footer footer={footer} />
     </Container>
@@ -170,6 +171,14 @@ export const query = graphql`
             }
             text {
               text
+            }
+          }
+          map {
+            mapBoxes {
+              boxElement {
+                bold
+                text
+              }
             }
           }
           findOutMore {

@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import Tooltip from './Tooltip'
 import WorkSans from './WorkSans'
 import BarlowText from './BarlowText'
+import MapBox from './MapBox'
 
 const Container = styled.section`
   display: flex;
@@ -19,7 +19,7 @@ const Container = styled.section`
 const LeftContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 30%;
+  width: 40%;
   position: absolute;
   left: 100px;
   top: 100px;
@@ -27,6 +27,10 @@ const LeftContainer = styled.div`
 
 const Title = styled.div`
   margin-bottom: 2rem;
+`
+
+const SubTitle = styled.div`
+  width: 60%;
 `
 
 const Image = styled.div`
@@ -37,12 +41,17 @@ const Image = styled.div`
     right: 0;
   }
 `
-
+const BoxesContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`
 const G = styled.g`
   cursor: pointer;
 `
 
-const Map = () => {
+const Map = ({ mapBoxes }) => {
+  console.log('mapBoxes: ', mapBoxes)
+  console.log('mapBoxes: type ', typeof mapBoxes)
   const [selectedCountry, setSelectedCountry] = useState('Brazil')
 
   return (
@@ -53,13 +62,20 @@ const Map = () => {
             And we’re just getting started
           </BarlowText>
         </Title>
-        <WorkSans>
-          Every day brings new challenges. Which is why, every day,
-          we’re developing new ways to make BEES, better, for
-          everyone.
-        </WorkSans>
+        <SubTitle>
+          <WorkSans>
+            Every day brings new challenges. Which is why, every day,
+            we’re developing new ways to make BEES, better, for
+            everyone.
+          </WorkSans>
+        </SubTitle>
+        <BoxesContainer>
+          {mapBoxes.mapBoxes.map((item, i) => {
+            console.log('item: ', item)
+            return <MapBox items={item.boxElement} key={i} />
+          })}
+        </BoxesContainer>
       </LeftContainer>
-      {/* <Tooltip coordinates={coordinates}>{selectedCountry}</Tooltip> */}
       <Image>
         <svg
           width="827"
