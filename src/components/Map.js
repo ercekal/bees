@@ -1,5 +1,8 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
+import Tooltip from './Tooltip'
+import WorkSans from './WorkSans'
+import BarlowText from './BarlowText'
 
 const Container = styled.section`
   display: flex;
@@ -11,6 +14,19 @@ const Container = styled.section`
   @media (min-width: 768px) {
     height: 100vh;
   }
+`
+
+const LeftContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  position: absolute;
+  left: 100px;
+  top: 100px;
+`
+
+const Title = styled.div`
+  margin-bottom: 2rem;
 `
 
 const Image = styled.div`
@@ -30,6 +46,19 @@ const Map = () => {
   const [selectedCountry, setSelectedCountry] = useState('Brazil')
   return (
     <Container>
+      <LeftContainer>
+        <Title>
+          <BarlowText size="4rem" lineHeight="76.8px">
+            And we’re just getting started
+          </BarlowText>
+        </Title>
+        <WorkSans>
+          Every day brings new challenges. Which is why, every day,
+          we’re developing new ways to make BEES, better, for
+          everyone.
+        </WorkSans>
+      </LeftContainer>
+      <Tooltip>{selectedCountry}</Tooltip>
       <Image>
         <svg
           width="827"
@@ -806,7 +835,6 @@ const Map = () => {
               }
             />
           </G>
-
           <G onClick={() => setSelectedCountry('Argentina')}>
             <path
               d="M343.949 612.995L342.202 618.547L341.393 626.876L342.055 628.199C341.926 628.199 341.853 628.218 341.816 628.291C339.739 631.068 351.137 637.227 344.022 643.312C340.014 646.75 329.921 644.378 330.031 649.195C330.252 658.333 321.316 654.454 321.316 656.274C321.316 658.59 321.408 667.305 320.103 669.658C318.081 673.317 311.591 673.924 313.595 678.391C315.635 682.841 321.923 683.043 315.231 689.533C306.957 697.549 308.722 702.439 310.359 706.576L309.164 706.631L309.145 706.172C309.145 706.172 302.637 704.756 300.633 704.756C298.629 704.756 298.004 702.733 298.004 702.733L297.176 697.641C297.176 697.641 295.577 697.641 294.952 697.439C294.658 697.347 294.603 695.839 294.676 694.148C294.805 692.199 295.099 690.066 295.559 689.717C296.367 689.11 296.551 685.451 297.783 682.638C298.997 679.789 299.419 678.152 299.419 678.152L300.449 673.096L299.842 671.074L300.835 669.254L299.419 668.04L300.228 664.988L298.629 663.775L297.415 660.319L299.438 659.289C299.438 659.289 300.045 646.732 301.258 645.702C302.471 644.673 301.258 641.032 301.056 638.201C300.835 635.351 302.471 634.138 303.887 631.693C305.321 629.266 305.707 623.787 305.707 623.787L304.108 620.937L303.887 615.256L306.314 613.234L305.928 605.935L307.344 605.714L309.973 600.842L309.77 595.584L310.193 593.157L313.429 591.337L313.852 587.274L316.683 584.222L318.32 584.828L320.949 585.031L322.769 587.458L323.982 584.222L327.659 584.424L328.854 586.465L332.513 589.296L334.94 590.509C334.94 590.509 341.025 594.168 343.066 595.179C345.089 596.209 340.639 602.901 340.639 602.901L346.927 603.508L349.556 602.074L352.81 599.647L352.59 596.816L353.877 597.128L355.844 597.606L355.421 602.883L349.538 605.512L344.28 612.02L343.949 612.995Z"
