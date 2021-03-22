@@ -44,15 +44,9 @@ const G = styled.g`
 
 const Map = () => {
   const [selectedCountry, setSelectedCountry] = useState('Brazil')
-  const [coordinates, setCoordinates] = useState({ x: 0, y: 0 })
+  const [coordinates, setCoordinates] = useState({ x: 715, y: 505 })
 
   const onMouseClick = e => {
-    console.log('e: ', e)
-    console.log(
-      'e.target.getBoundingClientRect(): ',
-      e.target.getBoundingClientRect(),
-    )
-    console.log('e.pageX: ', e.pageX)
     setCoordinates({
       x: e.target.getBoundingClientRect().x,
       y: e.target.getBoundingClientRect().y,
