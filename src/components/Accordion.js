@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react'
 import styled from 'styled-components'
 import Chevron from './Chevron'
 import WorkSans from './WorkSans'
+import BarlowText from './BarlowText'
 
 import './Accordion.css'
 
@@ -32,7 +33,11 @@ function Accordion({ countries, title }) {
         className={`accordion ${setActive}`}
         onClick={toggleAccordion}
       >
-        <p className="accordion__title">{title}</p>
+        <p className="accordion__title">
+          <BarlowText size="28px" lineHeight="33.6px">
+            {title}
+          </BarlowText>
+        </p>
         <Chevron
           className={`${setRotate}`}
           width={10}

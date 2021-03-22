@@ -8,7 +8,7 @@ const Container = styled.section`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 3rem;
+  padding: 3rem 2rem 0.5rem;
   background: url(${({ image }) => (image ? `http:${image}` : '')})
       center no-repeat,
     linear-gradient(
@@ -41,7 +41,7 @@ const Container = styled.section`
 const Logo = styled.img`
   width: 114px;
   height: 35px;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 `
 
 const Upper = styled.div`
@@ -52,16 +52,18 @@ const Upper = styled.div`
 
 const Lower = styled.div`
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   width: 100%;
 `
 
-const LowerContent = styled(Upper)`
-  width: 40%;
+const LowerContent = styled.div`
+  width: 100%;
+  padding-right: 2rem;
 `
 
 const Number = styled.div`
   display: flex;
+  margin-top: 1rem;
   @media (min-width: 768px) {
     display: none;
   }
@@ -128,6 +130,10 @@ const DesktopSliderContainer = styled.div`
   top: 150px;
 `
 
+const MobileTitle = styled.div`
+  margin-bottom: 0.5rem;
+`
+
 const Title = styled.div`
   margin-bottom: 1rem;
 `
@@ -163,13 +169,21 @@ const SecondContentType = ({ item, number, total }) => {
         <Upper>
           <Lower>
             <LowerContent>
-              <WorkSans size="20px">{headerSubtitleFirst}</WorkSans>
+              <MobileTitle>
+                <WorkSans size="20px" fontWeight="600">
+                  {headerSubtitleFirst}
+                </WorkSans>
+              </MobileTitle>
               <WorkSans size="14px">
                 {headerDescriptionFirst}
               </WorkSans>
             </LowerContent>
             <LowerContent>
-              <WorkSans size="20px">{headerSubtitleSecond}</WorkSans>
+              <MobileTitle>
+                <WorkSans size="20px" fontWeight="600">
+                  {headerSubtitleSecond}
+                </WorkSans>
+              </MobileTitle>
               <WorkSans size="14px">
                 {headerDescriptionSecond}
               </WorkSans>
@@ -179,7 +193,9 @@ const SecondContentType = ({ item, number, total }) => {
             <WorkSans fontWeight="600" size="14px">
               {number + 1}
             </WorkSans>
-            <Slash>/</Slash>
+            <Slash>
+              <WorkSans size="14px">/</WorkSans>
+            </Slash>
             <WorkSans size="14px">{total}</WorkSans>
           </Number>
         </Upper>

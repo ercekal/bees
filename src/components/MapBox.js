@@ -7,12 +7,14 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   background-color: #ffff00;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   margin-bottom: 1rem;
-  padding: 1rem;
   width: 100%;
+  height: 100px;
   @media (min-width: 768px) {
+    justify-content: flex-start;
+    padding: 1rem;
     margin: 1rem 1rem 0 0;
     width: 13.25rem;
     padding-top: 1rem;

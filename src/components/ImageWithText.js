@@ -5,7 +5,7 @@ import WorkSans from './WorkSans'
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  width: 80%;
+  width: 90%;
   margin: 0 auto 2rem;
   @media (min-width: 768px) {
     width: 15rem;

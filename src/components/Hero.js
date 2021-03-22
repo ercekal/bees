@@ -57,11 +57,11 @@ const HeroColoredText = styled.div`
 `
 
 const Description = styled.div`
-  width: 45%;
+  width: 50%;
   display: flex;
   align-items: center;
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 4rem;
 `
 
 const Mobile = styled.div`

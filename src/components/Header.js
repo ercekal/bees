@@ -7,7 +7,12 @@ import Button from './Button'
 const Container = styled.div`
   padding: 0.5rem 1rem;
   display: flex;
+  align-items: center;
   justify-content: space-between;
+`
+const Image = styled.img`
+  width: 100px;
+  height: 30px;
 `
 
 const Header = ({ navbar }) => {
@@ -27,9 +32,9 @@ const Header = ({ navbar }) => {
     >
       <Container>
         <Link to="/">
-          <img src={url} alt="#" />
+          <Image src={url} />
         </Link>
-        <Button>{button}</Button>
+        <Button width="150px">{button}</Button>
       </Container>
     </header>
   )

@@ -5,12 +5,9 @@ import BarlowText from './BarlowText'
 
 const Container = styled.section`
   display: flex;
-  height: 100vh;
-`
-
-const ContainerMobile = styled.section`
-  display: flex;
   flex-direction: column;
+  margin-top: 3rem;
+
   @media (min-width: 768px) {
     height: 100vh;
   }
@@ -62,7 +59,7 @@ const ThirdContentType = ({ third }) => {
     ))
 
   return (
-    <ContainerMobile>
+    <Container>
       <Mobile>
         <Upper>
           <BarlowText size="36px" lineHeight="43.2px">
@@ -79,7 +76,7 @@ const ThirdContentType = ({ third }) => {
         </Left>
         <Right>{renderImageBoxes()}</Right>
       </Desktop>
-    </ContainerMobile>
+    </Container>
   )
 }
 

@@ -76,7 +76,7 @@ const FindOutMore = ({ findOutMore }) => {
             <WorkSans lineHeight="20px">{subtitle}</WorkSans>
           </MobileElement>
           <MobileElement>
-            <Button>{button}</Button>
+            <Button width="106px">{button}</Button>
           </MobileElement>
         </MobileText>
         <DesktopText>
@@ -84,7 +84,7 @@ const FindOutMore = ({ findOutMore }) => {
             {title}
           </BarlowText>
           <WorkSans lineHeight="30px">{subtitle}</WorkSans>
-          <Button>{button}</Button>
+          <Button width="106px">{button}</Button>
         </DesktopText>
       </Left>
       <Image src={`http:${bgImage.file.url}`} />

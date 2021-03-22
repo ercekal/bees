@@ -57,8 +57,8 @@ const IndexPage = ({ data }) => {
       <Products products={products} />
       <Testemonials testemonials={testemonials} />
       <Perks perks={perks} />
-      <Grow grow={grow} />
       <Map mapBoxes={map} countries={footer.countries} />
+      <Grow grow={grow} />
       <FindOutMore findOutMore={findOutMore} />
       <Footer footer={footer} />
     </Container>

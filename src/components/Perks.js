@@ -7,14 +7,17 @@ const Container = styled.section`
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 100vh;
+  padding-bottom: 3rem;
+  @media (min-width: 768px) {
+    height: 100vh;
+  }
 `
 
 const Upper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 40%;
+  width: 50%;
   margin: 0 auto;
   text-align: center;
   padding-top: 3rem;
@@ -22,6 +25,15 @@ const Upper = styled.div`
 const Lower = styled.div`
   display: flex;
   justify-content: center;
+  position: relative;
+  background: linear-gradient(
+    to bottom,
+    white,
+    white 20%,
+    yellow 20%,
+    yellow 40%,
+    white 40%
+  );
 `
 
 const Perks = ({ perks }) => {
@@ -35,7 +47,7 @@ const Perks = ({ perks }) => {
   return (
     <Container>
       <Upper>
-        <BarlowText size="3rem" lineHeight="58px">
+        <BarlowText size="36px" lineHeight="43.2px">
           {title}
         </BarlowText>
       </Upper>

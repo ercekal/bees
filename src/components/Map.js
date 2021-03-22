@@ -55,7 +55,7 @@ const LeftContainer = styled.div`
 `
 
 const Title = styled.div`
-  width: 50%;
+  width: 60%;
   margin-bottom: 2rem;
   @media (min-width: 768px) {
     width: 60%;
@@ -63,7 +63,7 @@ const Title = styled.div`
 `
 
 const SubTitle = styled.div`
-  width: 50%;
+  width: 60%;
   @media (min-width: 768px) {
     width: 60%;
   }
