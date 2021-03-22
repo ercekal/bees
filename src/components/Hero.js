@@ -64,12 +64,8 @@ const Description = styled.div`
   margin-bottom: 4rem;
 `
 
-const Mobile = styled.div`
-  display: flex;
+const Chevron = styled.img`
   padding-bottom: 3rem;
-  @media (min-width: 768px) {
-    display: none;
-  }
 `
 
 const Desktop = styled.div`
@@ -81,7 +77,6 @@ const Desktop = styled.div`
 
 function Hero({ hero }) {
   const {
-    heroButton,
     heroDescription,
     heroText,
     heroColoredText,
@@ -105,12 +100,7 @@ function Hero({ hero }) {
       <Description>
         <WorkSans>{heroDescription}</WorkSans>
       </Description>
-      <Desktop>
-        <Button>{heroButton}</Button>
-      </Desktop>
-      <Mobile>
-        <img src="../../chevron.svg" />
-      </Mobile>
+      <Chevron src="../../chevron.svg" />
     </Container>
   )
 }
