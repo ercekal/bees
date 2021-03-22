@@ -50,8 +50,6 @@ const G = styled.g`
 `
 
 const Map = ({ mapBoxes }) => {
-  console.log('mapBoxes: ', mapBoxes)
-  console.log('mapBoxes: type ', typeof mapBoxes)
   const [selectedCountry, setSelectedCountry] = useState('Brazil')
 
   return (

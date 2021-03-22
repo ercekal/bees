@@ -42,7 +42,6 @@ const renderText = (item, i) => {
 }
 
 const MapBox = ({ items }) => {
-  console.log('items: ', items)
   return (
     <Container>
       {items.map((item, i) => renderText(item, i))}
