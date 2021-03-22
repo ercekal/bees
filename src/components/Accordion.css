@@ -49,13 +49,8 @@
 .accordion__content {
   background-color: #f0ecfc;
   overflow: auto;
-  transition: max-height 0.6s ease;
-}
-
-/* Style the accordion content text */
-.accordion__text {
-  font-family: 'Open Sans', sans-serif;
-  font-weight: 400;
-  font-size: 14px;
-  padding: 18px;
+  transition: 170px 0.6s ease;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
 }

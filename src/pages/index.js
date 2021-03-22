@@ -58,7 +58,7 @@ const IndexPage = ({ data }) => {
       <Testemonials testemonials={testemonials} />
       <Perks perks={perks} />
       <Grow grow={grow} />
-      <Map mapBoxes={map} />
+      <Map mapBoxes={map} countries={footer.countries} />
       <FindOutMore findOutMore={findOutMore} />
       <Footer footer={footer} />
     </Container>

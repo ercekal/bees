@@ -81,7 +81,7 @@ const BoxesContainer = styled.div`
   }
 `
 
-const Map = ({ mapBoxes }) => {
+const Map = ({ mapBoxes, countries }) => {
   return (
     <Container>
       <LeftContainer>
@@ -110,7 +110,10 @@ const Map = ({ mapBoxes }) => {
               <MapBox items={item.boxElement} key={i} />
             ))}
           </BoxesContainer>
-          <Accordion title="And this is where you will find us" />
+          <Accordion
+            title="And this is where you will find us"
+            countries={countries}
+          />
         </Mobile>
       </LeftContainer>
       <WorldMap />

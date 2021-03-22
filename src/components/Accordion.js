@@ -1,7 +1,13 @@
 import React, { useState, useRef } from 'react'
+import styled from 'styled-components'
 import Chevron from './Chevron'
+import WorkSans from './WorkSans'
 
 import './Accordion.css'
+
+const Country = styled.div`
+  padding-bottom: 0.5rem;
+`
 
 function Accordion({ countries, title }) {
   const [setActive, setActiveState] = useState('')
@@ -12,11 +18,7 @@ function Accordion({ countries, title }) {
 
   function toggleAccordion() {
     setActiveState(setActive === '' ? 'active' : '')
-    setHeightState(
-      setActive === 'active'
-        ? '0px'
-        : `${content.current.scrollHeight}px`,
-    )
+    setHeightState(setActive === 'active' ? '0px' : `170px`)
     setRotateState(
       setActive === 'active'
         ? 'accordion__icon'
@@ -39,16 +41,16 @@ function Accordion({ countries, title }) {
       </button>
       <div
         ref={content}
-        style={{ maxHeight: `${setHeight}` }}
+        style={{ height: `${setHeight}` }}
         className="accordion__content"
       >
-        <p>Brazil</p>
-        <p>Brazil</p>
-        <p>Brazil</p>
-        <p>Brazil</p>
-        <p>Brazil</p>
-        <p>Brazil</p>
-        <p>Brazil</p>
+        {countries.map((c, i) => (
+          <Country key={i}>
+            <WorkSans size="18px" lineHeight="22px">
+              {c.countryName}
+            </WorkSans>
+          </Country>
+        ))}
       </div>
     </div>
   )
