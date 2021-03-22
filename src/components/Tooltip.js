@@ -9,10 +9,11 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   background: white;
-  position: relative;
+  position: absolute;
   z-index: 5;
-  top: 150px;
-  left: 280px;
+  left: ${({ x }) => x - 40 + 'px' || '0'};
+  top: ${({ y }) => y + 40 + 'px' || '0'};
+
   filter: drop-shadow(0px 0px 1px black);
   &:before {
     content: '';
@@ -28,9 +29,9 @@ const Container = styled.div`
   }
 `
 
-const Tooltip = ({ children }) => {
+const Tooltip = ({ children, coordinates }) => {
   return (
-    <Container>
+    <Container x={coordinates.x} y={coordinates.y}>
       <WorkSans size="20px" lineHeight="30px" fontWeight="600">
         {children}
       </WorkSans>
