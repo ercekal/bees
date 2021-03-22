@@ -26,6 +26,8 @@ const Lower = styled.div`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  width: 80%;
+  margin: 0 auto;
 `
 
 const Products = ({ products }) => {

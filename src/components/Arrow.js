@@ -10,6 +10,7 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   margin-left: 2rem;
+  cursor: pointer;
 `
 
 const Arrow = ({ degrees, onClick, bgColor }) => {

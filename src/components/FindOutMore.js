@@ -51,10 +51,15 @@ const DesktopText = styled.div`
   }
 `
 
+const DesktopSubtitle = styled.div`
+  padding: 1rem 0;
+`
+
 const Image = styled.img`
   height: 200px;
   @media (min-width: 768px) {
     height: 300px;
+    margin-right: 10rem;
   }
 `
 
@@ -83,7 +88,9 @@ const FindOutMore = ({ findOutMore }) => {
           <BarlowText size="4rem" lineHeight="77px">
             {title}
           </BarlowText>
-          <WorkSans lineHeight="30px">{subtitle}</WorkSans>
+          <DesktopSubtitle>
+            <WorkSans lineHeight="30px">{subtitle}</WorkSans>
+          </DesktopSubtitle>
           <Button width="106px">{button}</Button>
         </DesktopText>
       </Left>

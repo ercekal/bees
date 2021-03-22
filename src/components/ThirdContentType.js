@@ -18,7 +18,7 @@ const Left = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-left: 3rem;
+  padding: 0 3rem;
 `
 
 const Upper = styled.div`

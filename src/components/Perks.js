@@ -34,6 +34,16 @@ const Lower = styled.div`
     yellow 40%,
     white 40%
   );
+  @media (min-width: 768px) {
+    background: linear-gradient(
+      to bottom,
+      white,
+      white 30%,
+      yellow 30%,
+      yellow 50%,
+      white 50%
+    );
+  }
 `
 
 const Perks = ({ perks }) => {
