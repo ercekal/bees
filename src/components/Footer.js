@@ -66,7 +66,6 @@ const DesktopTopContainer = styled.div`
 
 const Middle = styled.div`
   display: flex;
-  /* justify-content: flex-start; */
   width: 90%;
   margin: 1rem 0;
   @media (min-width: 768px) {
@@ -115,6 +114,10 @@ const Image = styled.img`
   width: 100px;
 `
 
+const ListTitle = styled.div`
+  padding-bottom: 2rem;
+`
+
 const Icon = styled.img`
   width: 15px;
   height: 15px;
@@ -154,14 +157,16 @@ const Footer = ({ footer }) => {
   const renderGetInTouch = () => (
     <>
       <Link to="/contact">
-        <WorkSans
-          fontWeight="600"
-          size="1rem"
-          lineHeight="1.5rem"
-          color="#FFFFFF"
-        >
-          {getInTouchTitle}
-        </WorkSans>
+        <ListTitle>
+          <WorkSans
+            fontWeight="600"
+            size="1rem"
+            lineHeight="1.5rem"
+            color="#FFFFFF"
+          >
+            {getInTouchTitle}
+          </WorkSans>
+        </ListTitle>
       </Link>
       {getInTouchElements.map(c => (
         <Icon key={c.icon.title} src={'http:' + c.icon.file.url} />
@@ -176,7 +181,7 @@ const Footer = ({ footer }) => {
         </Upper>
         <Middle>
           <List>
-            <div>
+            <ListTitle>
               <BarlowText
                 size="18px"
                 lineHeight="22px"
@@ -184,7 +189,7 @@ const Footer = ({ footer }) => {
               >
                 {countriesTitle}
               </BarlowText>
-            </div>
+            </ListTitle>
             {rendercountries()}
           </List>
           <List>{renderGetInTouch()}</List>
