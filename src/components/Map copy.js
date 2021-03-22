@@ -985,7 +985,7 @@ const Map = () => {
               </>
             )}
           </G>
-
+          {/* 
           {selectedCountry === 'Colombia' && (
             <>
               <mask id="path-213-inside-2" fill="white">
@@ -1421,7 +1421,7 @@ const Map = () => {
                 fill="black"
               />
             </>
-          )}
+          )} */}
         </svg>
       </Image>
     </Container>
