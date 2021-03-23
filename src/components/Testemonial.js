@@ -14,6 +14,7 @@ const Container = styled.div`
 `
 const Quote = styled.div`
   max-width: 800px;
+  height: 400px;
 `
 
 const Lower = styled.div`

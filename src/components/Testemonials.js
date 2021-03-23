@@ -27,11 +27,9 @@ const Container = styled.section`
         white 38%,
         white 100%
       );
-    padding: 6rem 10rem;
+    padding: 6rem;
     width: 100%;
-    height: 100vh;
-    /* justify-content: center; */
-    /* position: relative; */
+    height: 100%;
   }
 `
 
@@ -39,6 +37,9 @@ const Arrows = styled.div`
   width: 100%;
   display: flex;
   justify-content: flex-end;
+  @media (min-width: 768px) {
+    max-width: 800px;
+  }
 `
 
 const Testemonials = ({ testemonials }) => {
