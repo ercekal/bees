@@ -43,6 +43,7 @@ const Right = styled.div`
   width: 60%;
   display: flex;
   flex-wrap: wrap;
+  max-width: 1100px;
 `
 
 const RightTop = styled.div`
