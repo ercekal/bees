@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import Button from './Button'
 
 const Container = styled.div`
-  padding: 0.5rem 1rem;
+  padding: 2rem 2.5rem 1rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -27,14 +27,14 @@ const Header = ({ navbar }) => {
     <header
       style={{
         background: bgColor,
-        height: '60px',
+        height: '80px',
       }}
     >
       <Container>
         <Link to="/">
           <Image src={url} />
         </Link>
-        <Button width="150px">{button}</Button>
+        <Button>{button}</Button>
       </Container>
     </header>
   )

@@ -12,7 +12,7 @@ const Container = styled.div`
   justify-content: center;
   flex-direction: column;
   @media (min-width: 768px) {
-    height: calc(100vh - 60px);
+    height: calc(100vh - 80px);
   }
 `
 
@@ -62,17 +62,14 @@ const Description = styled.div`
   align-items: center;
   text-align: center;
   margin-bottom: 4rem;
+  @media (min-width: 768px) {
+    max-width: 500px;
+  }
 `
 
 const Chevron = styled.img`
-  padding-bottom: 3rem;
-`
-
-const Desktop = styled.div`
-  display: none;
-  @media (min-width: 768px) {
-    display: flex;
-  }
+  padding-bottom: 1.5rem;
+  cursor: pointer;
 `
 
 function Hero({ hero }) {

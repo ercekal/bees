@@ -5,7 +5,7 @@ import BarlowText from './BarlowText'
 
 const Container = styled.button`
   background: #000000;
-  padding: 1rem 0.5rem;
+  padding: 10px 20px;
   width: ${({ width }) => (width ? width : 'fit-content')};
 `
 

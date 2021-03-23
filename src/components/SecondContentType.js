@@ -32,6 +32,7 @@ const Container = styled.section`
       );
     width: 100%;
     position: relative;
+    padding: 2rem;
   }
   transition: background-color 1s linear;
   height: 100vh;
@@ -83,16 +84,23 @@ const Desktop = styled.div`
   display: none;
   @media (min-width: 768px) {
     display: flex;
-    position: relative;
-    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    width: 80%;
+    height: 100%;
   }
 `
 const DesktopRight = styled.div`
   display: flex;
   flex-direction: column;
-  position: absolute;
-  right: 125px;
-  top: 150px;
+  width: 220px;
+  margin-right: 2rem;
+  @media (min-width: 1024px) {
+    margin-right: 3rem;
+  }
+  @media (min-width: 1200px) {
+    margin-right: 12rem;
+  }
 `
 
 const DesktopList = styled.div`
@@ -125,9 +133,9 @@ const DesktopSlider = styled.div`
 const DesktopSliderContainer = styled.div`
   display: flex;
   flex-direction: column;
-  position: absolute;
+  /* position: absolute;
   left: 100px;
-  top: 150px;
+  top: calc(100vh / 4); */
 `
 
 const MobileTitle = styled.div`
@@ -209,7 +217,7 @@ const SecondContentType = ({ item, number, total }) => {
         <DesktopRight>
           <DesktopUpper>
             <Logo src={headerLogo.file.url} />
-            <BarlowText size="28px" lineHeight="34px">
+            <BarlowText size="36px" lineHeight="43.2px">
               {headerTitle}
             </BarlowText>
           </DesktopUpper>
