@@ -13,11 +13,10 @@ const Container = styled.section`
   align-items: center;
   width: 100%;
   padding: 2rem 1rem;
-
   @media (min-width: 768px) {
     flex-direction: row;
     position: relative;
-    padding: 4rem;
+    padding-left: 4rem;
     height: 100vh;
   }
 `
@@ -42,7 +41,6 @@ const Desktop = styled.div`
 const LeftContainer = styled.div`
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
   align-items: center;
   text-align: center;
   @media (min-width: 768px) {

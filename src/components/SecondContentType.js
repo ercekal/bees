@@ -33,7 +33,7 @@ const Container = styled.section`
       );
     width: 100%;
     position: relative;
-    padding: 2rem;
+    padding: 0 4rem;
   }
   transition: background-color 1s linear;
   height: 100vh;
@@ -53,7 +53,6 @@ const Upper = styled.div`
 
 const Lower = styled.div`
   display: flex;
-  /* justify-content: space-between; */
   width: 100%;
 `
 
@@ -86,35 +85,48 @@ const Desktop = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 80%;
+    width: 100%;
     height: 100%;
   }
 `
+
+const DesktopLeft = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 38%;
+  padding-left: 4rem;
+  /* position: absolute;
+  left: 100px;
+  top: calc(100vh / 4); */
+`
+
 const DesktopRight = styled.div`
   display: flex;
   flex-direction: column;
-  width: 220px;
+  width: 62%;
   margin-right: 2rem;
-  @media (min-width: 1024px) {
-    margin-right: 3rem;
+  @media (min-width: 768px) {
+    margin-right: 0;
+    align-items: center;
   }
-  @media (min-width: 1200px) {
-    margin-right: 12rem;
-  }
-`
-
-const DesktopList = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 250px;
-  height: 100px;
-  align-items: baseline;
-  margin: 2rem 0;
 `
 
 const DesktopUpper = styled.div`
   display: flex;
   flex-direction: column;
+  margin-bottom: 3rem;
+  width: 250px;
+`
+
+const DesktopList = styled.div`
+  display: flex;
+  flex-direction: column;
+  max-width: 250px;
+  align-items: baseline;
+  margin-bottom: 3rem;
+  &:last-child {
+    margin-bottom: 0;
+  }
 `
 
 const DesktopSlider = styled.div`
@@ -128,14 +140,6 @@ const DesktopSlider = styled.div`
     rgba(0, 0, 0, 0.1) ${({ ratio }) => ratio || 0}%,
     rgba(0, 0, 0, 0.1) 100%
   );
-`
-
-const DesktopSliderContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  /* position: absolute;
-  left: 100px;
-  top: calc(100vh / 4); */
 `
 
 const MobileTitle = styled.div`
@@ -209,11 +213,11 @@ const SecondContentType = ({ item, number, total }) => {
         </Upper>
       </Mobile>
       <Desktop>
-        <DesktopSliderContainer>
+        <DesktopLeft>
           <WorkSans>{number + 1}</WorkSans>
           <DesktopSlider ratio={((number + 1) / total) * 100} />
           <WorkSans>{total}</WorkSans>
-        </DesktopSliderContainer>
+        </DesktopLeft>
         <DesktopRight>
           <DesktopUpper>
             <Logo src={headerLogo.file.url} />

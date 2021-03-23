@@ -10,7 +10,6 @@ const Container = styled.button`
 `
 
 const Button = ({ children, width }) => {
-  console.log('width: ', width)
   return (
     <Container width={width}>
       <Link to="/contact">

@@ -9,7 +9,7 @@ const Container = styled.section`
   width: 100%;
   padding-bottom: 3rem;
   @media (min-width: 768px) {
-    height: 100vh;
+    min-height: 600px;
   }
 `
 

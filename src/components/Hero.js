@@ -1,7 +1,6 @@
 /* eslint-disable */
 import React from 'react'
 import styled from 'styled-components'
-import Button from './Button'
 import BarlowText from './BarlowText'
 import WorkSans from './WorkSans'
 
@@ -18,23 +17,23 @@ const Container = styled.div`
   }
 `
 
-const HeroImage = styled.div`
-  height: 450px;
-  width: 100%;
-  margin: 0 auto;
-  padding-bottom: 3rem;
-  background: url(${({ heroImageMobile }) =>
-      heroImageMobile ? `http:${heroImageMobile}` : ''})
-    center no-repeat;
-  @media (min-width: 768px) {
-    height: 350px;
-    width: 90%;
-    padding-bottom: 0;
-    background: url(${({ heroImageDesktop }) =>
-        heroImageDesktop ? `http:${heroImageDesktop}` : ''})
-      center no-repeat;
-  }
-`
+// const HeroImage = styled.div`
+//   height: 450px;
+//   width: 100%;
+//   margin: 0 auto;
+//   padding-bottom: 3rem;
+//   background: url(${({ heroImageMobile }) =>
+//       heroImageMobile ? `http:${heroImageMobile}` : ''})
+//     center no-repeat;
+//   @media (min-width: 768px) {
+//     height: 350px;
+//     width: 90%;
+//     padding-bottom: 0;
+//     background: url(${({ heroImageDesktop }) =>
+//         heroImageDesktop ? `http:${heroImageDesktop}` : ''})
+//       center no-repeat;
+//   }
+// `
 
 const TitleContainer = styled.div`
   display: flex;
@@ -70,8 +69,9 @@ const Description = styled.div`
 `
 
 const Chevron = styled.img`
-  padding-bottom: 1.5rem;
   cursor: pointer;
+  position: absolute;
+  bottom: 3rem;
 `
 const HeroImageDesktop = styled.img`
   display: none;
