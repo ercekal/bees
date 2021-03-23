@@ -11,6 +11,8 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  padding: 0 2rem;
+  width: 100%;
   @media (min-width: 768px) {
     height: calc(100vh - 80px);
   }
@@ -71,6 +73,21 @@ const Chevron = styled.img`
   padding-bottom: 1.5rem;
   cursor: pointer;
 `
+const HeroImageDesktop = styled.img`
+  display: none;
+  @media (min-width: 768px) {
+    display: initial;
+    max-width: 100%;
+  }
+`
+
+const HeroImageMobile = styled.img`
+  display: initial;
+  max-width: 100%;
+  @media (min-width: 768px) {
+    display: none;
+  }
+`
 
 function Hero({ hero }) {
   const {
@@ -84,10 +101,8 @@ function Hero({ hero }) {
 
   return (
     <Container bgColor={bgColor}>
-      <HeroImage
-        heroImageDesktop={heroImageDesktop.file.url}
-        heroImageMobile={heroImageMobile.file.url}
-      />
+      <HeroImageDesktop src={heroImageDesktop.file.url} />
+      <HeroImageMobile src={heroImageMobile.file.url} />
       <TitleContainer>
         <BarlowText lineHeight="6rem" size="5rem">
           {heroText}

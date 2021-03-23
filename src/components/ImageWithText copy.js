@@ -10,8 +10,9 @@ const Container = styled.div`
   @media (min-width: 768px) {
     width: 15rem;
     height: 280px;
-    margin-right: 3rem;
-    margin-bottom: 1rem;
+    margin: 2rem;
+    margin: ${({ number }) =>
+      number === 1 ? '2rem 8rem 2rem 2rem' : '2rem'};
   }
 `
 

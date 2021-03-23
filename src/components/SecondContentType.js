@@ -20,14 +20,15 @@ const Container = styled.section`
     );
   background-size: ${({ number }) =>
     number === 1 ? '300px' : '500px'};
+  width: 100vw;
   @media (min-width: 768px) {
     background: url(${({ image }) => (image ? `http:${image}` : '')})
         33% no-repeat,
       linear-gradient(
         to right,
         ${({ leftBgColor }) => leftBgColor || 'red'} 0%,
-        ${({ leftBgColor }) => leftBgColor || 'red'} 38%,
-        white 38%,
+        ${({ leftBgColor }) => leftBgColor || 'red'} 40%,
+        white 40%,
         white 100%
       );
     width: 100%;
@@ -36,7 +37,6 @@ const Container = styled.section`
   }
   transition: background-color 1s linear;
   height: 100vh;
-  width: 100vh;
 `
 
 const Logo = styled.img`
