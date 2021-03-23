@@ -42,7 +42,7 @@ const Desktop = styled.div`
 const Right = styled.div`
   width: 60%;
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
 `
 
 const RightTop = styled.div`
@@ -51,6 +51,7 @@ const RightTop = styled.div`
 
 const RightBottom = styled.div`
   display: flex;
+  padding-left: 1.5rem;
 `
 
 const ThirdContentType = ({ third }) => {

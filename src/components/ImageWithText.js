@@ -10,8 +10,8 @@ const Container = styled.div`
   @media (min-width: 768px) {
     width: 15rem;
     height: 280px;
-    margin-right: 3rem;
-    margin-bottom: 1rem;
+    margin-right: 2rem;
+    margin-bottom: 0.25rem;
   }
 `
 
@@ -24,7 +24,7 @@ const TextContainer = styled.div`
   padding: 2rem 3rem 2rem 2rem;
   margin-bottom: 2rem;
   @media (min-width: 768px) {
-    padding: 2.5rem 1.75rem 2.5rem 0;
+    padding: 15px 22px;
   }
 `
 
