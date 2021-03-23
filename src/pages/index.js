@@ -18,10 +18,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
-  width: 100vh;
-  @media (min-width: 768px) {
-    width: 100%;
-  }
+  width: 100%;
 `
 
 const IndexPage = ({ data }) => {
@@ -58,7 +55,7 @@ const IndexPage = ({ data }) => {
       <Testemonials testemonials={testemonials} />
       <Perks perks={perks} />
       <Map mapBoxes={map} countries={footer.countries} />
-      <Grow grow={grow} />
+      {/* <Grow grow={grow} /> */}
       <FindOutMore findOutMore={findOutMore} />
       <Footer footer={footer} />
     </Container>
