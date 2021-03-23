@@ -70,8 +70,11 @@ const Description = styled.div`
 
 const Chevron = styled.img`
   cursor: pointer;
-  position: absolute;
-  bottom: 3rem;
+  padding-bottom: 2rem;
+  @media (min-width: 768px) {
+    position: absolute;
+    bottom: 3rem;
+  }
 `
 const HeroImageDesktop = styled.img`
   display: none;
