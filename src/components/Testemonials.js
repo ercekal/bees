@@ -27,9 +27,12 @@ const Container = styled.section`
         white 38%,
         white 100%
       );
-    padding: 6rem;
+    padding: 3rem;
     width: 100%;
-    height: 100%;
+    height: auto;
+  }
+  @media (min-width: 1024px) {
+    padding: 6rem;
   }
 `
 

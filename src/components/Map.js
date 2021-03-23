@@ -17,8 +17,12 @@ const Container = styled.section`
   @media (min-width: 768px) {
     flex-direction: row;
     position: relative;
-    padding: 4rem;
+    justify-content: flex-start;
+    padding: 0 4rem;
     height: 100vh;
+  }
+  @media (min-width: 1024px) {
+    height: 90vh;
   }
 `
 
@@ -48,9 +52,11 @@ const LeftContainer = styled.div`
   @media (min-width: 768px) {
     width: 40%;
     text-align: start;
+  }
+  @media (min-width: 1024px) {
     position: absolute;
+    top: 0;
     left: 0;
-    top: 100px;
   }
 `
 
@@ -58,7 +64,23 @@ const Title = styled.div`
   width: 60%;
   margin-bottom: 2rem;
   @media (min-width: 768px) {
-    width: 60%;
+    display: none;
+  }
+  @media (min-width: 1024px) {
+    display: initial;
+  }
+`
+
+const TabletTitle = styled.div`
+  display: none;
+  @media (min-width: 768px) {
+    display: flex;
+    text-align: center;
+    width: 80%;
+    padding-bottom: 2rem;
+  }
+  @media (min-width: 1024px) {
+    display: none;
   }
 `
 
@@ -75,7 +97,7 @@ const BoxesContainer = styled.div`
   margin: 2rem 0;
   @media (min-width: 768px) {
     position: absolute;
-    left: 120px;
+    left: 4rem;
     flex-direction: row;
     flex-wrap: wrap;
   }
@@ -90,6 +112,11 @@ const Map = ({ mapBoxes, countries }) => {
             And we’re just getting started
           </BarlowText>
         </Title>
+        <TabletTitle>
+          <BarlowText size="2rem" lineHeight="36px">
+            And we’re just getting started
+          </BarlowText>
+        </TabletTitle>
         <SubTitle>
           <WorkSans>
             Every day brings new challenges. Which is why, every day,

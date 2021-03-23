@@ -9,6 +9,7 @@ const Container = styled.section`
   width: 100%;
   padding-bottom: 3rem;
   @media (min-width: 768px) {
+    padding-bottom: 0;
     min-height: 600px;
   }
 `
@@ -17,7 +18,6 @@ const Upper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  /* width: 50%; */
   margin: 0 auto;
   text-align: center;
   padding-top: 3rem;

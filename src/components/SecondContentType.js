@@ -33,7 +33,7 @@ const Container = styled.section`
       );
     width: 100%;
     position: relative;
-    padding: 0 4rem;
+    padding: 0 0 0 4rem;
   }
   transition: background-color 1s linear;
   height: 100vh;

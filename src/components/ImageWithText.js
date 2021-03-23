@@ -8,6 +8,12 @@ const Container = styled.div`
   width: 90%;
   margin: 0 auto 2rem;
   @media (min-width: 768px) {
+    width: 11rem;
+    height: 14px;
+    margin-right: 1rem;
+    margin-bottom: 0.25rem;
+  }
+  @media (min-width: 1024px) {
     width: 15rem;
     height: 280px;
     margin-right: 2rem;
@@ -34,9 +40,17 @@ const MobileText = styled.div`
   }
 `
 
-const DesktopText = styled.div`
+const TabletText = styled.div`
   display: none;
   @media (min-width: 768px) {
+    display: initial;
+    width: 90%;
+  }
+`
+
+const DesktopText = styled.div`
+  display: none;
+  @media (min-width: 1024px) {
     display: initial;
     width: 90%;
   }
@@ -63,6 +77,11 @@ const imageWithText = ({ item, number }) => {
             {text}
           </WorkSans>
         </MobileText>
+        <TabletText>
+          <WorkSans size="18px" lineHeight="20px" fontWeight="600">
+            {text}
+          </WorkSans>
+        </TabletText>
         <DesktopText>
           <WorkSans size="20px" lineHeight="30px" fontWeight="600">
             {text}

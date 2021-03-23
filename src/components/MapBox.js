@@ -16,7 +16,24 @@ const Container = styled.div`
     justify-content: flex-start;
     padding: 1rem;
     margin: 1rem 1rem 0 0;
-    width: 13.25rem;
+    width: 9.25rem;
+    padding-top: 1rem;
+    min-height: 9.5rem;
+  }
+  /* @media (min-width: 1024px) {
+    justify-content: flex-start;
+    padding: 1rem;
+    margin: 1rem 1rem 0 0;
+    width: 10.25rem;
+    padding-top: 1rem;
+    height: 7.5rem;
+  } */
+
+  @media (min-width: 1240px) {
+    justify-content: flex-start;
+    padding: 1rem;
+    margin: 1rem 1rem 0 0;
+    width: 12.25rem;
     padding-top: 1rem;
     height: 7.5rem;
   }
@@ -44,11 +61,11 @@ const TextContainer = styled.div`
 const renderTextDesktop = (item, i) => {
   const { text, bold } = item
 
-  if (item.bold) {
+  if (bold) {
     return (
       <TextContainer>
         <BarlowText key={i} size="36px" lineHeight="43.2px">
-          {item.text}
+          {text}
         </BarlowText>
       </TextContainer>
     )
@@ -56,7 +73,7 @@ const renderTextDesktop = (item, i) => {
   return (
     <TextContainer>
       <WorkSans key={i} lineHeight="16px" size="14px">
-        {item.text}
+        {text}
       </WorkSans>
     </TextContainer>
   )
