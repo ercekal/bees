@@ -91,7 +91,7 @@ const FindOutMore = ({ findOutMore }) => {
           <DesktopSubtitle>
             <WorkSans lineHeight="30px">{subtitle}</WorkSans>
           </DesktopSubtitle>
-          <Button width="106px">{button}</Button>
+          <Button width="130px">{button}</Button>
         </DesktopText>
       </Left>
       <Image src={`http:${bgImage.file.url}`} />
