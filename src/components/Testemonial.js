@@ -8,6 +8,12 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   height: 400px;
+  @media (min-width: 768px) {
+    height: auto;
+  }
+`
+const Quote = styled.div`
+  max-width: 800px;
 `
 
 const Lower = styled.div`
@@ -16,7 +22,7 @@ const Lower = styled.div`
   text-align: end;
   width: 100%;
   @media (min-width: 768px) {
-    margin-top: 4rem;
+    margin-bottom: 2rem;
   }
 `
 
@@ -25,14 +31,16 @@ const Testemonial = ({ testemonial }) => {
 
   return (
     <Container>
-      <BarlowText size="50px" lineHeight="60px">
-        {text}
-      </BarlowText>
+      <Quote>
+        <BarlowText size="5rem" lineHeight="6rem">
+          {text}
+        </BarlowText>
+      </Quote>
       <Lower>
-        <WorkSans size="20px" lineHeight="26px" fontWeight="600">
+        <WorkSans size="24px" lineHeight="32px" fontWeight="600">
           {clientName}
         </WorkSans>
-        <WorkSans size="18px" lineHeight="20px" fontWeight="400">
+        <WorkSans size="20px" lineHeight="30px" fontWeight="400">
           {clientDetail}
         </WorkSans>
       </Lower>

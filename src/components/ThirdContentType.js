@@ -18,7 +18,7 @@ const Left = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0 3rem;
+  padding: 0 3rem 0 4rem;
 `
 
 const Upper = styled.div`
@@ -70,7 +70,7 @@ const ThirdContentType = ({ third }) => {
       </Mobile>
       <Desktop>
         <Left>
-          <BarlowText size="3rem" lineHeight="48.6px">
+          <BarlowText size="3rem" lineHeight="57.6px">
             {mainText}
           </BarlowText>
         </Left>

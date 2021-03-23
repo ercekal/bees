@@ -20,19 +20,19 @@ const Upper = styled.div`
   text-align: center;
   @media (min-width: 768px) {
     width: 30%;
+    flex-direction: column;
   }
 `
 const Lower = styled.div`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  width: 80%;
+  /* width: 80%; */
   margin: 0 auto;
 `
 
 const Products = ({ products }) => {
   const { bgColor, description, imagesList } = products
-
   const renderIconWithText = () =>
     imagesList.map((item, i) => <IconWithText item={item} key={i} />)
 
@@ -40,7 +40,10 @@ const Products = ({ products }) => {
     <Container bgColor={bgColor}>
       <Upper>
         <BarlowText size="3rem" lineHeight="58px">
-          {description}
+          {description.split('.')[0] + '.'}
+        </BarlowText>
+        <BarlowText size="3rem" lineHeight="58px">
+          {description.split('.')[1]}
         </BarlowText>
       </Upper>
       <Lower>{renderIconWithText()}</Lower>

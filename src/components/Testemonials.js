@@ -27,10 +27,11 @@ const Container = styled.section`
         white 38%,
         white 100%
       );
-    padding: 10rem;
+    padding: 6rem 10rem;
     width: 100%;
     height: 100vh;
-    position: relative;
+    /* justify-content: center; */
+    /* position: relative; */
   }
 `
 

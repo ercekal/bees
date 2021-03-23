@@ -12,7 +12,7 @@ const Container = styled.div`
     height: 280px;
     margin: 2rem;
     margin: ${({ number }) =>
-      number === 1 ? '2rem 5rem 2rem 2rem' : '2rem'};
+      number === 1 ? '2rem 8rem 2rem 2rem' : '2rem'};
   }
 `
 
@@ -25,7 +25,7 @@ const TextContainer = styled.div`
   padding: 2rem 3rem 2rem 2rem;
   margin-bottom: 2rem;
   @media (min-width: 768px) {
-    padding: 2rem;
+    padding: 2.5rem 1.75rem 2.5rem 0;
   }
 `
 
@@ -39,6 +39,7 @@ const DesktopText = styled.div`
   display: none;
   @media (min-width: 768px) {
     display: initial;
+    width: 90%;
   }
 `
 
