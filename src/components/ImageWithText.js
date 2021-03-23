@@ -46,6 +46,9 @@ const TabletText = styled.div`
     display: initial;
     width: 90%;
   }
+  @media (min-width: 1024px) {
+    display: none;
+  }
 `
 
 const DesktopText = styled.div`
