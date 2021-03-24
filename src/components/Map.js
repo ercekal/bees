@@ -125,6 +125,8 @@ const Card = styled.div`
   background-color: #ffff00;
   margin: 0 10px 10px 0;
   padding: 1rem;
+  width: 230px;
+  /* height: 200px; */
 `
 
 const renderText = (item, i) => {
@@ -135,7 +137,7 @@ const renderText = (item, i) => {
 const Map = ({ mapBoxes, countries }) => {
   const list = mapBoxes.mapBoxes.map((item, i) => {
     return (
-      <div className="cols3" key={i}>
+      <div style={{ float: 'left' }} key={i}>
         <Card className="img-card">
           <div className="img-card-text">
             {item.boxElement.map((el, i) => renderText(el, i))}
