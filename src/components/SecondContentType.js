@@ -34,9 +34,10 @@ const Container = styled.section`
     width: 100%;
     position: relative;
     padding: 0 0 0 4rem;
+    background-size: contain;
   }
   transition: background-color 1s linear;
-  height: 100vh;
+  height: 700px;
 `
 
 const Logo = styled.img`
