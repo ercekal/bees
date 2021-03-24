@@ -39,7 +39,7 @@ const P = styled.p`
 
 const Card = styled.div`
   width: 49%;
-  height: 20%;
+  /* height: 20%; */
   float: left;
   background-color: #ffff00;
   margin-bottom: 8px;
@@ -52,6 +52,18 @@ const Card = styled.div`
   &:nth-of-type(1),
   &:nth-of-type(3) {
     margin-right: 2%;
+  }
+  @media (min-width: 700px) {
+    height: 160px;
+  }
+  /* @media (min-width: 768px) {
+    height: 150px;
+  } */
+  @media (min-width: 950px) {
+    height: 120px;
+  }
+  @media (min-width: 1100px) {
+    height: 130px;
   }
 `
 

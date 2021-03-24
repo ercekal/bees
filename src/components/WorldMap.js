@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 const Image = styled.div`
   display: none;
-  @media (min-width: 768px) {
+  @media (min-width: 600px) {
     display: flex;
     /* position: relative; */
     /* right: 0;
