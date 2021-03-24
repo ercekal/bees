@@ -42,14 +42,7 @@ const IndexPage = ({ data }) => {
       <SEO title="Home" />
       <Header navbar={navbar} />
       <Hero hero={hero} />
-      {itemsList.map((item, i) => (
-        <SecondContentType
-          item={item}
-          key={i}
-          number={i}
-          total={itemsList.length}
-        />
-      ))}
+      <SecondContentType items={itemsList} />
       <ThirdContentType third={third} />
       <Products products={products} />
       <Testemonials testemonials={testemonials} />
