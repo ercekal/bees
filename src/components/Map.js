@@ -39,7 +39,6 @@ const P = styled.p`
 
 const Card = styled.div`
   width: 49%;
-  /* height: 20%; */
   float: left;
   background-color: #ffff00;
   margin-bottom: 8px;
