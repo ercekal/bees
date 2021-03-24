@@ -17,36 +17,18 @@ const Container = styled.div`
   }
 `
 
-// const HeroImage = styled.div`
-//   height: 450px;
-//   width: 100%;
-//   margin: 0 auto;
-//   padding-bottom: 3rem;
-//   background: url(${({ heroImageMobile }) =>
-//       heroImageMobile ? `http:${heroImageMobile}` : ''})
-//     center no-repeat;
-//   @media (min-width: 768px) {
-//     height: 350px;
-//     width: 90%;
-//     padding-bottom: 0;
-//     background: url(${({ heroImageDesktop }) =>
-//         heroImageDesktop ? `http:${heroImageDesktop}` : ''})
-//       center no-repeat;
-//   }
-// `
-
 const TitleContainer = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 2rem;
 `
 
-const HeroColoredText = styled.div`
+const HeroColoredText = styled.h1`
   font-family: Barlow Semi Condensed;
   font-style: normal;
   font-weight: 600;
-  font-size: 5rem;
-  line-height: 96px;
+  font-size: 50px;
+  line-height: 60px;
   letter-spacing: -0.05em;
   background-color: black;
   color: #fff;
@@ -55,6 +37,34 @@ const HeroColoredText = styled.div`
   align-items: center;
   margin-left: 0.5rem;
   padding: 0 0.5rem;
+  @media (min-width: 768px) {
+    font-size: 5rem;
+    line-height: 96px;
+  }
+`
+
+const H1 = styled.h1`
+  font-family: 'Barlow Semi Condensed', sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 50px;
+  line-height: 60px;
+  letter-spacing: -0.05em;
+  @media (min-width: 768px) {
+    font-size: 80px;
+    line-height: 96px;
+  }
+`
+
+const Subtitle = styled.p`
+  font-size: 16px;
+  line-height: 24px;
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 400;
+  @media (min-width: 768px) {
+    font-size: 16px;
+    line-height: 24px;
+  }
 `
 
 const Description = styled.div`
@@ -107,13 +117,11 @@ function Hero({ hero }) {
       <HeroImageDesktop src={heroImageDesktop.file.url} />
       <HeroImageMobile src={heroImageMobile.file.url} />
       <TitleContainer>
-        <BarlowText lineHeight="6rem" size="5rem">
-          {heroText}
-        </BarlowText>{' '}
+        <H1>{heroText}</H1>{' '}
         <HeroColoredText> {heroColoredText}</HeroColoredText>
       </TitleContainer>
       <Description>
-        <WorkSans>{heroDescription}</WorkSans>
+        <Subtitle>{heroDescription}</Subtitle>
       </Description>
       <Chevron src="../../chevron.svg" />
     </Container>
