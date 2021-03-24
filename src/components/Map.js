@@ -71,7 +71,9 @@ const Map = ({ mapBoxes }) => {
 
   const list = mapBoxes.mapBoxes.map((item, i) => {
     return (
-      <Card>{item.boxElement.map((el, i) => renderText(el, i))}</Card>
+      <Card key={i}>
+        {item.boxElement.map((el, i) => renderText(el, i))}
+      </Card>
     )
   })
 

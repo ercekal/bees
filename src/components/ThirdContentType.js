@@ -24,6 +24,10 @@ const H4 = styled.h4`
   font-weight: 600;
 `
 
+const Image = styled.img`
+  width: 100%;
+`
+
 const TextContainer = styled.div`
   background: ${({ bgColor }) => bgColor || ''};
 `
@@ -34,14 +38,11 @@ const ThirdContentType = ({ third }) => {
   let list = imageWithTextList.map((item, i) => (
     <div className="photo-box" key={i}>
       <div className="photo-box-img">
-        <img src={'http:' + item.image.file.url} />
+        <Image src={'http:' + item.image.file.url} />
       </div>
-      <TextContainer
-        bgColor={item.textBgColor}
-        className="photo-box-text"
-      >
+      <div bgColor={item.textBgColor} className="photo-box-text">
         <H4>{item.text}</H4>
-      </TextContainer>
+      </div>
     </div>
   ))
 
