@@ -5,41 +5,11 @@ const Image = styled.div`
   display: none;
   @media (min-width: 600px) {
     display: flex;
-    /* position: relative; */
-    /* right: 0;
-    top: 0; */
   }
-  /* @media (min-width: 768px) {
-    width: 60%;
-    display: initial;
-    position: absolute;
-    right: 154px;
-  }
-  @media (min-width: 1024px) {
-    right: 125px;
-    top: 0;
-  }
-  @media (min-width: 1240px) {
-    right: 42px;
-  } */
 `
 
 const G = styled.g`
   cursor: pointer;
-`
-
-const SVG = styled.svg`
-  /* position: absolute; */
-  /* right: 0; */
-  /* @media (min-width: 768px) {
-    transform: scale(0.5);
-  }
-  @media (min-width: 1024px) {
-    transform: scale(0.8);
-  }
-  @media (min-width: 1240px) {
-    transform: scale(0.9);
-  } */
 `
 
 const WorldMap = () => {
@@ -47,7 +17,7 @@ const WorldMap = () => {
 
   return (
     <Image>
-      <SVG
+      <svg
         width="827"
         height="723"
         viewBox="0 0 827 723"
@@ -1426,7 +1396,7 @@ const WorldMap = () => {
             />
           </>
         )}
-      </SVG>
+      </svg>
     </Image>
   )
 }
