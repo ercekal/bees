@@ -12,6 +12,14 @@ const Header = styled.h2`
   margin-bottom: 20px;
 `
 
+const SubHeader = styled.p`
+  font-size: 16px;
+  line-height: 24px;
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 400;
+  margin-bottom: 0;
+`
+
 const H2 = styled.h2`
   font-size: 36px;
   line-height: 43.2px;
@@ -30,16 +38,21 @@ const P = styled.p`
 `
 
 const Card = styled.div`
-  /* display: flex;
-  align-items: flex-start;
-  flex-direction: column;
+  width: 49%;
+  height: 20%;
+  float: left;
   background-color: #ffff00;
-   */
-
-  /* margin: 0 10px 10px 0; */
-  /* padding: 1rem; */
-  /* width: 230px; */
-  /* height: 150px; */
+  margin-bottom: 8px;
+  min-height: 120px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  &:nth-of-type(1),
+  &:nth-of-type(3) {
+    margin-right: 2%;
+  }
 `
 
 const Map = ({ mapBoxes }) => {
@@ -50,23 +63,12 @@ const Map = ({ mapBoxes }) => {
 
   const list = mapBoxes.mapBoxes.map((item, i) => {
     return (
-      <div className="box">
-        {item.boxElement.map((el, i) => renderText(el, i))}
-        {/* <h2>Over 1 Million</h2>
-          <p>Retailers</p> */}
-      </div>
-      // <div style={{ float: 'left' }} key={i}>
-      //   <Card className="img-card">
-      //     <div className="img-card-text">
-      //       {item.boxElement.map((el, i) => renderText(el, i))}
-      //     </div>
-      //   </Card>
-      // </div>
+      <Card>{item.boxElement.map((el, i) => renderText(el, i))}</Card>
     )
   })
 
   return (
-    <section id="four-boxes" style={{ height: '900px' }}>
+    <section>
       <div className="interactive-maps">
         <WorldMap />
       </div>
@@ -74,31 +76,12 @@ const Map = ({ mapBoxes }) => {
       <div className="container clearfix">
         <div className="cols8-map" style={{ marginRight: '4.16%' }}>
           <Header>And we’re just getting started</Header>
-          <p>
+          <SubHeader>
             Every day brings new challenges. Which is why, every day,
             we’re developing new ways to make BEES, better, for
             everyone.
-          </p>
-
-          <div className="boxes">
-            {/* <div className="box">
-              <h2>Over 1 Million</h2>
-              <p>Retailers</p>
-            </div>
-            <div className="box">
-              <h2>Over 1 Million</h2>
-              <p>Retailers</p>
-            </div>
-            <div className="box">
-              <h2>Over 1 Million</h2>
-              <p>Retailers</p>
-            </div>
-            <div className="box">
-              <h2>Over 1 Million</h2>
-              <p>Retailers</p>
-            </div> */}
-            {list.map(l => l)}
-          </div>
+          </SubHeader>
+          <div className="boxes">{list.map(l => l)}</div>
         </div>
       </div>
     </section>
