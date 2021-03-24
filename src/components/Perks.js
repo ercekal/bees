@@ -62,6 +62,23 @@ const H2 = styled.h2`
   font-weight: 600;
 `
 
+const H3 = styled.h3`
+  font-size: 36px;
+  line-height: 43.2px;
+  letter-spacing: -3px;
+  font-family: 'Barlow Semi Condensed', sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.05em;
+`
+
+const P = styled.p`
+  font-size: 16px;
+  line-height: 24px;
+  font-family: 'Work Sans', sans-serif;
+  font-weight: normal;
+  margin-bottom: 0;
+`
+
 const Perks = ({ perks }) => {
   const { title, imageWithTitleAndSubtitles } = perks
 
@@ -77,8 +94,8 @@ const Perks = ({ perks }) => {
           <img src={item.image.file.url} />
         </div>
         <div className="img-card-text">
-          <h3>{item.title}</h3>
-          <p>{item.subtitle}</p>
+          <H3>{item.title}</H3>
+          <P>{item.subtitle}</P>
         </div>
       </div>
     </div>
@@ -101,14 +118,6 @@ const Perks = ({ perks }) => {
         </div>
       </div>
     </section>
-    // <Container>
-    //   <Upper>
-    //     <BarlowText size="36px" lineHeight="43.2px">
-    //       {title}
-    //     </BarlowText>
-    //   </Upper>
-    //   <Lower>{renderImageBoxes()}</Lower>
-    // </Container>
   )
 }
 
