@@ -150,7 +150,7 @@ const Map = ({ mapBoxes, countries }) => {
   })
 
   return (
-    <section>
+    <section style={{ position: 'relative' }}>
       <div className="container">
         <div
           className="clearfix"

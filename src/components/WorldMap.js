@@ -5,6 +5,9 @@ const Image = styled.div`
   display: none;
   @media (min-width: 768px) {
     display: flex;
+    /* position: relative; */
+    /* right: 0;
+    top: 0; */
   }
   /* @media (min-width: 768px) {
     width: 60%;
@@ -26,6 +29,8 @@ const G = styled.g`
 `
 
 const SVG = styled.svg`
+  /* position: absolute; */
+  /* right: 0; */
   /* @media (min-width: 768px) {
     transform: scale(0.5);
   }
