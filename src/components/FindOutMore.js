@@ -42,10 +42,9 @@ const MobileText = styled.div`
 const DesktopText = styled.div`
   display: none;
   @media (min-width: 768px) {
+    width: 100%;
     display: flex;
     flex-direction: column;
-    margin-left: 4rem;
-    margin-bottom: 2rem;
     height: 150px;
     justify-content: space-around;
   }
@@ -69,33 +68,40 @@ const MobileElement = styled.div`
 
 const FindOutMore = ({ findOutMore }) => {
   const { title, subtitle, button, bgColor, bgImage } = findOutMore
-
   return (
-    <Container bgColor={bgColor}>
-      <Left>
-        <MobileText>
-          <BarlowText size="2.6rem" lineHeight="50px">
-            {title}
-          </BarlowText>
-          <MobileElement>
-            <WorkSans lineHeight="20px">{subtitle}</WorkSans>
-          </MobileElement>
-          <MobileElement>
-            <Button width="106px">{button}</Button>
-          </MobileElement>
-        </MobileText>
-        <DesktopText>
-          <BarlowText size="4rem" lineHeight="77px">
-            {title}
-          </BarlowText>
-          <DesktopSubtitle>
-            <WorkSans lineHeight="30px">{subtitle}</WorkSans>
-          </DesktopSubtitle>
-          <Button width="130px">{button}</Button>
-        </DesktopText>
-      </Left>
-      <Image src={`http:${bgImage.file.url}`} />
-    </Container>
+    <section style={{ backgroundColor: bgColor, paddingTop: '50px' }}>
+      <div
+        className="findOutMore-image"
+        style={{ position: 'absolute', right: 0, width: '30%' }}
+      >
+        <Image src={`http:${bgImage.file.url}`} />
+      </div>
+
+      <div className="container clearfix">
+        <Left>
+          <MobileText>
+            <BarlowText size="2.6rem" lineHeight="50px">
+              {title}
+            </BarlowText>
+            <MobileElement>
+              <WorkSans lineHeight="20px">{subtitle}</WorkSans>
+            </MobileElement>
+            <MobileElement>
+              <Button width="106px">{button}</Button>
+            </MobileElement>
+          </MobileText>
+          <DesktopText>
+            <BarlowText size="4rem" lineHeight="77px">
+              {title}
+            </BarlowText>
+            <DesktopSubtitle>
+              <WorkSans lineHeight="30px">{subtitle}</WorkSans>
+            </DesktopSubtitle>
+            <Button width="130px">{button}</Button>
+          </DesktopText>
+        </Left>
+      </div>
+    </section>
   )
 }
 
