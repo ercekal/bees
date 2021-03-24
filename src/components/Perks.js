@@ -1,51 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import BarlowText from './BarlowText'
-import ImageWithTextAndSubtitle from './ImageWithTextAndSubtitle'
 import './Perks.css'
-
-// const Container = styled.section`
-//   display: flex;
-//   flex-direction: column;
-//   width: 100%;
-//   padding-bottom: 3rem;
-//   @media (min-width: 768px) {
-//     padding-bottom: 0;
-//     min-height: 600px;
-//   }
-// `
-
-// const Upper = styled.div`
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   margin: 0 auto;
-//   text-align: center;
-//   padding-top: 3rem;
-// `
-// const Lower = styled.div`
-//   display: flex;
-//   justify-content: center;
-//   position: relative;
-//   background: linear-gradient(
-//     to bottom,
-//     white,
-//     white 20%,
-//     yellow 20%,
-//     yellow 40%,
-//     white 40%
-//   );
-//   @media (min-width: 768px) {
-//     background: linear-gradient(
-//       to bottom,
-//       white,
-//       white 30%,
-//       yellow 30%,
-//       yellow 50%,
-//       white 50%
-//     );
-//   }
-// `
 
 const Header = styled.div`
   margin-right: 4.16%;
@@ -62,13 +17,25 @@ const H2 = styled.h2`
   font-weight: 600;
 `
 
+const H3 = styled.h3`
+  font-size: 36px;
+  line-height: 43.2px;
+  letter-spacing: -3px;
+  font-family: 'Barlow Semi Condensed', sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.05em;
+`
+
+const P = styled.p`
+  font-size: 16px;
+  line-height: 24px;
+  font-family: 'Work Sans', sans-serif;
+  font-weight: normal;
+  margin-bottom: 0;
+`
+
 const Perks = ({ perks }) => {
   const { title, imageWithTitleAndSubtitles } = perks
-
-  // const renderImageBoxes = () =>
-  //   imageWithTitleAndSubtitles.map((item, i) => (
-  //     <ImageWithTextAndSubtitle item={item} key={i} />
-  //   ))
 
   const list = imageWithTitleAndSubtitles.map((item, i) => (
     <div className="cols3" key={i}>
@@ -77,8 +44,8 @@ const Perks = ({ perks }) => {
           <img src={item.image.file.url} />
         </div>
         <div className="img-card-text">
-          <h3>{item.title}</h3>
-          <p>{item.subtitle}</p>
+          <H3>{item.title}</H3>
+          <P>{item.subtitle}</P>
         </div>
       </div>
     </div>
@@ -101,14 +68,6 @@ const Perks = ({ perks }) => {
         </div>
       </div>
     </section>
-    // <Container>
-    //   <Upper>
-    //     <BarlowText size="36px" lineHeight="43.2px">
-    //       {title}
-    //     </BarlowText>
-    //   </Upper>
-    //   <Lower>{renderImageBoxes()}</Lower>
-    // </Container>
   )
 }
 
