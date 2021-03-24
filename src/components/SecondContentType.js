@@ -15,12 +15,18 @@ const Container = styled.section.attrs(props => ({
   }))`
   height: 400vh;
 `
+const Pin = styled.div`
+  position: relative;
+`
 const Inner = styled.div`
   position: relative;
   max-width: 1280px;
   padding-left: 30px;
   padding-right: 30px;
   margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `
 
 const Slides = styled.div`
@@ -31,6 +37,7 @@ const Slides = styled.div`
   transition: background-color 1s linear;
   min-height: 500px;
   height: 100vh;
+  width: 100%;
 
   @media screen and (min-width: 768px) {
     flex-direction: row;
@@ -58,6 +65,10 @@ const SlideContent = styled.div`
   position: relative;
   width: 65%;
   padding: 30px 0;
+`
+
+const SlideAnimate = styled.div.attrs(props => ({ className: 'animate' }))`
+  opacity: 0
 `
 
 const ProgressNav = styled.div`
@@ -133,6 +144,18 @@ const DesktopRight = styled.div`
   }
 `
 
+const SlideImage = styled.div`
+  background: url(${({ image }) => (image ? `http:${image}` : '')})
+      center no-repeat;
+  background-size: contain;
+  width: 100%;
+  height 70vh;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  left: 38.5%;
+  top: 50%;
+`
+
 const SlideUpper = styled.div`
   display: flex;
   flex-direction: column;
@@ -167,29 +190,17 @@ const Slash = styled.p`
 
 
 const SecondContentType = ({ items }) => {
-  /*const {
-    headerLogo,
-    secondaryContentImage,
-    headerSubtitleFirst,
-    headerDescriptionFirst,
-    headerSubtitleSecond,
-    headerDescriptionSecond,
-    headerTitle,
-    leftBgColor,
-    active
-  } = item*/
   if (!items || items.length <= 0) return null
-
-  /*{itemsList.map((item, i) => (
-
-  ))}*/
 
   const [activeIndex, setActiveIndex] = useState(0)
   const [progress, setProgress] = useState(0)
   const [pinScrollTrigger, setPinScrollTrigger] = useState(null)
   const [slideAnimation, setSlideAnimation] = useState(null)
+  const [currentImage, setCurrentImage] = useState(items[activeIndex].secondaryContentImage.file.url)
   const total = items.length
   const $container = useRef(null)
+  const $pin = useRef(null)
+  const $image = useRef(null)
   const $slides = useRef(null)
   let initialGradient = `linear-gradient(
     to right,
@@ -227,8 +238,8 @@ const SecondContentType = ({ items }) => {
       value: `linear-gradient(
         to right,
         ${ items[activeIndex].leftBgColor || 'yellow' } 0%,
-        ${ items[activeIndex].leftBgColor || 'yellow' } 37.5%,
-        white 37.5%,
+        ${ items[activeIndex].leftBgColor || 'yellow' } 38.8%,
+        white 38.8%,
         white 100%
       )`,
       duration,
@@ -249,6 +260,36 @@ const SecondContentType = ({ items }) => {
 
     }, '<')
 
+
+    // Animate in image
+    slideAnimationTl.to($image.current, { autoAlpha: 0, y: 10 }, '<')
+    slideAnimationTl.call(setCurrentImage, [i => items[activeIndex].secondaryContentImage.file.url], '>')
+    slideAnimationTl.to($image.current, {
+      y: 0,
+      autoAlpha: 1,
+      ease: 'power4.inOut',
+      duration: 1
+    }, '>')
+
+    // Animate in text content
+    const slidesArray = $slides.current.children
+    const $allAnimatable = $slides.current.querySelectorAll('.animate')
+    slideAnimationTl.to($allAnimatable, { autoAlpha: 0, y: 10 }, '-=1')
+    const animateElements = []
+    if (slidesArray) {
+      [...slidesArray].forEach((slide, index) => {
+        if (index === activeIndex) {
+          gsap.killTweensOf($allAnimatable)
+          slideAnimationTl.to(slide.querySelectorAll('.animate'), {
+            autoAlpha: 1,
+            y: 0,
+            ease: 'power4.out',
+            duration: 1,
+          }, '>')
+        }
+      })
+    }
+
     setSlideAnimation(a => slideAnimationTl)
   }, [activeIndex])
 
@@ -263,16 +304,15 @@ const SecondContentType = ({ items }) => {
   useEffect(() => {
     if (!pinScrollTrigger) {
       const scrollPin = ScrollTrigger.create({
-        anticipatePin: 1,
         trigger: $container.current,
-        pin: $slides.current,   // pin the trigger element while active
-        start: "top top", // when the top of the trigger hits the top of the viewport
+        pin: $pin.current,
+        start: "top top",
         end: "bottom bottom",
         scrub: false,
         onUpdate: self => pinProgress(self.progress)
       })
 
-      setPinScrollTrigger(pst => scrollPin)
+      setPinScrollTrigger(p => scrollPin)
     }
   }, [])
 
@@ -285,89 +325,61 @@ const SecondContentType = ({ items }) => {
 
   return (
      <Container gradient={gradient} ref={$container}>
-      <Inner>
-        <Slides ref={$slides}>
+      <Pin ref={$pin}>
+        <SlideImage ref={$image} image={currentImage}/>
+        <Inner>
           <ProgressNav>
             <WorkSans>{activeIndex + 1}</WorkSans>
             <Progress ratio={((progress) / total) * 100} />
             <WorkSans>{total}</WorkSans>
           </ProgressNav>
+          <Slides gradient={gradient} ref={$slides}>
 
-          <button onClick={() => setProgress(progress + 1)}>Clicky</button>
-
-          {items.map((item, i) => (
-            <Slide>
-              <SlideContent>
-                <SlideUpper>
-                  <Logo src={item.headerLogo.file.url} />
-                  <Tween from={{ opacity: 0 }} duration={2}>
-                    <BarlowText size="36px" lineHeight="43.2px">
-                      {item.headerTitle}
-                    </BarlowText>
-                  </Tween>
-                </SlideUpper>
-                <SlideBody>
-                  <Title>
-                    <WorkSans
-                      size="24px"
-                      lineHeight="2rem"
-                      fontWeight="600"
-                    >
-                      {item.headerSubtitleFirst}
-                    </WorkSans>
-                  </Title>
-                  <WorkSans size="16px">{item.headerDescriptionFirst}</WorkSans>
-                </SlideBody>
-                <SlideBody>
-                  <Title>
-                    <WorkSans
-                      size="24px"
-                      lineHeight="2rem"
-                      fontWeight="600"
-                    >
-                      {item.headerSubtitleSecond}
-                    </WorkSans>
-                  </Title>
-                  <WorkSans size="16px">{item.headerDescriptionSecond}</WorkSans>
-                </SlideBody>
-              </SlideContent>
-            </Slide>
-          ))}
-        </Slides>
-      </Inner>
-
-      {/*<DesktopRight>
-        <DesktopUpper>
-          <Logo src={headerLogo.file.url} />
-          <BarlowText size="36px" lineHeight="43.2px">
-            {headerTitle}
-          </BarlowText>
-        </DesktopUpper>
-        <DesktopList>
-          <Title>
-            <WorkSans
-              size="24px"
-              lineHeight="2rem"
-              fontWeight="600"
-            >
-              {headerSubtitleFirst}
-            </WorkSans>
-          </Title>
-          <WorkSans size="16px">{headerDescriptionFirst}</WorkSans>
-        </DesktopList>
-        <DesktopList>
-          <Title>
-            <WorkSans
-              size="24px"
-              lineHeight="2rem"
-              fontWeight="600"
-            >
-              {headerSubtitleSecond}
-            </WorkSans>
-          </Title>
-          <WorkSans size="16px">{headerDescriptionSecond}</WorkSans>
-        </DesktopList>
-      </DesktopRight>*/}
+            {items.map((item, i) => (
+              <Slide key={'slide-'+i}>
+                <SlideContent>
+                  <SlideUpper>
+                    <Logo src={item.headerLogo.file.url} />
+                    <SlideAnimate>
+                      <BarlowText size="36px" lineHeight="43.2px">
+                        {item.headerTitle}
+                      </BarlowText>
+                    </SlideAnimate>
+                  </SlideUpper>
+                  <SlideBody>
+                    <Title>
+                      <WorkSans
+                        size="24px"
+                        lineHeight="2rem"
+                        fontWeight="600"
+                      >
+                        {item.headerSubtitleFirst}
+                      </WorkSans>
+                    </Title>
+                    <SlideAnimate>
+                      <WorkSans size="16px">{item.headerDescriptionFirst}</WorkSans>
+                    </SlideAnimate>
+                  </SlideBody>
+                  <SlideBody>
+                    <Title>
+                      <WorkSans
+                        size="24px"
+                        lineHeight="2rem"
+                        fontWeight="600"
+                      >
+                        {item.headerSubtitleSecond}
+                      </WorkSans>
+                    </Title>
+                    <SlideAnimate>
+                      <WorkSans size="16px">{item.headerDescriptionSecond}</WorkSans>
+                    </SlideAnimate>
+                  </SlideBody>
+                </SlideContent>
+              </Slide>
+            ))}
+          </Slides>
+        </Inner>
+       </Pin>
     </Container>
   )
 }
