@@ -122,11 +122,13 @@ const H2 = styled.h2`
   text-align: left;
 `
 const Card = styled.div`
+  display: flex;
+  align-items: center;
   background-color: #ffff00;
   margin: 0 10px 10px 0;
   padding: 1rem;
   width: 230px;
-  /* height: 200px; */
+  height: 150px;
 `
 
 const renderText = (item, i) => {

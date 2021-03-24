@@ -26,7 +26,7 @@ const G = styled.g`
 `
 
 const SVG = styled.svg`
-  @media (min-width: 768px) {
+  /* @media (min-width: 768px) {
     transform: scale(0.5);
   }
   @media (min-width: 1024px) {
@@ -34,7 +34,7 @@ const SVG = styled.svg`
   }
   @media (min-width: 1240px) {
     transform: scale(0.9);
-  }
+  } */
 `
 
 const WorldMap = () => {
