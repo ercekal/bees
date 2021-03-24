@@ -150,10 +150,10 @@ const Map = ({ mapBoxes, countries }) => {
   })
 
   return (
-    <section style={{ display: 'flex', paddingBottom: '3rem' }}>
-      <div style={{ maxWidth: '70%' }}>
+    <section>
+      <div className="container">
         <div
-          className="headline clearfix"
+          className="clearfix"
           style={{ display: 'block', paddingTop: '20px' }}
         >
           <Header className="cols24">
