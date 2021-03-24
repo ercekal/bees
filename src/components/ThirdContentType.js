@@ -78,6 +78,10 @@ const H4 = styled.h4`
   font-weight: 600;
 `
 
+const TextContainer = styled.div`
+  background: ${({ bgColor }) => bgColor || ''};
+`
+
 const ThirdContentType = ({ third }) => {
   const { mainText, imageWithTextList } = third
 
@@ -86,9 +90,12 @@ const ThirdContentType = ({ third }) => {
       <div className="photo-box-img">
         <img src={'http:' + item.image.file.url} />
       </div>
-      <div className="photo-box-text">
+      <TextContainer
+        bgColor={item.textBgColor}
+        className="photo-box-text"
+      >
         <H4>{item.text}</H4>
-      </div>
+      </TextContainer>
     </div>
   ))
 
