@@ -11,7 +11,7 @@ const Container = styled.div`
   justify-content: space-between;
 `
 const Image = styled.img`
-  width: 100px;
+  width: 130px;
   height: 30px;
 `
 

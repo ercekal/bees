@@ -7,6 +7,7 @@ const Container = styled.button`
   background: #000000;
   padding: 10px 20px;
   width: ${({ width }) => (width ? width : 'fit-content')};
+  border: 0;
 `
 const ButtonLink = styled(Link)`
   text-decoration: none;

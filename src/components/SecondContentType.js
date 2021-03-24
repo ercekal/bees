@@ -3,16 +3,16 @@ import styled from 'styled-components'
 import BarlowText from './BarlowText'
 import WorkSans from './WorkSans'
 import { gsap } from 'gsap'
-import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { Controls, PlayState, Tween } from 'react-gsap'
 
 gsap.registerPlugin(ScrollTrigger)
 
 const Container = styled.section.attrs(props => ({
-    style: {
-      background: props.gradient,
-    },
-  }))`
+  style: {
+    background: props.gradient,
+  },
+}))`
   height: 400vh;
 `
 const Pin = styled.div`
@@ -67,8 +67,10 @@ const SlideContent = styled.div`
   padding: 30px 0;
 `
 
-const SlideAnimate = styled.div.attrs(props => ({ className: 'animate' }))`
-  opacity: 0
+const SlideAnimate = styled.div.attrs(props => ({
+  className: 'animate',
+}))`
+  opacity: 0;
 `
 
 const ProgressNav = styled.div`
@@ -77,16 +79,16 @@ const ProgressNav = styled.div`
 `
 
 const Progress = styled.div.attrs(props => ({
-    style: {
-      background: `linear-gradient(
+  style: {
+    background: `linear-gradient(
         to bottom,
         black 0%,
-        black ${ props.ratio }%,
-        rgba(0, 0, 0, 0.1) ${ props.ratio }%,
+        black ${props.ratio}%,
+        rgba(0, 0, 0, 0.1) ${props.ratio}%,
         rgba(0, 0, 0, 0.1) 100%
       )`,
-    },
-  }))`
+  },
+}))`
   display: flex;
   width: 5px;
   height: 200px;
@@ -145,8 +147,8 @@ const DesktopRight = styled.div`
 `
 
 const SlideImage = styled.div`
-  background: url(${({ image }) => (image ? `http:${image}` : '')})
-      center no-repeat;
+  background: url(${({ image }) =>
+    image ? `http:${image}` : ''}) center no-repeat;
   background-size: contain;
   width: 100%;
   height 70vh;
@@ -188,7 +190,6 @@ const Slash = styled.p`
   padding: 0 0.25rem 0 0.5rem;
 `
 
-
 const SecondContentType = ({ items }) => {
   if (!items || items.length <= 0) return null
 
@@ -196,7 +197,9 @@ const SecondContentType = ({ items }) => {
   const [progress, setProgress] = useState(0)
   const [pinScrollTrigger, setPinScrollTrigger] = useState(null)
   const [slideAnimation, setSlideAnimation] = useState(null)
-  const [currentImage, setCurrentImage] = useState(items[activeIndex].secondaryContentImage.file.url)
+  const [currentImage, setCurrentImage] = useState(
+    items[activeIndex].secondaryContentImage.file.url,
+  )
   const total = items.length
   const $container = useRef(null)
   const $pin = useRef(null)
@@ -204,21 +207,19 @@ const SecondContentType = ({ items }) => {
   const $slides = useRef(null)
   let initialGradient = `linear-gradient(
     to right,
-    ${ items[activeIndex].leftBgColor || 'yellow' } 0%,
-    ${ items[activeIndex].leftBgColor || 'yellow' } 0%,
+    ${items[activeIndex].leftBgColor || 'yellow'} 0%,
+    ${items[activeIndex].leftBgColor || 'yellow'} 0%,
     white 0%,
     white 100%
   )`
   const [gradient, setGradient] = useState(initialGradient)
 
-
-  const pinProgress = (pinProgress) => {
+  const pinProgress = pinProgress => {
     const step = 1 / total
     const nextActiveIndex = Math.floor(pinProgress / step)
     if (nextActiveIndex === items.length) return false
     setActiveIndex(i => nextActiveIndex)
   }
-
 
   // Animate slider background
   useEffect(() => {
@@ -226,19 +227,19 @@ const SecondContentType = ({ items }) => {
     const slideAnimationTl = gsap.timeline({
       scrollTrigger: {
         trigger: $container.current,
-        start: "top 95%",
+        start: 'top 95%',
         scrub: false,
-        once: true
+        once: true,
       },
     })
 
     const currentGradient = { value: gradient }
-    const duration = (gradient === initialGradient) ? 1.5 : 0.5
+    const duration = gradient === initialGradient ? 1.5 : 0.5
     slideAnimationTl.to(currentGradient, {
       value: `linear-gradient(
         to right,
-        ${ items[activeIndex].leftBgColor || 'yellow' } 0%,
-        ${ items[activeIndex].leftBgColor || 'yellow' } 38.8%,
+        ${items[activeIndex].leftBgColor || 'yellow'} 0%,
+        ${items[activeIndex].leftBgColor || 'yellow'} 38.8%,
         white 38.8%,
         white 100%
       )`,
@@ -246,46 +247,66 @@ const SecondContentType = ({ items }) => {
       ease: 'power4.inOut',
       onUpdate: () => {
         setGradient(g => currentGradient.value)
-      }
+      },
     })
 
     const currentProgress = { value: progress }
-    slideAnimationTl.to(currentProgress, {
-      value: activeIndex + 1,
-      duration: 1,
-      ease: 'power4.inOut',
-      onUpdate: () => {
-        setProgress(g => currentProgress.value)
-      }
-
-    }, '<')
-
+    slideAnimationTl.to(
+      currentProgress,
+      {
+        value: activeIndex + 1,
+        duration: 1,
+        ease: 'power4.inOut',
+        onUpdate: () => {
+          setProgress(g => currentProgress.value)
+        },
+      },
+      '<',
+    )
 
     // Animate in image
     slideAnimationTl.to($image.current, { autoAlpha: 0, y: 10 }, '<')
-    slideAnimationTl.call(setCurrentImage, [i => items[activeIndex].secondaryContentImage.file.url], '>')
-    slideAnimationTl.to($image.current, {
-      y: 0,
-      autoAlpha: 1,
-      ease: 'power4.inOut',
-      duration: 1
-    }, '>')
+    slideAnimationTl.call(
+      setCurrentImage,
+      [i => items[activeIndex].secondaryContentImage.file.url],
+      '>',
+    )
+    slideAnimationTl.to(
+      $image.current,
+      {
+        y: 0,
+        autoAlpha: 1,
+        ease: 'power4.inOut',
+        duration: 1,
+      },
+      '>',
+    )
 
     // Animate in text content
     const slidesArray = $slides.current.children
-    const $allAnimatable = $slides.current.querySelectorAll('.animate')
-    slideAnimationTl.to($allAnimatable, { autoAlpha: 0, y: 10 }, '-=1')
+    const $allAnimatable = $slides.current.querySelectorAll(
+      '.animate',
+    )
+    slideAnimationTl.to(
+      $allAnimatable,
+      { autoAlpha: 0, y: 10 },
+      '-=1',
+    )
     const animateElements = []
     if (slidesArray) {
-      [...slidesArray].forEach((slide, index) => {
+      ;[...slidesArray].forEach((slide, index) => {
         if (index === activeIndex) {
           gsap.killTweensOf($allAnimatable)
-          slideAnimationTl.to(slide.querySelectorAll('.animate'), {
-            autoAlpha: 1,
-            y: 0,
-            ease: 'power4.out',
-            duration: 1,
-          }, '>')
+          slideAnimationTl.to(
+            slide.querySelectorAll('.animate'),
+            {
+              autoAlpha: 1,
+              y: 0,
+              ease: 'power4.out',
+              duration: 1,
+            },
+            '>',
+          )
         }
       })
     }
@@ -295,10 +316,10 @@ const SecondContentType = ({ items }) => {
 
   useEffect(() => {
     return () => {
-      if (slideAnimation && slideAnimation.scrollTrigger) slideAnimation.scrollTrigger.kill()
+      if (slideAnimation && slideAnimation.scrollTrigger)
+        slideAnimation.scrollTrigger.kill()
     }
   }, [slideAnimation])
-
 
   // Apply/kill scrolltrigger
   useEffect(() => {
@@ -306,10 +327,10 @@ const SecondContentType = ({ items }) => {
       const scrollPin = ScrollTrigger.create({
         trigger: $container.current,
         pin: $pin.current,
-        start: "top top",
-        end: "bottom bottom",
+        start: 'top top',
+        end: 'bottom bottom',
         scrub: false,
-        onUpdate: self => pinProgress(self.progress)
+        onUpdate: self => pinProgress(self.progress),
       })
 
       setPinScrollTrigger(p => scrollPin)
@@ -322,21 +343,19 @@ const SecondContentType = ({ items }) => {
     }
   }, [pinScrollTrigger])
 
-
   return (
-     <Container gradient={gradient} ref={$container}>
+    <Container gradient={gradient} ref={$container}>
       <Pin ref={$pin}>
-        <SlideImage ref={$image} image={currentImage}/>
+        <SlideImage ref={$image} image={currentImage} />
         <Inner>
           <ProgressNav>
             <WorkSans>{activeIndex + 1}</WorkSans>
-            <Progress ratio={((progress) / total) * 100} />
+            <Progress ratio={(progress / total) * 100} />
             <WorkSans>{total}</WorkSans>
           </ProgressNav>
           <Slides gradient={gradient} ref={$slides}>
-
             {items.map((item, i) => (
-              <Slide key={'slide-'+i}>
+              <Slide key={'slide-' + i}>
                 <SlideContent>
                   <SlideUpper>
                     <Logo src={item.headerLogo.file.url} />
@@ -357,7 +376,9 @@ const SecondContentType = ({ items }) => {
                       </WorkSans>
                     </Title>
                     <SlideAnimate>
-                      <WorkSans size="16px">{item.headerDescriptionFirst}</WorkSans>
+                      <WorkSans size="16px">
+                        {item.headerDescriptionFirst}
+                      </WorkSans>
                     </SlideAnimate>
                   </SlideBody>
                   <SlideBody>
@@ -371,7 +392,9 @@ const SecondContentType = ({ items }) => {
                       </WorkSans>
                     </Title>
                     <SlideAnimate>
-                      <WorkSans size="16px">{item.headerDescriptionSecond}</WorkSans>
+                      <WorkSans size="16px">
+                        {item.headerDescriptionSecond}
+                      </WorkSans>
                     </SlideAnimate>
                   </SlideBody>
                 </SlideContent>
@@ -379,7 +402,7 @@ const SecondContentType = ({ items }) => {
             ))}
           </Slides>
         </Inner>
-       </Pin>
+      </Pin>
     </Container>
   )
 }

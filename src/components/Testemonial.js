@@ -7,7 +7,6 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* min-height: 400px; */
   @media (min-width: 1024px) {
     height: auto;
   }
@@ -17,6 +16,7 @@ const Quote = styled.div`
   height: 200px;
   @media (min-width: 768px) {
     height: 300px;
+    margin-bottom: 2rem;
   }
   @media (min-width: 1024px) {
     height: 400px;
@@ -29,7 +29,7 @@ const Lower = styled.div`
   text-align: end;
   width: 100%;
   @media (min-width: 768px) {
-    margin-bottom: 2rem;
+    margin-bottom: 60px;
   }
 `
 

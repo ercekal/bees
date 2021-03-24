@@ -35,8 +35,8 @@ p {
 .background {
   background: linear-gradient(
     white,
-    white 10%,
-    yellow 10%,
+    white 30%,
+    yellow 30%,
     yellow 50%,
     white 50%
   );
@@ -49,9 +49,9 @@ p {
   .background {
     background: linear-gradient(
       white,
-      white 15%,
-      yellow 15%,
-      yellow 40%,
+      white 30%,
+      yellow 30%,
+      yellow 50%,
       white 36%
     );
   }
@@ -76,8 +76,8 @@ p {
   .background {
     background: linear-gradient(
       white,
-      white 8%,
-      yellow 8%,
+      white 30%,
+      yellow 30%,
       yellow 50%,
       white 50%
     );

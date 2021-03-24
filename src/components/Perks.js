@@ -58,8 +58,7 @@ const Perks = ({ perks }) => {
           <H2>{title}</H2>
         </Header>
       </div>
-
-      <div className="background">
+      <div className="background" style={{ marginTop: '80px' }}>
         <div
           className="carousel clearfix"
           style={{ display: 'block' }}
