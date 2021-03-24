@@ -12,7 +12,9 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   @media (min-width: 768px) {
-    height: 250px;
+    height: 240px;
+    justify-content: space-between;
+    padding: 1rem;
   }
   background: #000000;
 `
@@ -115,7 +117,7 @@ const Image = styled.img`
 `
 
 const ListTitle = styled.div`
-  padding-bottom: 2rem;
+  padding-bottom: 0.5rem;
 `
 
 const Icon = styled.img`
@@ -201,9 +203,15 @@ const Footer = ({ footer }) => {
         </Upper>
         <Middle>
           <List>
-            <BarlowText size="18px" lineHeight="22px" color="#FFFFFF">
-              {countriesTitle}
-            </BarlowText>
+            <ListTitle>
+              <BarlowText
+                size="18px"
+                lineHeight="22px"
+                color="#FFFFFF"
+              >
+                {countriesTitle}
+              </BarlowText>
+            </ListTitle>
             <CountriesList>{rendercountries()}</CountriesList>
           </List>
           <List>{renderGetInTouch()}</List>

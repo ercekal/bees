@@ -8,15 +8,18 @@ const Container = styled.button`
   padding: 10px 20px;
   width: ${({ width }) => (width ? width : 'fit-content')};
 `
+const ButtonLink = styled(Link)`
+  text-decoration: none;
+`
 
 const Button = ({ children, width }) => {
   return (
     <Container width={width}>
-      <Link to="/contact">
+      <ButtonLink to="/contact">
         <BarlowText size="1.25rem" color="#ffff00">
           {children}
         </BarlowText>
-      </Link>
+      </ButtonLink>
     </Container>
   )
 }
