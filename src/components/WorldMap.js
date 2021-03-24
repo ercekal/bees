@@ -4,6 +4,9 @@ import styled from 'styled-components'
 const Image = styled.div`
   display: none;
   @media (min-width: 768px) {
+    display: flex;
+  }
+  /* @media (min-width: 768px) {
     width: 60%;
     display: initial;
     position: absolute;
@@ -15,7 +18,7 @@ const Image = styled.div`
   }
   @media (min-width: 1240px) {
     right: 42px;
-  }
+  } */
 `
 
 const G = styled.g`
@@ -933,14 +936,14 @@ const WorldMap = () => {
           <>
             <mask id="path-210-inside-1" fill="white">
               <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
+                fillRule="evenodd"
+                clipRule="evenodd"
                 d="M422 484H315V521H360.381L368.5 530L376.619 521H422V484Z"
               />
             </mask>
             <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
+              fillRule="evenodd"
+              clipRule="evenodd"
               d="M422 484H315V521H360.381L368.5 530L376.619 521H422V484Z"
               fill="white"
             />
@@ -980,14 +983,14 @@ const WorldMap = () => {
           <>
             <mask id="path-213-inside-2" fill="white">
               <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
+                fillRule="evenodd"
+                clipRule="evenodd"
                 d="M350 449H243V486H288.381L296.5 495L304.619 486H350V449Z"
               />
             </mask>
             <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
+              fillRule="evenodd"
+              clipRule="evenodd"
               d="M350 449H243V486H288.381L296.5 495L304.619 486H350V449Z"
               fill="white"
             />
@@ -1034,14 +1037,14 @@ const WorldMap = () => {
           <>
             <mask id="path-216-inside-3" fill="white">
               <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
+                fillRule="evenodd"
+                clipRule="evenodd"
                 d="M332 465H225V502H270.381L278.5 511L286.619 502H332V465Z"
               />
             </mask>
             <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
+              fillRule="evenodd"
+              clipRule="evenodd"
               d="M332 465H225V502H270.381L278.5 511L286.619 502H332V465Z"
               fill="white"
             />
@@ -1084,14 +1087,14 @@ const WorldMap = () => {
           <>
             <mask id="path-219-inside-4" fill="white">
               <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
+                fillRule="evenodd"
+                clipRule="evenodd"
                 d="M340 489H233V526H278.381L286.5 535L294.619 526H340V489Z"
               />
             </mask>
             <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
+              fillRule="evenodd"
+              clipRule="evenodd"
               d="M340 489H233V526H278.381L286.5 535L294.619 526H340V489Z"
               fill="white"
             />
@@ -1122,14 +1125,14 @@ const WorldMap = () => {
           <>
             <mask id="path-222-inside-5" fill="white">
               <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
+                fillRule="evenodd"
+                clipRule="evenodd"
                 d="M265 323H158V360H203.381L211.5 369L219.619 360H265V323Z"
               />
             </mask>
             <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
+              fillRule="evenodd"
+              clipRule="evenodd"
               d="M265 323H158V360H203.381L211.5 369L219.619 360H265V323Z"
               fill="white"
             />
@@ -1156,14 +1159,14 @@ const WorldMap = () => {
           <>
             <mask id="path-225-inside-6" fill="white">
               <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
+                fillRule="evenodd"
+                clipRule="evenodd"
                 d="M259 385H152V422H197.381L205.5 431L213.619 422H259V385Z"
               />
             </mask>
             <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
+              fillRule="evenodd"
+              clipRule="evenodd"
               d="M259 385H152V422H197.381L205.5 431L213.619 422H259V385Z"
               fill="white"
             />
@@ -1202,14 +1205,14 @@ const WorldMap = () => {
           <>
             <mask id="path-228-inside-7" fill="white">
               <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
+                fillRule="evenodd"
+                clipRule="evenodd"
                 d="M372 385H240V438H300.381L308.5 447L316.619 438H372V385Z"
               />
             </mask>
             <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
+              fillRule="evenodd"
+              clipRule="evenodd"
               d="M372 385H240V438H300.381L308.5 447L316.619 438H372V385Z"
               fill="white"
             />
@@ -1298,14 +1301,14 @@ const WorldMap = () => {
           <>
             <mask id="path-231-inside-8" fill="white">
               <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
+                fillRule="evenodd"
+                clipRule="evenodd"
                 d="M384 581H260V618H314.381L322.5 627L330.619 618H384V581Z"
               />
             </mask>
             <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
+              fillRule="evenodd"
+              clipRule="evenodd"
               d="M384 581H260V618H314.381L322.5 627L330.619 618H384V581Z"
               fill="white"
             />
@@ -1356,14 +1359,14 @@ const WorldMap = () => {
           <>
             <mask id="path-234-inside-9" fill="white">
               <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
+                fillRule="evenodd"
+                clipRule="evenodd"
                 d="M673 555H526V592H591.381L599.5 601L607.619 592H673V555Z"
               />
             </mask>
             <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
+              fillRule="evenodd"
+              clipRule="evenodd"
               d="M673 555H526V592H591.381L599.5 601L607.619 592H673V555Z"
               fill="white"
             />
