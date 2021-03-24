@@ -154,7 +154,7 @@ const Map = ({ mapBoxes, countries }) => {
       <div style={{ maxWidth: '70%' }}>
         <div
           className="headline clearfix"
-          style={{ display: 'block' }}
+          style={{ display: 'block', paddingTop: '20px' }}
         >
           <Header className="cols24">
             <H2 style={{ paddingBottom: '20px' }}>
@@ -168,7 +168,7 @@ const Map = ({ mapBoxes, countries }) => {
           </Header>
         </div>
 
-        <div className="headline">
+        <div className="headline" style={{ paddingTop: '20px' }}>
           <div className="clearfix" style={{ display: 'block' }}>
             <div className="cols24">{list.map(l => l)}</div>
           </div>
