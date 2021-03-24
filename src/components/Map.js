@@ -148,7 +148,7 @@ const Map = ({ mapBoxes, countries }) => {
   })
 
   return (
-    <section style={{ display: 'flex' }}>
+    <section style={{ display: 'flex', paddingBottom: '3rem' }}>
       <div style={{ maxWidth: '70%' }}>
         <div
           className="headline clearfix"

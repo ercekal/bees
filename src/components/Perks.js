@@ -51,7 +51,7 @@ const Header = styled.div`
   margin-right: 4.16%;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
 `
 
 const H2 = styled.h2`
