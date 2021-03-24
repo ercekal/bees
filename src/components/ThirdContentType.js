@@ -40,9 +40,12 @@ const ThirdContentType = ({ third }) => {
       <div className="photo-box-img">
         <Image src={'http:' + item.image.file.url} />
       </div>
-      <div bgColor={item.textBgColor} className="photo-box-text">
+      <TextContainer
+        bgColor={item.textBgColor}
+        className="photo-box-text"
+      >
         <H4>{item.text}</H4>
-      </div>
+      </TextContainer>
     </div>
   ))
 
