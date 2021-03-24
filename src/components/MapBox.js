@@ -82,11 +82,11 @@ const renderTextDesktop = (item, i) => {
 const renderTextMobile = (item, i) => {
   const { text, bold } = item
 
-  if (item.bold) {
+  if (bold) {
     return (
       <TextContainer>
         <BarlowText key={i} size="28px" lineHeight="33.6px">
-          {item.text}
+          {text}
         </BarlowText>
       </TextContainer>
     )
@@ -94,7 +94,7 @@ const renderTextMobile = (item, i) => {
   return (
     <TextContainer>
       <WorkSans key={i} lineHeight="16px" size="14px">
-        {item.text}
+        {text}
       </WorkSans>
     </TextContainer>
   )
