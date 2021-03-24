@@ -14,12 +14,12 @@ const H2 = styled.h2`
 const Map = () => {
   return (
     <section id="four-boxes" style={{ height: '900px' }}>
-      <div class="interactive-maps">
+      <div className="interactive-maps">
         <WorldMap />
       </div>
 
-      <div class="container clearfix">
-        <div class="cols8" style={{ marginRight: '4.16%' }}>
+      <div className="container clearfix">
+        <div className="cols8-map" style={{ marginRight: '4.16%' }}>
           <H2>And we’re just getting started</H2>
           <p>
             Every day brings new challenges. Which is why, every day,
@@ -27,20 +27,20 @@ const Map = () => {
             everyone.
           </p>
 
-          <div class="boxes">
-            <div class="box">
+          <div className="boxes">
+            <div className="box">
               <h2>Over 1 Million</h2>
               <p>Retailers</p>
             </div>
-            <div class="box">
+            <div className="box">
               <h2>Over 1 Million</h2>
               <p>Retailers</p>
             </div>
-            <div class="box">
+            <div className="box">
               <h2>Over 1 Million</h2>
               <p>Retailers</p>
             </div>
-            <div class="box">
+            <div className="box">
               <h2>Over 1 Million</h2>
               <p>Retailers</p>
             </div>
