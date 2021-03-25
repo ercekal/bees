@@ -10,6 +10,7 @@ const Container = styled.div`
     hover ? (selected ? 'white' : hoverColor) : bgColor || 'white'};
   margin-bottom: 1rem;
   width: 330px;
+  cursor: pointer;
 `
 
 const Icon = styled.img`
@@ -25,6 +26,7 @@ const ContactPageButton = ({
   selected,
   hoverColor,
   hover,
+  onClick,
 }) => {
   const { color, icon, title, isButton } = item
 
@@ -41,6 +43,7 @@ const ContactPageButton = ({
       hover={hover}
       onMouseEnter={() => onMouseEnter(number)}
       onMouseLeave={onLeave}
+      onClick={() => onClick(number)}
     >
       {isButton && <Icon src={`http:${icon.file.url}`} />}
       <BarlowText size="3rem" lineHeight="58px">

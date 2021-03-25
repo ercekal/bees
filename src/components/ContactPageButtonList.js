@@ -3,6 +3,15 @@ import styled from 'styled-components'
 import ContactPageButton from '../components/ContactPageButton'
 import HoverElement from '../components/HoverElement'
 
+const Wrapper = styled.div`
+  background: linear-gradient(
+    to bottom,
+    black 0%,
+    black 40%,
+    rgba(0, 0, 0, 0.1) 40%,
+    rgba(0, 0, 0, 0.1) 100%
+  );
+`
 const Container = styled.div`
   display: flex;
   height: calc(100vh - 310px);
@@ -15,6 +24,7 @@ const List = styled.div`
 
 const ContactPageButtonList = ({ list }) => {
   const [number, setNumber] = useState(0)
+  const [clickedNumber, setClickedNumber] = useState(0)
   const [hover, setHover] = useState(false)
   const [hoverIconsList, setHoverIconsList] = useState([])
   const [colorsList, setColorsList] = useState([])
@@ -41,6 +51,11 @@ const ContactPageButtonList = ({ list }) => {
     setHover(false)
   }
 
+  const onClick = number => {
+    console.log('number: ', number)
+    setClickedNumber
+  }
+
   return (
     <div
       className="container clearfix"
@@ -61,10 +76,11 @@ const ContactPageButtonList = ({ list }) => {
               selected={i === number}
               hover={hover}
               hoverColor={colorsList[number]}
+              onClick={setClickedNumber}
             />
           ))}
         </List>
-        {hoverIconsList[number]}
+        {clickedNumber === 0 ? hoverIconsList[number] : clickedNumber}
       </Container>
     </div>
   )
