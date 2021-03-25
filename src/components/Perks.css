@@ -62,16 +62,27 @@ p {
     width: 320px;
     margin-right: 24px;
   }
-  .cols24 {
-    overflow: hidden;
-  }
   .headline {
     padding: 100px 24px 0 24px;
   }
   .carousel {
     padding: 0 0 80px 48px;
-    width: 1500px;
-    overflow-x: scroll;
+    overflow: auto;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;
+  }
+  .carousel .cols24 {
+    display: flex;
+    flex-shrink: 0;
+  }
+  .carousel .cols24 ::-webkit-scrollbar {
+    display: none;
+  }
+  .carousel .cols3 {
+    flex-shrink: 0;
+  }
+  .carousel .cols3:last-child {
+    margin-right: 24px;
   }
   .background {
     background: linear-gradient(
