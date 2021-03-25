@@ -1,7 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import styled from 'styled-components'
 import Arrow from './Arrow'
 import Testemonial from './Testemonial'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
 
 const Container = styled.section`
   display: flex;
@@ -46,6 +50,7 @@ const Testemonials = ({ testemonials }) => {
   const [number, setNumber] = useState(0)
   const [list, setList] = useState([])
   const { testemonialsList, bgColor } = testemonials
+  const $wrapper = useRef(null)
 
   useEffect(() => {
     const tList = testemonialsList.map((t, i) => (
@@ -54,28 +59,37 @@ const Testemonials = ({ testemonials }) => {
     setList(tList)
   }, [])
 
-  function previous() {
-    if (number === 0) {
-      setNumber(list.length - 1)
-    } else {
-      setNumber(number - 1)
-    }
-  }
+  function changeSlide(dir) {
+    // animate out
+    const tl = gsap.timeline({ paused: true })
+    tl.fromTo($wrapper.current, { y: 0, autoAlpha: 1 }, { y: 30, autoAlpha: 0, ease: 'none' })
+    tl.call(() => {
+      // Change slide number
+      let newNumber = number + dir
+      if (dir < 0 && number === 0) {
+        newNumber = list.length - 1
+      } else if (dir > 0 && number === list.length - 1) {
+        newNumber = 0
+      }
+      setNumber(newNumber)
+    }, [])
+    tl.to($wrapper.current, { y: 0, autoAlpha: 1, ease: 'none' })
 
-  function next() {
-    if (number === list.length - 1) {
-      setNumber(0)
-    } else {
-      setNumber(number + 1)
-    }
+    gsap.to(tl, {
+      time: tl.duration(),
+      duration: tl.duration(),
+      ease:"circ.inOut"
+    });
   }
 
   return (
     <Container leftBgColor={bgColor}>
-      {list[number]}
+      <div ref={$wrapper}>
+        {list[number]}
+      </div>
       <Arrows>
-        <Arrow degrees="0" onClick={previous} />
-        <Arrow degrees="180" onClick={next} />
+        <Arrow degrees="0" onClick={() => changeSlide(-1)} />
+        <Arrow degrees="180" onClick={() => changeSlide(1)} />
       </Arrows>
     </Container>
   )

@@ -6,7 +6,6 @@ import BarlowText from './BarlowText'
 import WorkSans from './WorkSans'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { Controls, PlayState, Tween } from 'react-gsap'
 
 gsap.registerPlugin(ScrollTrigger)
 
