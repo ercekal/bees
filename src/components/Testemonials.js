@@ -57,6 +57,29 @@ const Testemonials = ({ testemonials }) => {
       <Testemonial testemonial={t} key={i} />
     ))
     setList(tList)
+
+    const introAnim = gsap.fromTo(
+      $wrapper.current,
+      {
+        y: 30,
+        autoAlpha: 0
+      },
+      {
+        scrollTrigger: {
+          trigger: $wrapper.current,
+          start: 'top 50%',
+          scrub: false,
+          once: true,
+        },
+        y: 0,
+        autoAlpha: 1
+      }
+     )
+
+    return () => {
+      introAnim.kill()
+    }
+
   }, [])
 
   function changeSlide(dir) {
@@ -78,7 +101,7 @@ const Testemonials = ({ testemonials }) => {
     gsap.to(tl, {
       time: tl.duration(),
       duration: tl.duration(),
-      ease:"circ.inOut"
+      ease:"power2.inOut"
     });
   }
 
