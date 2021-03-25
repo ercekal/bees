@@ -111,6 +111,24 @@ const ProgressNav = styled.div`
   }
 `
 
+const NavMarker = styled.span`
+  position: absolute;
+  top: ${({ top }) => top || '0'};
+  left: 0;
+  height: 1px;
+  display: block;
+  width: 100%;
+  background: rgba(255,255,255,0.3);
+
+  &:last-child {
+    display: none;
+  }
+
+  @media screen and (max-width: 767px) {
+    display: none;
+  }
+`
+
 const Progress = styled.div.attrs(props => ({
   style: {
     background: `linear-gradient(
@@ -123,6 +141,7 @@ const Progress = styled.div.attrs(props => ({
   },
 }))`
   display: none;
+  position: relative;
 
   @media screen and (min-width: 768px) {
     display: flex;
@@ -244,6 +263,7 @@ const SecondContentType = ({ items }) => {
     const nextActiveIndex = Math.floor(pinProgress / step)
     if (nextActiveIndex === items.length) return false
     setActiveIndex(i => nextActiveIndex)
+    setProgress(i => pinProgress)
   }
 
   // Animate slider background
@@ -257,6 +277,8 @@ const SecondContentType = ({ items }) => {
         once: true,
       },
     })
+
+    console.log(items[activeIndex].leftBgColor)
 
     // Animate slide coloured background
     const currentGradient = { value: gradient }
@@ -305,22 +327,6 @@ const SecondContentType = ({ items }) => {
         prevIndex === activeIndex ? 1 : 1,
       )
 
-      // Animate progress bar
-      const currentProgress = { value: progress }
-      slideAnimationTl.to(
-        currentProgress,
-        {
-          value: activeIndex + 1,
-          duration: 1,
-          ease: 'power4.inOut',
-          onUpdate: () => {
-            setProgress(g => currentProgress.value)
-          },
-        },
-        0,
-      )
-
-
       // Animate out text content
       const $allAnimatable = $slides.current.querySelectorAll(
         '.animate',
@@ -328,6 +334,7 @@ const SecondContentType = ({ items }) => {
       const $allStatic = $slides.current.querySelectorAll(
         '.static',
       )
+      console.log('fade out all', activeIndex)
       slideAnimationTl.to(
         $allAnimatable,
         { autoAlpha: 0, stagger: 0.1, duration: 0.3 },
@@ -338,11 +345,14 @@ const SecondContentType = ({ items }) => {
       if (slidesArray) {
         ;[...slidesArray].forEach((slide, index) => {
           if (index === activeIndex) {
+            const $staticEls = slide.querySelectorAll('.static')
+            const $animatedEls = slide.querySelectorAll('.animate')
+            console.log('fade in', index, activeIndex)
             slideAnimationTl.set($allStatic, { autoAlpha: 0 }, 0.5)
-            slideAnimationTl.set(slide.querySelectorAll('.static'), { autoAlpha: 1 }, 0.5)
-            gsap.killTweensOf($allAnimatable)
+            slideAnimationTl.set($staticEls, { autoAlpha: 1 }, 0.5)
+            gsap.killTweensOf($animatedEls)
             slideAnimationTl.to(
-              slide.querySelectorAll('.animate'),
+              $animatedEls,
               {
                 autoAlpha: 1,
                 ease: 'power4.out',
@@ -375,7 +385,15 @@ const SecondContentType = ({ items }) => {
         start: 'top top',
         end: 'bottom bottom',
         scrub: false,
-        onUpdate: self => pinProgress(self.progress),
+        markers: {startColor: "green", endColor: "red", fontSize: "12px"},
+        onLeave: self => {
+          console.log('on leave')
+          setActiveIndex(p => total - 1)
+        },
+        onUpdate: self => {
+          console.log('on update')
+          pinProgress(self.progress)
+        },
       })
 
       setPinScrollTrigger(p => scrollPin)
@@ -395,7 +413,11 @@ const SecondContentType = ({ items }) => {
         <Inner>
           <ProgressNav>
             <WorkSans>{activeIndex + 1}</WorkSans>
-            <Progress ratio={(progress / total) * 100} />
+            <Progress ratio={progress * 100}>
+              {items.map((item, i) => (
+                <NavMarker key={'marker'+i} top={((i + 1) / 4) * 100 + '%'} />
+              ))}
+            </Progress>
             <WorkSans>{total}</WorkSans>
           </ProgressNav>
           <Slides gradient={gradient} ref={$slides}>
