@@ -20,9 +20,7 @@ const Container = styled.div`
   width: 100%;
 `
 
-const IndexPage = ({ data, location }) => {
-  console.log('location: ', location)
-  console.log('data: ', data)
+const IndexPage = ({ data }) => {
   const { node } = data.allContentfulFrontPage.edges[0]
   const {
     navbar,
@@ -32,7 +30,6 @@ const IndexPage = ({ data, location }) => {
     products,
     testemonials,
     perks,
-    grow,
     map,
     findOutMore,
     footer,
@@ -49,7 +46,6 @@ const IndexPage = ({ data, location }) => {
       <Testemonials testemonials={testemonials} />
       <Perks perks={perks} />
       <Map mapBoxes={map} countries={footer.countries} />
-      {/* <Grow grow={grow} /> */}
       <FindOutMore findOutMore={findOutMore} />
       <Footer footer={footer} />
     </Container>
