@@ -48,7 +48,7 @@ const Links = styled.div`
 `
 
 const MobileTopContainer = styled.div`
-  width: 90%;
+  width: 100%;
   @media (min-width: 768px) {
     display: none;
   }
@@ -65,8 +65,7 @@ const DesktopTopContainer = styled.div`
 
 const Middle = styled.div`
   display: flex;
-  width: 90%;
-  margin: 1rem 0;
+  width: 100%;
   @media (min-width: 768px) {
     margin-left: 3rem;
     justify-content: space-evenly;
