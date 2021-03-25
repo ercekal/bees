@@ -1,8 +1,8 @@
-import * as React from 'react'
-import PropTypes from 'prop-types'
+import React from 'react'
 import { Link } from 'gatsby'
 import styled from 'styled-components'
 import Button from './Button'
+import Dropdown from './Dropdown'
 
 const Container = styled.div`
   padding: 2rem 2.5rem 1rem;
@@ -34,18 +34,11 @@ const Header = ({ navbar }) => {
         <Link to="/">
           <Image src={url} />
         </Link>
+        <Dropdown />
         <Button>{button}</Button>
       </Container>
     </header>
   )
-}
-
-Header.propTypes = {
-  siteTitle: PropTypes.string,
-}
-
-Header.defaultProps = {
-  siteTitle: ``,
 }
 
 export default Header

@@ -5,9 +5,7 @@ import HoverElement from '../components/HoverElement'
 
 const Container = styled.div`
   display: flex;
-  background: ${({ bgColor }) => bgColor || 'white'};
   height: calc(100vh - 310px);
-  padding: 2rem 5rem;
 `
 
 const List = styled.div`
@@ -44,23 +42,31 @@ const ContactPageButtonList = ({ list }) => {
   }
 
   return (
-    <Container bgColor={colorsList[number]}>
-      <List>
-        {list.map((c, i) => (
-          <ContactPageButton
-            item={c}
-            number={i}
-            key={i}
-            onEnter={onHover}
-            onLeave={onLeave}
-            selected={i === number}
-            hover={hover}
-            hoverColor={colorsList[number]}
-          />
-        ))}
-      </List>
-      {hoverIconsList[number]}
-    </Container>
+    <div
+      className="container clearfix"
+      style={{
+        backgroundColor: colorsList[number],
+        display: 'block',
+      }}
+    >
+      <Container>
+        <List>
+          {list.map((c, i) => (
+            <ContactPageButton
+              item={c}
+              number={i}
+              key={i}
+              onEnter={onHover}
+              onLeave={onLeave}
+              selected={i === number}
+              hover={hover}
+              hoverColor={colorsList[number]}
+            />
+          ))}
+        </List>
+        {hoverIconsList[number]}
+      </Container>
+    </div>
   )
 }
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { graphql } from 'gatsby'
 import styled from 'styled-components'
 import Header from '../components/Header'
@@ -20,7 +20,8 @@ const Container = styled.div`
   width: 100%;
 `
 
-const IndexPage = ({ data }) => {
+const IndexPage = ({ location, data }) => {
+  console.log('data: ', data)
   const { node } = data.allContentfulFrontPage.edges[0]
   const {
     navbar,
@@ -55,8 +56,8 @@ const IndexPage = ({ data }) => {
 export default IndexPage
 
 export const query = graphql`
-  query FrontPageQuery {
-    allContentfulFrontPage(filter: { node_locale: { eq: "en-US" } }) {
+  query SpanishFrontPageQuery {
+    allContentfulFrontPage(filter: { node_locale: { eq: "es" } }) {
       edges {
         node {
           navbar {
