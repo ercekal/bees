@@ -87,7 +87,29 @@ const SlideAnimate = styled.div.attrs(props => ({
 
 const ProgressNav = styled.div`
   position: absolute;
-  left: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 20px;
+  display: flex;
+
+  div:first-child {
+    &:after {
+      content: '/';
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    left: 30px;
+    display: block;
+    transform: none;
+    bottom: initial;
+
+    div:first-child {
+      &:after {
+        display: none;
+      }
+    }
+  }
 `
 
 const Progress = styled.div.attrs(props => ({
@@ -101,9 +123,13 @@ const Progress = styled.div.attrs(props => ({
       )`,
   },
 }))`
-  display: flex;
-  width: 5px;
-  height: 200px;
+  display: none;
+
+  @media screen and (min-width: 768px) {
+    display: flex;
+    width: 5px;
+    height: 200px;
+  }
 `
 
 const SlideImage = styled.div`
