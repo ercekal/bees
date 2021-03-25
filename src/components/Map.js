@@ -3,6 +3,11 @@ import styled from 'styled-components'
 import './Map.css'
 import WorldMap from './WorldMap'
 
+const Section = styled.section`
+  @media (min-width: 1700px) {
+    height: 800px;
+  }
+`
 const Header = styled.h2`
   font-size: 48px;
   line-height: 56px;
@@ -78,7 +83,7 @@ const Map = ({ mapBoxes }) => {
   })
 
   return (
-    <section>
+    <Section>
       <div className="interactive-maps">
         <WorldMap />
       </div>
@@ -94,7 +99,7 @@ const Map = ({ mapBoxes }) => {
           <div className="boxes">{list.map(l => l)}</div>
         </div>
       </div>
-    </section>
+    </Section>
   )
 }
 
