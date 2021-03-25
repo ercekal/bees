@@ -1,17 +1,17 @@
-.carousel {
-  padding-top: 0;
-}
 .headline {
   padding: 120px 48px 0 48px;
 }
 .cols24 {
   width: 100%;
-  float: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
 }
 .cols3 {
   width: 30%;
   margin-right: 5%;
   float: left;
+  opacity: 0;
 }
 .cols3:last-child {
   margin-right: 0%;
@@ -32,28 +32,10 @@ p {
 .img-card-img {
   margin-bottom: 24px;
 }
-.background {
-  background: linear-gradient(
-    white,
-    white 30%,
-    yellow 30%,
-    yellow 50%,
-    white 50%
-  );
-}
 
 @media only screen and (max-width: 1100px) {
   .headline {
     padding: 100px 48px 0 48px;
-  }
-  .background {
-    background: linear-gradient(
-      white,
-      white 30%,
-      yellow 30%,
-      yellow 50%,
-      white 36%
-    );
   }
 }
 
@@ -83,14 +65,5 @@ p {
   }
   .carousel .cols3:last-child {
     margin-right: 24px;
-  }
-  .background {
-    background: linear-gradient(
-      white,
-      white 30%,
-      yellow 30%,
-      yellow 50%,
-      white 50%
-    );
   }
 }
