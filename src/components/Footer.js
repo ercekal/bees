@@ -8,15 +8,12 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: 1rem;
   justify-content: center;
   align-items: center;
   @media (min-width: 768px) {
     height: 240px;
     justify-content: space-between;
-    padding: 1rem;
   }
-  background: #000000;
 `
 
 const Upper = styled.div`
@@ -35,7 +32,7 @@ const Lower = styled.div`
   align-items: center;
   @media (min-width: 768px) {
     flex-direction: row;
-    width: 90%;
+    width: 100%;
   }
 `
 
@@ -62,7 +59,7 @@ const DesktopTopContainer = styled.div`
   @media (min-width: 768px) {
     display: flex;
     height: 140px;
-    width: 90%;
+    width: 100%;
   }
 `
 
@@ -176,52 +173,56 @@ const Footer = ({ footer }) => {
     </>
   )
   return (
-    <Container>
-      <MobileTopContainer>
-        <Upper>
-          <Image src={'http:' + logo.file.url} />
-        </Upper>
-        <Middle>
-          <List>
-            <ListTitle>
-              <BarlowText
-                size="18px"
-                lineHeight="22px"
-                color="#FFFFFF"
-              >
-                {countriesTitle}
-              </BarlowText>
-            </ListTitle>
-            {rendercountries()}
-          </List>
-          <List>{renderGetInTouch()}</List>
-        </Middle>
-      </MobileTopContainer>
-      <DesktopTopContainer>
-        <Upper>
-          <Image src={'http:' + logo.file.url} />
-        </Upper>
-        <Middle>
-          <List>
-            <ListTitle>
-              <BarlowText
-                size="18px"
-                lineHeight="22px"
-                color="#FFFFFF"
-              >
-                {countriesTitle}
-              </BarlowText>
-            </ListTitle>
-            <CountriesList>{rendercountries()}</CountriesList>
-          </List>
-          <List>{renderGetInTouch()}</List>
-        </Middle>
-      </DesktopTopContainer>
-      <Lower>
-        <Text>{tradeMark}</Text>
-        <Links>{renderLinks()}</Links>
-      </Lower>
-    </Container>
+    <section style={{ backgroundColor: 'black' }}>
+      <div className="container clearfix">
+        <Container>
+          <MobileTopContainer>
+            <Upper>
+              <Image src={'http:' + logo.file.url} />
+            </Upper>
+            <Middle>
+              <List>
+                <ListTitle>
+                  <BarlowText
+                    size="18px"
+                    lineHeight="22px"
+                    color="#FFFFFF"
+                  >
+                    {countriesTitle}
+                  </BarlowText>
+                </ListTitle>
+                {rendercountries()}
+              </List>
+              <List>{renderGetInTouch()}</List>
+            </Middle>
+          </MobileTopContainer>
+          <DesktopTopContainer>
+            <Upper>
+              <Image src={'http:' + logo.file.url} />
+            </Upper>
+            <Middle>
+              <List>
+                <ListTitle>
+                  <BarlowText
+                    size="18px"
+                    lineHeight="22px"
+                    color="#FFFFFF"
+                  >
+                    {countriesTitle}
+                  </BarlowText>
+                </ListTitle>
+                <CountriesList>{rendercountries()}</CountriesList>
+              </List>
+              <List>{renderGetInTouch()}</List>
+            </Middle>
+          </DesktopTopContainer>
+          <Lower>
+            <Text>{tradeMark}</Text>
+            <Links>{renderLinks()}</Links>
+          </Lower>
+        </Container>
+      </div>
+    </section>
   )
 }
 
