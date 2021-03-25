@@ -6,7 +6,6 @@ import BarlowText from './BarlowText'
 import WorkSans from './WorkSans'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { Controls, PlayState, Tween } from 'react-gsap'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -87,7 +86,29 @@ const SlideAnimate = styled.div.attrs(props => ({
 
 const ProgressNav = styled.div`
   position: absolute;
-  left: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 20px;
+  display: flex;
+
+  div:first-child {
+    &:after {
+      content: '/';
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    left: 30px;
+    display: block;
+    transform: none;
+    bottom: initial;
+
+    div:first-child {
+      &:after {
+        display: none;
+      }
+    }
+  }
 `
 
 const Progress = styled.div.attrs(props => ({
@@ -101,9 +122,13 @@ const Progress = styled.div.attrs(props => ({
       )`,
   },
 }))`
-  display: flex;
-  width: 5px;
-  height: 200px;
+  display: none;
+
+  @media screen and (min-width: 768px) {
+    display: flex;
+    width: 5px;
+    height: 200px;
+  }
 `
 
 const SlideImage = styled.div`
@@ -238,6 +263,11 @@ const SecondContentType = ({ items }) => {
     const duration = gradient === initialGradient ? 1.5 : 0.5
     const gradientDirection = windowSize.width <= 768 ? 'bottom' : 'right'
     const gradientPercent = windowSize.width <= 768 ? '50%' : '38.8%'
+
+    if (prevIndex === activeIndex && prevIndex === 0) {
+      slideAnimationTl.set($image.current, { autoAlpha: 0, y: -30 }, 0)
+    }
+
     slideAnimationTl.to(currentGradient, {
       value: `linear-gradient(
         to ${gradientDirection},
@@ -264,19 +294,15 @@ const SecondContentType = ({ items }) => {
           0.7,
         )
       }
-      slideAnimationTl.fromTo(
+      slideAnimationTl.to(
         $image.current,
-        {
-          y: -30,
-          autoAlpha: 0
-        },
         {
           y: 0,
           autoAlpha: 1,
           ease: 'power4.out',
           duration: 1.5,
         },
-        prevIndex === activeIndex ? 0.5 : 1,
+        prevIndex === activeIndex ? 1 : 1,
       )
 
       // Animate progress bar
@@ -302,7 +328,6 @@ const SecondContentType = ({ items }) => {
       const $allStatic = $slides.current.querySelectorAll(
         '.static',
       )
-      slideAnimationTl.set($allStatic, { autoAlpha: 0 }, 0.5)
       slideAnimationTl.to(
         $allAnimatable,
         { autoAlpha: 0, stagger: 0.1, duration: 0.3 },
@@ -313,6 +338,7 @@ const SecondContentType = ({ items }) => {
       if (slidesArray) {
         ;[...slidesArray].forEach((slide, index) => {
           if (index === activeIndex) {
+            slideAnimationTl.set($allStatic, { autoAlpha: 0 }, 0.5)
             slideAnimationTl.set(slide.querySelectorAll('.static'), { autoAlpha: 1 }, 0.5)
             gsap.killTweensOf($allAnimatable)
             slideAnimationTl.to(
@@ -323,7 +349,7 @@ const SecondContentType = ({ items }) => {
                 duration: 1,
                 stagger: 0.1
               },
-              1,
+              0.7,
             )
           }
         })

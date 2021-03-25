@@ -71,12 +71,12 @@ p {
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;
   }
+  .carousel::-webkit-scrollbar {
+    display: none;
+  }
   .carousel .cols24 {
     display: flex;
     flex-shrink: 0;
-  }
-  .carousel .cols24 ::-webkit-scrollbar {
-    display: none;
   }
   .carousel .cols3 {
     flex-shrink: 0;
