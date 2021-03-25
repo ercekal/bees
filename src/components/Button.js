@@ -5,6 +5,9 @@ import BarlowText from './BarlowText'
 
 const Container = styled.button`
   background: #000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 10px 20px;
   width: ${({ width }) => (width ? width : 'fit-content')};
   border: 0;

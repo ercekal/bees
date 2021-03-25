@@ -4,26 +4,12 @@ import BarlowText from './BarlowText'
 import WorkSans from './WorkSans'
 import Button from './Button'
 
-const Container = styled.section`
-  display: flex;
-  flex-direction: column-reverse;
-  justify-content: center;
-  align-items: center;
-  padding: 3rem 0;
-  @media (min-width: 768px) {
-    flex-direction: row;
-    height: 30rem;
-    padding: 0 5rem 0 0;
-  }
-  background: ${({ bgColor }) => bgColor || ''};
-  width: 100%;
-`
 const Left = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 90%;
+  width: 100%;
   height: 100%;
 `
 
@@ -34,6 +20,11 @@ const MobileText = styled.div`
   justify-content: space-around;
   align-items: center;
   text-align: center;
+  @media (min-width: 768px) {
+    display: none;
+  }
+`
+const MobileImage = styled.div`
   @media (min-width: 768px) {
     display: none;
   }
@@ -66,19 +57,38 @@ const MobileElement = styled.div`
   margin: 1rem 0;
 `
 
+const ImageContainer = styled.div`
+  display: none;
+  @media (min-width: 768px) {
+    display: initial;
+    position: absolute;
+    right: 0;
+    width: '30%';
+  }
+`
+
+const Section = styled.section`
+  @media (min-width: 768px) {
+    padding-top: '50px';
+  }
+`
+
 const FindOutMore = ({ findOutMore }) => {
   const { title, subtitle, button, bgColor, bgImage } = findOutMore
   return (
-    <section style={{ backgroundColor: bgColor, paddingTop: '50px' }}>
-      <div
+    <Section style={{ backgroundColor: bgColor }}>
+      <ImageContainer
         className="findOutMore-image"
         style={{ position: 'absolute', right: 0, width: '30%' }}
       >
         <Image src={`http:${bgImage.file.url}`} />
-      </div>
+      </ImageContainer>
 
       <div className="container clearfix">
         <Left>
+          <MobileImage>
+            <Image src={`http:${bgImage.file.url}`} />
+          </MobileImage>
           <MobileText>
             <BarlowText size="2.6rem" lineHeight="50px">
               {title}
@@ -87,7 +97,7 @@ const FindOutMore = ({ findOutMore }) => {
               <WorkSans lineHeight="20px">{subtitle}</WorkSans>
             </MobileElement>
             <MobileElement>
-              <Button width="106px">{button}</Button>
+              <Button width="130px">{button}</Button>
             </MobileElement>
           </MobileText>
           <DesktopText>
@@ -101,7 +111,7 @@ const FindOutMore = ({ findOutMore }) => {
           </DesktopText>
         </Left>
       </div>
-    </section>
+    </Section>
   )
 }
 
