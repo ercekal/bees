@@ -1,6 +1,5 @@
 import React, { useState, useRef } from 'react'
 import styled from 'styled-components'
-import { navigate } from 'gatsby' //import navigate from gatsby
 import { globalHistory as history } from '@reach/router'
 import { Link } from 'gatsby'
 
@@ -19,15 +18,6 @@ const Dropdown = () => {
   const [isOpen, setIsOpen] = useState(false)
   const languages = ['en', 'es']
 
-  const onChange = val => {
-    event.preventDefault()
-    setSelectedLanguage(val)
-    if (val === 'en' && location.pathname !== '/') {
-      navigate('/')
-    } else if (val === 'es' && location.pathname !== '/es') {
-      navigate('es')
-    }
-  }
   const getLink = val => {
     if (location.pathname === '/es') {
       if (val === 'es') {
@@ -42,7 +32,6 @@ const Dropdown = () => {
   }
   return (
     <div onClick={() => setIsOpen(!isOpen)}>
-      {/* {selectedLanguage} */}
       <div>
         <div>
           {languages.map((lan, i) => (

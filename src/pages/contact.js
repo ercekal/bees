@@ -11,6 +11,7 @@ const ContactPage = ({ data }) => {
 
   const { node } = data.allContentfulContactPage.edges[0]
   const { contactPageButtonList, navbar, footer } = node
+  console.log('contactPageButtonList: ', contactPageButtonList)
   return (
     <div>
       <Header navbar={navbar} />
@@ -24,7 +25,9 @@ export default ContactPage
 
 export const query = graphql`
   query ContactPageQuery {
-    allContentfulContactPage {
+    allContentfulContactPage(
+      filter: { node_locale: { eq: "en-US" } }
+    ) {
       edges {
         node {
           navbar {
@@ -38,6 +41,26 @@ export const query = graphql`
           }
           contactPageButtonList {
             color
+            clickEl {
+              ... on ContentfulJoinTheTeam {
+                id
+                description
+                link
+                title
+                button
+                type
+              }
+              ... on ContentfulNewFormGroup {
+                id
+                inputsList {
+                  required
+                  label
+                  placeholder
+                }
+                button
+                type
+              }
+            }
             hoverElement {
               file {
                 url

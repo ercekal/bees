@@ -1,16 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import ContactPageButton from '../components/ContactPageButton'
-import HoverElement from '../components/HoverElement'
+import ContactPageButton from './ContactPageButton'
+import HoverElement from './HoverElement'
+import ContactPageClickElement from './ContactPageClickElement'
 
 const Wrapper = styled.div`
-  background: linear-gradient(
-    to bottom,
-    black 0%,
-    black 40%,
-    rgba(0, 0, 0, 0.1) 40%,
-    rgba(0, 0, 0, 0.1) 100%
-  );
+  background: ${({ clicked, hoverBgColor, clickBgColor }) =>
+    clicked ? clickBgColor : hoverBgColor || 'white'};
+  display: 'block';
 `
 const Container = styled.div`
   display: flex;
@@ -27,16 +24,22 @@ const ContactPageButtonList = ({ list }) => {
   const [clickedNumber, setClickedNumber] = useState(0)
   const [hover, setHover] = useState(false)
   const [hoverIconsList, setHoverIconsList] = useState([])
+  const [clickElementsList, setClickElementsList] = useState([])
   const [colorsList, setColorsList] = useState([])
 
   useEffect(() => {
+    console.log('list: ', list)
     const hList = list.map((t, i) => (
       <HoverElement
         image={`http:${t.hoverElement.file.url}`}
         key={i}
       />
     ))
+    const clickElList = list.map((t, i) => (
+      <ContactPageClickElement element={t.clickEl} key={i} />
+    ))
     const cList = list.map(c => c.color)
+    setClickElementsList(clickElList)
     setColorsList(cList)
     setHoverIconsList(hList)
   }, [])
@@ -51,18 +54,12 @@ const ContactPageButtonList = ({ list }) => {
     setHover(false)
   }
 
-  const onClick = number => {
-    console.log('number: ', number)
-    setClickedNumber
-  }
-
   return (
-    <div
+    <Wrapper
       className="container clearfix"
-      style={{
-        backgroundColor: colorsList[number],
-        display: 'block',
-      }}
+      clicked={clickedNumber !== 0}
+      hoverBgColor={colorsList[number]}
+      clickBgColor={colorsList[clickedNumber]}
     >
       <Container>
         <List>
@@ -74,15 +71,20 @@ const ContactPageButtonList = ({ list }) => {
               onEnter={onHover}
               onLeave={onLeave}
               selected={i === number}
+              clickSelected={i === clickedNumber}
               hover={hover}
               hoverColor={colorsList[number]}
+              clickColor={colorsList[clickedNumber]}
+              clicked={clickedNumber !== 0}
               onClick={setClickedNumber}
             />
           ))}
         </List>
-        {clickedNumber === 0 ? hoverIconsList[number] : clickedNumber}
+        {clickedNumber === 0
+          ? hoverIconsList[number]
+          : clickElementsList[clickedNumber]}
       </Container>
-    </div>
+    </Wrapper>
   )
 }
 
