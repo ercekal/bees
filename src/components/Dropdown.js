@@ -36,6 +36,7 @@ const Dropdown = () => {
         return '/'
       }
     } else if (location.pathname === '/') {
+      if (val === 'en') return '/'
       return val
     }
   }
