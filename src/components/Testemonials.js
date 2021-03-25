@@ -102,7 +102,7 @@ const Testemonials = ({ testemonials }) => {
       time: tl.duration(),
       duration: tl.duration(),
       ease:"power2.inOut"
-    });
+    })
   }
 
   return (
