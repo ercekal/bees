@@ -61,7 +61,7 @@ const ContactPageButtonList = ({ list }) => {
         ${colorsList[clickedNumber]} 40%,
         white 40%,
         white 100%
-      )`
+      );`
     } else if (hovered) {
       return colorsList[hoveredNumber]
     }
@@ -88,7 +88,7 @@ const ContactPageButtonList = ({ list }) => {
       className="container clearfix"
       clicked={isClicked()}
       bgColor={getBgColor()}
-      hoverBgColor={colorsList[hoveredNumber]}
+      // hoverBgColor={colorsList[hoveredNumber]}
       clickBgColor={colorsList[clickedNumber]}
     >
       <Container>
