@@ -386,11 +386,9 @@ const SecondContentType = ({ items }) => {
         end: 'bottom bottom',
         scrub: false,
         onLeave: self => {
-          console.log('on leave')
           setActiveIndex(p => total - 1)
         },
         onUpdate: self => {
-          console.log('on update')
           pinProgress(self.progress)
         },
       })
