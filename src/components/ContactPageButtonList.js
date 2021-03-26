@@ -7,7 +7,19 @@ import ContactPageClickElement from './ContactPageClickElement'
 const Wrapper = styled.div`
   background: ${({ clicked, hoverBgColor, clickBgColor }) =>
     clicked ? clickBgColor : hoverBgColor || 'white'};
-  display: 'block';
+  position: relative;
+  display: block;
+  &::before {
+    content: '';
+    background: ${({ clicked, hoverBgColor, clickBgColor }) =>
+      clicked ? clickBgColor : hoverBgColor || 'white'};
+    position: absolute;
+    height: 100%;
+    width: 4000px;
+    left: -2000px;
+    z-index: -1;
+    top: 0;
+  }
 `
 const Container = styled.div`
   display: flex;
