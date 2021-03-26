@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import Button from './Button'
 
 const Container = styled.div`
-  padding-left: 60px;
+  padding-left: 160px;
   width: 480px;
 `
 
