@@ -4,11 +4,14 @@ import Button from './Button'
 
 const Container = styled.div`
   padding-left: 60px;
+  width: 480px;
 `
 
 const FormInput = styled.div`
   display: flex;
   flex-direction: column;
+  margin-right: ${({ rowEl }) => (rowEl ? '40px' : '0')};
+  width: 100%;
 `
 
 const Label = styled.label`
@@ -37,7 +40,7 @@ const ContactPageForm = ({ element }) => {
   const formElementsList = () =>
     element.inputsList.map((t, i) => {
       return (
-        <FormInput>
+        <FormInput rowEl={i === 1}>
           <Label>
             {t.label}
             {t.required && ' *'}
@@ -49,7 +52,7 @@ const ContactPageForm = ({ element }) => {
   return (
     <Container>
       <div>{formElementsList()[0]}</div>
-      <div>
+      <div style={{ display: 'flex' }}>
         {formElementsList()[1]}
         {formElementsList()[2]}
       </div>
