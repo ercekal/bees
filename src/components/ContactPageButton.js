@@ -6,8 +6,7 @@ const Container = styled.div`
   display: flex;
   justify-content: start;
   align-items: center;
-  background: ${({ bgColor, hoverColor, selected, hover }) =>
-    hover ? (selected ? 'white' : hoverColor) : bgColor || 'white'};
+  background-color: ${({ bgColor }) => bgColor || 'black'};
   margin-bottom: 1rem;
   width: 330px;
   cursor: pointer;
@@ -23,24 +22,46 @@ const ContactPageButton = ({
   onEnter,
   onLeave,
   number,
-  selected,
+  hoverSelected,
   hoverColor,
-  hover,
+  clickSelected,
+  clickColor,
+  hovered,
   onClick,
+  clicked,
 }) => {
   const { color, icon, title, isButton } = item
+
+  const getBgColor = () => {
+    if (clicked) {
+      if (clickSelected) {
+        return 'white'
+      } else {
+        return clickColor
+      }
+    } else if (hovered) {
+      if (hoverSelected) {
+        return 'white'
+      } else {
+        return hoverColor
+      }
+    } else {
+      return color
+    }
+  }
 
   const onMouseEnter = number => {
     if (number !== 0) {
       onEnter(number)
     }
   }
+
   return (
     <Container
-      bgColor={color}
-      selected={selected}
+      bgColor={getBgColor()}
+      selected={hoverSelected}
       hoverColor={hoverColor}
-      hover={hover}
+      hovered={hovered}
       onMouseEnter={() => onMouseEnter(number)}
       onMouseLeave={onLeave}
       onClick={() => onClick(number)}

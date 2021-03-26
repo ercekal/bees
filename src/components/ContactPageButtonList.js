@@ -5,14 +5,11 @@ import HoverElement from './HoverElement'
 import ContactPageClickElement from './ContactPageClickElement'
 
 const Wrapper = styled.div`
-  background: ${({ clicked, hoverBgColor, clickBgColor }) =>
-    clicked ? clickBgColor : hoverBgColor || 'white'};
   position: relative;
   display: block;
   &::before {
     content: '';
-    background: ${({ clicked, hoverBgColor, clickBgColor }) =>
-      clicked ? clickBgColor : hoverBgColor || 'white'};
+    background: ${({ bgColor }) => bgColor || 'white'};
     position: absolute;
     height: 100%;
     width: 4000px;
@@ -32,9 +29,9 @@ const List = styled.div`
 `
 
 const ContactPageButtonList = ({ list }) => {
-  const [number, setNumber] = useState(0)
+  const [hoveredNumber, setHoveredNumber] = useState(0)
   const [clickedNumber, setClickedNumber] = useState(0)
-  const [hover, setHover] = useState(false)
+  const [hovered, setHovered] = useState(false)
   const [hoverIconsList, setHoverIconsList] = useState([])
   const [clickElementsList, setClickElementsList] = useState([])
   const [colorsList, setColorsList] = useState([])
@@ -56,21 +53,42 @@ const ContactPageButtonList = ({ list }) => {
     setHoverIconsList(hList)
   }, [])
 
+  const getBgColor = () => {
+    if (isClicked()) {
+      return `linear-gradient(
+        to right,
+        ${colorsList[clickedNumber]} 0%,
+        ${colorsList[clickedNumber]} 40%,
+        white 40%,
+        white 100%
+      )`
+    } else if (hovered) {
+      return colorsList[hoveredNumber]
+    }
+  }
+
+  const isClicked = () => clickedNumber !== 0
+  console.log('isClicked: ', isClicked())
   const onHover = n => {
-    setNumber(n)
-    setHover(true)
+    if (!isClicked()) {
+      setHoveredNumber(n)
+      setHovered(true)
+    }
   }
 
   const onLeave = () => {
-    setNumber(0)
-    setHover(false)
+    if (!isClicked()) {
+      setHoveredNumber(0)
+      setHovered(false)
+    }
   }
 
   return (
     <Wrapper
       className="container clearfix"
-      clicked={clickedNumber !== 0}
-      hoverBgColor={colorsList[number]}
+      clicked={isClicked()}
+      bgColor={getBgColor()}
+      hoverBgColor={colorsList[hoveredNumber]}
       clickBgColor={colorsList[clickedNumber]}
     >
       <Container>
@@ -82,18 +100,18 @@ const ContactPageButtonList = ({ list }) => {
               key={i}
               onEnter={onHover}
               onLeave={onLeave}
-              selected={i === number}
+              hoverSelected={i === hoveredNumber}
               clickSelected={i === clickedNumber}
-              hover={hover}
-              hoverColor={colorsList[number]}
+              hovered={hovered}
+              hoverColor={colorsList[hoveredNumber]}
               clickColor={colorsList[clickedNumber]}
-              clicked={clickedNumber !== 0}
+              clicked={isClicked()}
               onClick={setClickedNumber}
             />
           ))}
         </List>
-        {clickedNumber === 0
-          ? hoverIconsList[number]
+        {!isClicked()
+          ? hoverIconsList[hoveredNumber]
           : clickElementsList[clickedNumber]}
       </Container>
     </Wrapper>
