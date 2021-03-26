@@ -21,6 +21,7 @@ const Wrapper = styled.div`
 const Container = styled.div`
   display: flex;
   height: calc(100vh - 310px);
+  /* background: ${({ bgColor }) => bgColor || 'white'}; */
 `
 
 const List = styled.div`
@@ -57,10 +58,24 @@ const ContactPageButtonList = ({ list }) => {
     if (isClicked()) {
       return `linear-gradient(
         to right,
-        ${colorsList[clickedNumber]} 0%,
-        ${colorsList[clickedNumber]} 40%,
-        white 40%,
-        white 100%
+        ${colorsList[clickedNumber]} 62%,
+        ${colorsList[clickedNumber]} 00%,
+        white 0%,
+        white 0%
+      );`
+    } else if (hovered) {
+      return colorsList[hoveredNumber]
+    }
+  }
+
+  const getBgColorContainer = () => {
+    if (isClicked()) {
+      return `linear-gradient(
+        to right,
+        ${colorsList[clickedNumber]} 50%,
+        ${colorsList[clickedNumber]} 00%,
+        white 0%,
+        white 00%
       );`
     } else if (hovered) {
       return colorsList[hoveredNumber]
@@ -91,7 +106,7 @@ const ContactPageButtonList = ({ list }) => {
       // hoverBgColor={colorsList[hoveredNumber]}
       clickBgColor={colorsList[clickedNumber]}
     >
-      <Container>
+      <Container bgColor={getBgColorContainer()}>
         <List>
           {list.map((c, i) => (
             <ContactPageButton
