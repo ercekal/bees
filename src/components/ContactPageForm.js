@@ -26,6 +26,9 @@ const Input = styled.input`
   border: none;
   border-bottom: 3px solid black;
   padding: 8px 4px;
+  padding-top: ${({ isMessageBox }) =>
+    isMessageBox ? '50px' : '8px'};
+
   margin-bottom: 20px;
   &::placeholder {
     font-size: 16px;
@@ -45,7 +48,11 @@ const ContactPageForm = ({ element }) => {
             {t.label}
             {t.required && ' *'}
           </Label>
-          <Input type="text" placeholder={t.placeholder} />
+          <Input
+            type="text"
+            placeholder={t.placeholder}
+            isMessageBox={i === 4}
+          />
         </FormInput>
       )
     })
@@ -57,6 +64,7 @@ const ContactPageForm = ({ element }) => {
         {formElementsList()[2]}
       </div>
       <div>{formElementsList()[3]}</div>
+      <div>{formElementsList()[4]}</div>
     </Container>
   )
 }
