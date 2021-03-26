@@ -67,7 +67,7 @@ const ContactPageForm = ({ element }) => {
       <div style={{ marginBottom: '20px' }}>
         {formElementsList()[4]}
       </div>
-      <Button>{element.button}</Button>
+      <Button to="#">{element.button}</Button>
     </Container>
   )
 }

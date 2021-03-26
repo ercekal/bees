@@ -1,6 +1,7 @@
 import React from 'react'
 import Button from './Button'
 import ContactPageForm from './ContactPageForm'
+import Hiring from './Hiring'
 
 const ContactPageClickElement = ({ element }) => {
   if (!element) {
@@ -8,16 +9,7 @@ const ContactPageClickElement = ({ element }) => {
   } else if (element.type === 'form') {
     return <ContactPageForm element={element} />
   } else if (element.type === 'hiring') {
-    return (
-      <div>
-        <div>{element.title}</div>
-        {element.description.map((el, i) => (
-          <p key={i}>{el}</p>
-        ))}
-        <Button>{element.button}</Button>
-        <p>{element.link}</p>
-      </div>
-    )
+    return <Hiring element={element} />
   }
   return <div>Click element</div>
 }

@@ -16,10 +16,10 @@ const ButtonLink = styled(Link)`
   text-decoration: none;
 `
 
-const Button = ({ children, width }) => {
+const Button = ({ children, width, to }) => {
   return (
     <Container width={width}>
-      <ButtonLink to="/contact">
+      <ButtonLink to={to || '/contact'}>
         <BarlowText size="1.25rem" color="#ffff00">
           {children}
         </BarlowText>
