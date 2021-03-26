@@ -97,7 +97,9 @@ const FindOutMore = ({ findOutMore }) => {
               <WorkSans lineHeight="20px">{subtitle}</WorkSans>
             </MobileElement>
             <MobileElement>
-              <Button width="130px">{button}</Button>
+              <Button to="/contact" width="130px">
+                {button}
+              </Button>
             </MobileElement>
           </MobileText>
           <DesktopText>
@@ -107,7 +109,9 @@ const FindOutMore = ({ findOutMore }) => {
             <DesktopSubtitle>
               <WorkSans lineHeight="30px">{subtitle}</WorkSans>
             </DesktopSubtitle>
-            <Button width="130px">{button}</Button>
+            <Button to="/contact" width="130px">
+              {button}
+            </Button>
           </DesktopText>
         </Left>
       </div>

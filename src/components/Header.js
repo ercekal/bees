@@ -35,7 +35,7 @@ const Header = ({ navbar }) => {
           <Image src={url} />
         </Link>
         <Dropdown />
-        <Button>{button}</Button>
+        <Button to="/contact">{button}</Button>
       </Container>
     </header>
   )

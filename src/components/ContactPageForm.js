@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import Button from './Button'
+import { useForm, ValidationError } from '@formspree/react'
 
 const Container = styled.div`
   padding-left: 160px;
@@ -22,13 +23,15 @@ const Label = styled.label`
   margin-bottom: 0;
 `
 
+const Textarea = styled.textarea`
+  border: none;
+  border-bottom: 3px solid black;
+`
+
 const Input = styled.input`
   border: none;
   border-bottom: 3px solid black;
   padding: 8px 4px;
-  padding-top: ${({ isMessageBox }) =>
-    isMessageBox ? '50px' : '8px'};
-
   margin-bottom: 20px;
   &::placeholder {
     font-size: 16px;
@@ -39,7 +42,30 @@ const Input = styled.input`
   }
 `
 
+const initialValues = {
+  name: '',
+  company: '',
+  email: '',
+  phone: '',
+  message: '',
+}
+
 const ContactPageForm = ({ element }) => {
+  const [values, setValues] = useState(initialValues)
+  const [state, handleSubmit] = useForm('xnqlaovg')
+
+  console.log('values: ', values)
+
+  const handleInputChange = e => {
+    console.log('e: ', e)
+    const { name, value } = e.target
+    console.log('name, value: ', name, value)
+    setValues({
+      ...values,
+      [name]: value,
+    })
+  }
+
   const formElementsList = () =>
     element.inputsList.map((t, i) => {
       return (
@@ -48,26 +74,45 @@ const ContactPageForm = ({ element }) => {
             {t.label}
             {t.required && ' *'}
           </Label>
-          <Input
-            type="text"
-            placeholder={t.placeholder}
-            isMessageBox={i === 4}
-          />
+          {t.name === 'message' ? (
+            <Textarea
+              name={t.name}
+              rows="4"
+              cols="50"
+              value={values[t.name]}
+              type={t.type}
+              onChange={handleInputChange}
+              placeholder={t.placeholder}
+            />
+          ) : (
+            <Input
+              value={values[t.name]}
+              type={t.type}
+              name={t.name}
+              onChange={handleInputChange}
+              placeholder={t.placeholder}
+            />
+          )}
         </FormInput>
       )
     })
   return (
     <Container>
-      <div>{formElementsList()[0]}</div>
-      <div style={{ display: 'flex' }}>
-        {formElementsList()[1]}
-        {formElementsList()[2]}
-      </div>
-      <div>{formElementsList()[3]}</div>
-      <div style={{ marginBottom: '20px' }}>
-        {formElementsList()[4]}
-      </div>
-      <Button to="#">{element.button}</Button>
+      <form onSubmit={handleSubmit}>
+        <div>{formElementsList()[0]}</div>
+        <div style={{ display: 'flex' }}>
+          {formElementsList()[1]}
+          {formElementsList()[2]}
+        </div>
+        <div>{formElementsList()[3]}</div>
+        <div style={{ marginBottom: '20px' }}>
+          {formElementsList()[4]}
+        </div>
+        {/* <button type="submit" to="#" onSubmit>
+          {element.button}
+        </button> */}
+        <Button type="submit">{element.button}</Button>
+      </form>
     </Container>
   )
 }
