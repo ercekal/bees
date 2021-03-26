@@ -10,7 +10,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 gsap.registerPlugin(ScrollTrigger)
 
 const Container = styled.section`
-  height: 400vh;
+  height: 600vh;
 `
 const Pin = styled.div.attrs(props => ({
   style: {
@@ -166,7 +166,7 @@ const SlideImage = styled.div`
     top: 50%;
     width: 70%;
     height 70vh;
-    left: 38.5%;
+    left: calc(38.5% - 7vh);
   }
 
   @media screen and (min-width: 1024px) {
