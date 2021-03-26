@@ -9,13 +9,17 @@ const Text = styled.div`
   font-weight: ${({ fontWeight }) => fontWeight || '400'};
   font-size: ${({ size }) => size || '1rem'};
 
-  @media screen and (max-width: 1024px) {
-    font-size: ${({ tabletsize }) => tabletsize || '1.5rem'};
-  }
+  ${({ tabletsize }) => tabletsize && `
+    @media screen and (max-width: 1024px) {
+      font-size: ${tabletsize};
+    }
+  `}
 
-  @media screen and (max-width: 768px) {
-    font-size: ${({ mobsize }) => mobsize || '1.5rem'};
-  }
+  ${({ mobsize }) => mobsize && `
+    @media screen and (max-width: 768px) {
+      font-size: ${mobsize};
+    }
+  `}
 `
 
 const BarlowText = ({

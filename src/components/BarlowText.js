@@ -11,13 +11,17 @@ const Text = styled.div`
   color: ${({ color }) => color || '#000000'};
   font-size: ${({ size }) => size || '1rem'};
 
-  @media screen and (max-width: 1024px) {
-    font-size: ${({ tabletsize }) => tabletsize || '1rem'};
-  }
+  ${({ tabletsize }) => tabletsize && `
+    @media screen and (max-width: 1024px) {
+      font-size: ${tabletsize};
+    }
+  `}
 
-  @media screen and (max-width: 768px) {
-    font-size: ${({ mobsize }) => mobsize || '1rem'};
-  }
+  ${({ mobsize }) => mobsize && `
+    @media screen and (max-width: 768px) {
+      font-size: ${mobsize};
+    }
+  `}
 `
 
 const BarlowText = ({ children, color, size, mobsize, tabletsize, lineHeight }) => (
