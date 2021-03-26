@@ -21,6 +21,7 @@ const Wrapper = styled.div`
 const Container = styled.div`
   display: flex;
   align-items: center;
+  min-height: 600px;
 `
 
 const List = styled.div`
