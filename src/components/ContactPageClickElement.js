@@ -1,4 +1,5 @@
 import React from 'react'
+import Button from './Button'
 
 const ContactPageClickElement = ({ element }) => {
   const renderFormElements = element => {
@@ -17,7 +18,16 @@ const ContactPageClickElement = ({ element }) => {
   } else if (element.type === 'form') {
     return <div>{renderFormElements(element).map(t => t)}</div>
   } else if (element.type === 'hiring') {
-    return <div>{element.title}</div>
+    return (
+      <div>
+        <div>{element.title}</div>
+        {element.description.map((el, i) => (
+          <p key={i}>{el}</p>
+        ))}
+        <Button>{element.button}</Button>
+        <p>{element.link}</p>
+      </div>
+    )
   }
   return <div>Click element</div>
 }
