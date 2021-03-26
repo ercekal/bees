@@ -50,6 +50,25 @@ export const query = graphql`
                 button
                 type
               }
+              ... on ContentfulGetTheApp {
+                id
+                mobileCheckButton
+                mobileCheckDescription
+                mobileCheckTitle
+                otherCountryText
+                qrTitle
+                title
+                countries {
+                  countryName
+                  path
+                }
+                qrImage {
+                  file {
+                    url
+                  }
+                }
+                type
+              }
               ... on ContentfulNewFormGroup {
                 id
                 inputsList {
