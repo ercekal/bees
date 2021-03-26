@@ -23,13 +23,15 @@ const Label = styled.label`
   margin-bottom: 0;
 `
 
+const Textarea = styled.textarea`
+  border: none;
+  border-bottom: 3px solid black;
+`
+
 const Input = styled.input`
   border: none;
   border-bottom: 3px solid black;
   padding: 8px 4px;
-  padding-top: ${({ isMessageBox }) =>
-    isMessageBox ? '50px' : '8px'};
-
   margin-bottom: 20px;
   &::placeholder {
     font-size: 16px;
@@ -72,14 +74,25 @@ const ContactPageForm = ({ element }) => {
             {t.label}
             {t.required && ' *'}
           </Label>
-          <Input
-            value={values[t.name]}
-            type={t.type}
-            name={t.name}
-            onChange={handleInputChange}
-            placeholder={t.placeholder}
-            isMessageBox={i === 4}
-          />
+          {t.name === 'message' ? (
+            <Textarea
+              name={t.name}
+              rows="4"
+              cols="50"
+              value={values[t.name]}
+              type={t.type}
+              onChange={handleInputChange}
+              placeholder={t.placeholder}
+            />
+          ) : (
+            <Input
+              value={values[t.name]}
+              type={t.type}
+              name={t.name}
+              onChange={handleInputChange}
+              placeholder={t.placeholder}
+            />
+          )}
         </FormInput>
       )
     })

@@ -20,8 +20,7 @@ const Wrapper = styled.div`
 `
 const Container = styled.div`
   display: flex;
-  height: calc(100vh - 310px);
-  /* background: ${({ bgColor }) => bgColor || 'white'}; */
+  align-items: center;
 `
 
 const List = styled.div`
