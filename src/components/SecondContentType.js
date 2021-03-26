@@ -269,14 +269,21 @@ const SecondContentType = ({ items }) => {
   // Animate slider background
   useEffect(() => {
     // Initial component in animation
-    const slideAnimationTl = gsap.timeline({
-      scrollTrigger: {
-        trigger: $container.current,
-        start: 'top 95%',
-        scrub: false,
-        once: true,
-      },
-    })
+    let slideAnimationTl
+    if (slideAnimation) {
+       slideAnimationTl = slideAnimation
+    } else {
+      slideAnimationTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: $container.current,
+          start: 'top 95%',
+          scrub: false,
+          once: true,
+        },
+      })
+      setSlideAnimation(a => slideAnimationTl)
+    }
+    slideAnimationTl.clear()
 
     // Animate slide coloured background
     const currentGradient = { value: gradient }
@@ -334,8 +341,8 @@ const SecondContentType = ({ items }) => {
       )
       slideAnimationTl.to(
         $allAnimatable,
-        { autoAlpha: 0, stagger: 0.1, duration: 0.3 },
-        0,
+        { autoAlpha: 0, duration: 0.4 },
+        0.5,
       )
       // Animate in text content
       const slidesArray = $slides.current.children
@@ -344,9 +351,8 @@ const SecondContentType = ({ items }) => {
           if (index === activeIndex) {
             const $staticEls = slide.querySelectorAll('.static')
             const $animatedEls = slide.querySelectorAll('.animate')
-            slideAnimationTl.set($allStatic, { autoAlpha: 0 }, 0.5)
-            slideAnimationTl.set($staticEls, { autoAlpha: 1 }, 0.5)
-            gsap.killTweensOf($animatedEls)
+            slideAnimationTl.set($allStatic, { autoAlpha: 0 }, '>')
+            slideAnimationTl.set($staticEls, { autoAlpha: 1 }, '>')
             slideAnimationTl.to(
               $animatedEls,
               {
@@ -355,15 +361,13 @@ const SecondContentType = ({ items }) => {
                 duration: 1,
                 stagger: 0.1
               },
-              0.7,
+              '>',
             )
           }
         })
       }
     }
-
-    setSlideAnimation(a => slideAnimationTl)
-  }, [activeIndex, windowSize])
+  }, [activeIndex, windowSize, slideAnimation])
 
   useEffect(() => {
     return () => {
@@ -382,7 +386,8 @@ const SecondContentType = ({ items }) => {
         end: 'bottom bottom',
         scrub: false,
         onLeave: self => {
-          setActiveIndex(p => total - 1)
+          setActiveIndex(i => total - 1)
+          setProgress(p => 1)
         },
         onUpdate: self => {
           pinProgress(self.progress)
