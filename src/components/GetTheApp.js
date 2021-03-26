@@ -23,6 +23,7 @@ const CountryTextTitle = styled.h5`
   letter-spacing: -0.05em;
   font-weight: 600;
   margin-top: 20px;
+  margin-bottom: 15px;
 `
 
 const P = styled.p`
@@ -30,7 +31,7 @@ const P = styled.p`
   line-height: 24px;
   font-family: 'Work Sans', sans-serif;
   font-weight: 400;
-  margin-bottom: 16px;
+  margin-bottom: 25px;
 `
 
 const Country = styled.div`
