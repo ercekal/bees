@@ -11,19 +11,28 @@ const Container = styled.button`
   padding: 10px 20px;
   width: ${({ width }) => (width ? width : 'fit-content')};
   border: 0;
+  color: #ffff00;
+  font-size: 20px;
+  line-height: 24px;
+  font-family: Barlow Semi Condensed;
+  letter-spacing: -0.05em;
+  font-weight: 600;
+  margin-bottom: 20px;
 `
 const ButtonLink = styled(Link)`
   text-decoration: none;
+  color: #ffff00;
+  font-size: 20px;
+  line-height: 24px;
+  font-family: Barlow Semi Condensed;
+  letter-spacing: -0.05em;
+  font-weight: 600;
 `
 
 const Button = ({ children, width, to }) => {
   return (
     <Container width={width}>
-      <ButtonLink to={to || '/contact'}>
-        <BarlowText size="1.25rem" color="#ffff00">
-          {children}
-        </BarlowText>
-      </ButtonLink>
+      {to ? <ButtonLink to={to}>{children}</ButtonLink> : children}
     </Container>
   )
 }

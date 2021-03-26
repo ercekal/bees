@@ -7,6 +7,7 @@
   "dependencies": {
     "@contentful/rich-text-html-renderer": "^14.1.2",
     "@fontsource/barlow-semi-condensed": "^4.2.2",
+    "@formspree/react": "^2.2.3",
     "babel-plugin-styled-components": "^1.12.0",
     "contentful": "^8.2.0",
     "gatsby": "^3.1.1",

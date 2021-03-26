@@ -75,6 +75,8 @@ export const query = graphql`
                   required
                   label
                   placeholder
+                  name
+                  type
                 }
                 button
                 type
