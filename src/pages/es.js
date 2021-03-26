@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { graphql } from 'gatsby'
 import styled from 'styled-components'
 import Header from '../components/Header'
@@ -21,7 +21,6 @@ const Container = styled.div`
 `
 
 const IndexPage = ({ location, data }) => {
-  console.log('data: ', data)
   const { node } = data.allContentfulFrontPage.edges[0]
   const {
     navbar,
