@@ -17,12 +17,12 @@ const Container = styled.section.attrs(props => ({
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 5rem;
-  height: 500px;
+  padding: 5rem 2rem;
+  height: auto;
+
   @media (min-width: 768px) {
     padding: 200px 0 120px;
     width: 100%;
-    height: auto;
   }
 `
 

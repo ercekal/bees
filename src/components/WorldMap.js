@@ -5,6 +5,7 @@ const Image = styled.div`
   display: none;
   @media (min-width: 600px) {
     display: flex;
+    justify-content: flex-end;
   }
 `
 
@@ -12,24 +13,12 @@ const G = styled.g`
   cursor: pointer;
 `
 
-const SVG = styled.svg`
-  @media (min-width: 1024px) {
-    transform: scale(1.1);
-  }
-  @media (min-width: 1300px) {
-    transform: scale(1.2);
-  }
-  @media (min-width: 1950px) {
-    transform: scale(1.3);
-  }
-`
-
 const WorldMap = () => {
   const [selectedCountry, setSelectedCountry] = useState('Brazil')
 
   return (
     <Image>
-      <SVG
+      <svg
         width="827"
         height="723"
         viewBox="0 0 827 723"
@@ -1408,7 +1397,7 @@ const WorldMap = () => {
             />
           </>
         )}
-      </SVG>
+      </svg>
     </Image>
   )
 }

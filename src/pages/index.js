@@ -134,6 +134,7 @@ export const query = graphql`
               clientName
               clientDetail
               text
+              highlightWords
             }
             bgColor
           }

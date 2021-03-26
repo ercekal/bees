@@ -278,8 +278,6 @@ const SecondContentType = ({ items }) => {
       },
     })
 
-    console.log(items[activeIndex].leftBgColor)
-
     // Animate slide coloured background
     const currentGradient = { value: gradient }
     const duration = gradient === initialGradient ? 1.5 : 0.5
@@ -334,7 +332,6 @@ const SecondContentType = ({ items }) => {
       const $allStatic = $slides.current.querySelectorAll(
         '.static',
       )
-      console.log('fade out all', activeIndex)
       slideAnimationTl.to(
         $allAnimatable,
         { autoAlpha: 0, stagger: 0.1, duration: 0.3 },
@@ -347,7 +344,6 @@ const SecondContentType = ({ items }) => {
           if (index === activeIndex) {
             const $staticEls = slide.querySelectorAll('.static')
             const $animatedEls = slide.querySelectorAll('.animate')
-            console.log('fade in', index, activeIndex)
             slideAnimationTl.set($allStatic, { autoAlpha: 0 }, 0.5)
             slideAnimationTl.set($staticEls, { autoAlpha: 1 }, 0.5)
             gsap.killTweensOf($animatedEls)

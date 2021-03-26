@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import styled from 'styled-components'
+import { gsap } from 'gsap'
 import BarlowText from './BarlowText'
 import WorkSans from './WorkSans'
 
@@ -21,6 +22,43 @@ const Quote = styled.div`
   @media (min-width: 1024px) {
     height: 400px;
   }
+
+  .highlight {
+    position: relative;
+    display: inline-block;
+
+    span {
+      position: absolute;
+      top: 0;
+      left: -5px;
+      padding-left: 5px;
+      width: 100%;
+      bottom: -5px;
+      overflow: hidden;
+      width: 0;
+      color: white;
+      white-space: nowrap;
+
+      @media (min-width: 1024px) {
+        bottom: -10px;
+      }
+
+      &:before {
+        content: '';
+        background: black;
+        position: absolute;
+        top: 5px;
+        left: 2px;
+        right: 0;
+        bottom: 0px;
+        z-index: -1;
+
+        @media (min-width: 1024px) {
+          top: 10px;
+        }
+      }
+    }
+  }
 `
 
 const Lower = styled.div`
@@ -28,12 +66,14 @@ const Lower = styled.div`
   flex-direction: column;
   text-align: end;
   width: 100%;
+  margin-bottom: 30px;
+
   @media (min-width: 768px) {
     margin-bottom: 60px;
   }
 `
 
-const MobileText = styled.div`
+/*const MobileText = styled.div`
   display: initial;
   @media (min-width: 768px) {
     display: none;
@@ -55,35 +95,49 @@ const DesktopText = styled.div`
   @media (min-width: 1024px) {
     display: initial;
   }
-`
+`*/
 
 const Testemonial = ({ testemonial }) => {
-  const { clientName, clientDetail, text } = testemonial
+  const { clientName, clientDetail, text, highlightWords } = testemonial
+  const $quote = useRef(null)
+
+  let highlightedText = text
+  if (highlightWords) {
+    highlightWords.forEach(word => {
+      highlightedText = highlightedText.replace(word, `<span class="highlight"><span aria-hidden>${word}</span>${word}</span>`)
+    })
+  }
+
+  function createMarkup() {
+    return {__html: 'First &middot; Second'};
+  }
+
+  // Animation
+  useEffect(() => {
+    const highlights = highlightWords ? gsap.utils.toArray($quote.current.querySelectorAll('.highlight span')) : false
+    if (highlights) {
+      gsap.to(highlights, {
+        width: 'calc(100% + 10px)',
+        ease: 'power3.inOut',
+        duration: 0.8,
+        stagger: 0.2
+      })
+    }
+  }, [])
+  //gsap.to()
 
   return (
     <Container>
-      <Quote>
-        <MobileText>
-          <BarlowText size="2rem" lineHeight="3rem">
-            {text}
-          </BarlowText>
-        </MobileText>
-        <TabletText>
-          <BarlowText size="3rem" lineHeight="4rem">
-            {text}
-          </BarlowText>
-        </TabletText>
-        <DesktopText>
-          <BarlowText size="5rem" lineHeight="6rem">
-            {text}
-          </BarlowText>
-        </DesktopText>
+      <Quote ref={$quote}>
+        <BarlowText mobsize="2rem" tabletsize="3rem" size="5rem" lineHeight="1.2">
+          <div dangerouslySetInnerHTML={{__html: highlightedText}} />
+        </BarlowText>
       </Quote>
       <Lower>
-        <WorkSans size="24px" lineHeight="32px" fontWeight="600">
+        <WorkSans size="24px" mobsize="20px" lineHeight="1.2" fontWeight="600">
           {clientName}
         </WorkSans>
-        <WorkSans size="20px" lineHeight="30px" fontWeight="400">
+        <WorkSans size="20px" mobsize="18px" lineHeight="1.2" fontWeight="400">
           {clientDetail}
         </WorkSans>
       </Lower>

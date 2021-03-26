@@ -8,11 +8,21 @@ const Text = styled.div`
   color: ${({ color }) => color || '#000000'};
   font-weight: ${({ fontWeight }) => fontWeight || '400'};
   font-size: ${({ size }) => size || '1rem'};
+
+  @media screen and (max-width: 1024px) {
+    font-size: ${({ tabletsize }) => tabletsize || '1.5rem'};
+  }
+
+  @media screen and (max-width: 768px) {
+    font-size: ${({ mobsize }) => mobsize || '1.5rem'};
+  }
 `
 
 const BarlowText = ({
   children,
   color,
+  mobsize,
+  tabletsize,
   size,
   fontWeight,
   lineHeight,
@@ -20,6 +30,8 @@ const BarlowText = ({
   <Text
     color={color}
     size={size}
+    mobsize={mobsize}
+    tabletsize={tabletsize}
     fontWeight={fontWeight}
     lineHeight={lineHeight}
   >
