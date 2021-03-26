@@ -4,6 +4,9 @@ import './Map.css'
 import WorldMap from './WorldMap'
 
 const Section = styled.section`
+  @media (min-width: 1024px) {
+    margin-bottom: 40px;
+  }
   @media (min-width: 1700px) {
     height: 800px;
   }
