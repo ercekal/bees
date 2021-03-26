@@ -385,7 +385,6 @@ const SecondContentType = ({ items }) => {
         start: 'top top',
         end: 'bottom bottom',
         scrub: false,
-        markers: {startColor: "green", endColor: "red", fontSize: "12px"},
         onLeave: self => {
           console.log('on leave')
           setActiveIndex(p => total - 1)

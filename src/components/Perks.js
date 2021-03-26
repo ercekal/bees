@@ -57,7 +57,7 @@ const Background = styled.div`
   @media only screen and (min-width: 1440px) {
     left: 50%;
     right: auto;
-    width: 100vw;
+    width: 0vw;
     transform: translateX(-50%);
   }
  `
