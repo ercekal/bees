@@ -105,7 +105,7 @@ const Perks = ({ perks }) => {
     const introTl = gsap.timeline({
       scrollTrigger: {
         trigger: $container.current,
-        start: 'top 50%',
+        start: 'top 40%',
         scrub: false,
         once: true,
       },
