@@ -6,8 +6,10 @@ import BarlowText from './BarlowText'
 import WorkSans from './WorkSans'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
 
 gsap.registerPlugin(ScrollTrigger)
+gsap.registerPlugin(ScrollToPlugin)
 
 const Container = styled.section`
   height: 600vh;
@@ -99,7 +101,8 @@ const ProgressNav = styled.div`
 
   @media screen and (min-width: 768px) {
     left: 30px;
-    display: block;
+    flex-direction: column;
+    align-items: center;
     transform: none;
     bottom: initial;
 
@@ -185,6 +188,10 @@ const SlideUpper = styled.div`
     align-items: flex-start;
     width: 250px;
   }
+
+  @media screen and (min-width: 768px) and (max-height: 650px) {
+    margin-bottom: 1rem;
+  }
 `
 
 const SlideLower = styled.div`
@@ -230,6 +237,12 @@ const SlideBody = styled.div`
     max-width: 250px;
     width: 100%;
   }
+
+  @media screen and (min-width: 768px) and (max-height: 650px) {
+    margin-bottom: 1rem;
+    max-width: 350px;
+    height: 130px;
+  }
 `
 
 const SecondContentType = ({ items }) => {
@@ -258,12 +271,47 @@ const SecondContentType = ({ items }) => {
   )`
   const [gradient, setGradient] = useState(initialGradient)
 
-  const pinProgress = pinProgress => {
+  const pinProgress = (scroll, current) => {
     const step = 1 / total
-    const nextActiveIndex = Math.floor(pinProgress / step)
+    const velocity = scroll.getVelocity()
+    //const nextActiveIndex = Math.floor(scroll.progress / step)
+    let nextActiveIndex = velocity > 0 ? activeIndex + 1 : activeIndex - 1
+    setProgress(i => scroll.progress)
     if (nextActiveIndex === items.length) return false
-    setActiveIndex(i => nextActiveIndex)
-    setProgress(i => pinProgress)
+
+    // If progress is low perform initial tween
+    if (scroll.progress < 0.1) {
+      nextActiveIndex = 0
+    } else {
+      console.log(scroll.progress)
+    }
+
+    if (!gsap.isTweening(window) && (velocity > 100 || velocity < -100)) {
+      console.log('run')
+
+      if (nextActiveIndex >= 0) {
+        setActiveIndex(nextActiveIndex)
+      }
+
+      const totalScrollable = scroll.end - scroll.start
+      let scrollTarget = totalScrollable * (step * (nextActiveIndex + 1))
+      let leftToScroll = scrollTarget - (totalScrollable * scroll.progress)
+      let scrollDistance = `+=${leftToScroll}`
+      gsap.to(window, {
+        scrollTo: {y: scrollDistance, autoKill: false},
+        duration: 1
+      }).then(() => {
+        document.body.style.overflow = 'hidden'
+        document.body.style.height = '100%'
+
+        setTimeout(() => {
+          document.body.style.overflow = 'auto'
+          document.body.style.height = 'auto'
+        }, 1000)
+      })
+    } else {
+      console.log('no tween')
+    }
   }
 
   // Animate slider background
@@ -342,7 +390,7 @@ const SecondContentType = ({ items }) => {
       slideAnimationTl.to(
         $allAnimatable,
         { autoAlpha: 0, duration: 0.4 },
-        0.5,
+        0.7,
       )
       // Animate in text content
       const slidesArray = $slides.current.children
@@ -378,9 +426,10 @@ const SecondContentType = ({ items }) => {
 
   // Apply/kill scrolltrigger
   useEffect(() => {
-    if (!pinScrollTrigger) {
+    //if (!pinScrollTrigger) {
       const scrollPin = ScrollTrigger.create({
         trigger: $container.current,
+        anticipatePin: 1,
         pin: $pin.current,
         start: 'top top',
         end: 'bottom bottom',
@@ -390,19 +439,22 @@ const SecondContentType = ({ items }) => {
           setProgress(p => 1)
         },
         onUpdate: self => {
-          pinProgress(self.progress)
+          pinProgress(self, activeIndex)
         },
       })
 
-      setPinScrollTrigger(p => scrollPin)
+      //setPinScrollTrigger(p => scrollPin)
+    //}
+    return () => {
+      if (scrollPin) scrollPin.kill()
     }
-  }, [])
+  }, [activeIndex])
 
-  useEffect(() => {
+  /*useEffect(() => {
     return () => {
       if (pinScrollTrigger) pinScrollTrigger.kill()
     }
-  }, [pinScrollTrigger])
+  }, [pinScrollTrigger])*/
 
   return (
     <Container ref={$container}>
@@ -410,13 +462,13 @@ const SecondContentType = ({ items }) => {
         <SlideImage ref={$image} image={currentImage} />
         <Inner>
           <ProgressNav>
-            <WorkSans>{activeIndex + 1}</WorkSans>
+            <WorkSans>0{activeIndex + 1}</WorkSans>
             <Progress ratio={progress * 100}>
               {items.map((item, i) => (
                 <NavMarker key={'marker'+i} top={((i + 1) / 4) * 100 + '%'} />
               ))}
             </Progress>
-            <WorkSans>{total}</WorkSans>
+            <WorkSans>0{total}</WorkSans>
           </ProgressNav>
           <Slides gradient={gradient} ref={$slides}>
             {items.map((item, i) => (
