@@ -274,7 +274,6 @@ const SecondContentType = ({ items }) => {
   const pinProgress = (scroll, current) => {
     const step = 1 / total
     const velocity = scroll.getVelocity()
-    //const nextActiveIndex = Math.floor(scroll.progress / step)
     let nextActiveIndex = velocity > 0 ? activeIndex + 1 : activeIndex - 1
     setProgress(i => scroll.progress)
     if (nextActiveIndex === items.length) return false
@@ -291,20 +290,20 @@ const SecondContentType = ({ items }) => {
       }
 
       const totalScrollable = scroll.end - scroll.start
-      let scrollTarget = totalScrollable * (step * (nextActiveIndex + 1))
-      let leftToScroll = scrollTarget - (totalScrollable * scroll.progress)
-      let scrollDistance = `+=${leftToScroll}`
+      let scrollTarget = totalScrollable * (step * (nextActiveIndex + 1)) + scroll.start
+
+      document.body.style.overflow = 'hidden'
+      document.body.style.height = '100%'
+
       gsap.to(window, {
-        scrollTo: {y: scrollDistance, autoKill: false},
+        scrollTo: {y: scrollTarget, autoKill: false},
         duration: 1
       }).then(() => {
-        document.body.style.overflow = 'hidden'
-        document.body.style.height = '100%'
 
         setTimeout(() => {
           document.body.style.overflow = 'auto'
           document.body.style.height = 'auto'
-        }, 1000)
+        }, 500)
       })
     }
   }
@@ -428,7 +427,8 @@ const SecondContentType = ({ items }) => {
         pin: $pin.current,
         start: 'top top',
         end: 'bottom bottom',
-        scrub: false,
+        scrub: 2,
+        snap: 1 / (total),
         onLeave: self => {
           setActiveIndex(i => total - 1)
           setProgress(p => 1)
