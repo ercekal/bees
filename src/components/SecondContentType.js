@@ -282,12 +282,9 @@ const SecondContentType = ({ items }) => {
     // If progress is low perform initial tween
     if (scroll.progress < 0.1) {
       nextActiveIndex = 0
-    } else {
-      console.log(scroll.progress)
     }
 
     if (!gsap.isTweening(window) && (velocity > 100 || velocity < -100)) {
-      console.log('run')
 
       if (nextActiveIndex >= 0) {
         setActiveIndex(nextActiveIndex)
@@ -309,8 +306,6 @@ const SecondContentType = ({ items }) => {
           document.body.style.height = 'auto'
         }, 1000)
       })
-    } else {
-      console.log('no tween')
     }
   }
 
