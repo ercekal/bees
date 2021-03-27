@@ -31,7 +31,7 @@ const Quote = styled.div`
       position: absolute;
       top: 0;
       left: -5px;
-      padding-left: 5px;
+      padding-left: 0px;
       width: 100%;
       bottom: -5px;
       overflow: hidden;
@@ -116,15 +116,27 @@ const Testemonial = ({ testemonial }) => {
   useEffect(() => {
     const highlights = highlightWords ? gsap.utils.toArray($quote.current.querySelectorAll('.highlight span')) : false
     if (highlights) {
-      gsap.to(highlights, {
-        width: 'calc(100% + 10px)',
+      const tl = gsap.timeline({paused: true})
+        .to(highlights, {
+          paddingLeft: 5,
+          ease: 'none',
+          duration: 0.01,
+          stagger: 0.2
+        })
+        .to(highlights, {
+          width: 'calc(100% + 10px)',
+          ease: 'none',
+          duration: 0.8,
+          stagger: 0.2,
+        }, '-=0.2')
+      gsap.to(tl, {
+        time: tl.duration(),
+        duration: tl.duration(),
         ease: 'power3.inOut',
-        duration: 0.8,
-        stagger: 0.2
+        delay: 0.3
       })
     }
   }, [])
-  //gsap.to()
 
   return (
     <Container>

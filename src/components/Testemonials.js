@@ -36,7 +36,8 @@ const Arrows = styled.div`
 `
 
 const Testemonials = ({ testemonials }) => {
-  const [number, setNumber] = useState(0)
+  const [active, setActive] = useState(0)
+  const [number, setNumber] = useState()
   const [list, setList] = useState([])
   const { testemonialsList, bgColor } = testemonials
   const $container = useRef(null)
@@ -53,6 +54,22 @@ const Testemonials = ({ testemonials }) => {
   const [gradient, setGradient] = useState(initialGradient)
 
   useEffect(() => {
+    if (!active) {
+      const firstAnim = ScrollTrigger.create({
+        trigger: $container.current,
+        start: 'top 50%',
+        scrub: false,
+        once: true,
+        onEnter: () => {
+          setActive(1)
+          setNumber(n => 0)
+        }
+      })
+
+      return () => {
+        if (firstAnim) firstAnim.kill()
+      }
+    }
     const tList = testemonialsList.map((t, i) => (
       <Testemonial testemonial={t} key={i} />
     ))
@@ -104,7 +121,7 @@ const Testemonials = ({ testemonials }) => {
       }
     }
 
-  }, [])
+  }, [active])
 
   function changeSlide(dir) {
     // animate out
