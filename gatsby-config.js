@@ -1,8 +1,11 @@
+const languages = require('./src/data/languages')
+
 module.exports = {
   siteMetadata: {
     title: `Bees`,
     description: `Bees`,
     author: `@ercekal`,
+    languages,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -33,6 +36,15 @@ module.exports = {
       options: {
         name: `images`,
         path: `${__dirname}/src/images`,
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-i18n',
+      options: {
+        langKeyForNull: 'any',
+        langKeyDefault: languages.defaultLangKey,
+        useLangKeyLayout: true,
+        prefixDefault: false,
       },
     },
     {

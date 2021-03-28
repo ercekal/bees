@@ -20,7 +20,7 @@ const Container = styled.div`
   width: 100%;
 `
 
-const IndexPage = ({ location, data }) => {
+const IndexPage = ({ data }) => {
   const { node } = data.allContentfulFrontPage.edges[0]
   const {
     navbar,
@@ -55,7 +55,7 @@ const IndexPage = ({ location, data }) => {
 export default IndexPage
 
 export const query = graphql`
-  query SpanishFrontPageQuery {
+  query FrontPageQueryEs {
     allContentfulFrontPage(filter: { node_locale: { eq: "es" } }) {
       edges {
         node {
@@ -134,6 +134,7 @@ export const query = graphql`
               clientName
               clientDetail
               text
+              highlightWords
             }
             bgColor
           }

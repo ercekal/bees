@@ -55,7 +55,7 @@ const IndexPage = ({ data }) => {
 export default IndexPage
 
 export const query = graphql`
-  query FrontPageQuery {
+  query FrontPageQueryEn {
     allContentfulFrontPage(filter: { node_locale: { eq: "en-US" } }) {
       edges {
         node {
