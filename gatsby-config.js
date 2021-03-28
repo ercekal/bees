@@ -45,6 +45,14 @@ module.exports = {
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
+      resolve: 'gatsby-plugin-i18n',
+      options: {
+        languages: ['en', 'es'],
+        defaultLanguage: 'en',
+        redirect: true,
+      },
+    },
+    {
       resolve: `gatsby-plugin-manifest`,
       options: {
         name: `gatsby-starter-default`,

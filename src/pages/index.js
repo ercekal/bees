@@ -1,213 +1,31 @@
 import React from 'react'
+// import graphql from 'graphql'
+import { getUserLangKey } from 'ptz-i18n'
+import { withPrefix } from 'gatsby-link'
 import { graphql } from 'gatsby'
-import styled from 'styled-components'
-import Header from '../components/Header'
-import Hero from '../components/Hero'
-import SEO from '../components/seo'
-import Perks from '../components/Perks'
-import Products from '../components/Products'
-import Testemonials from '../components/Testemonials'
-import Map from '../components/Map'
-import FindOutMore from '../components/FindOutMore'
-import Footer from '../components/Footer'
-import SecondContentType from '../components/SecondContentType'
-import ThirdContentType from '../components/ThirdContentType'
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  width: 100%;
-`
+class RedirectIndex extends React.PureComponent {
+  constructor(args) {
+    super(args)
 
-const IndexPage = ({ data }) => {
-  const { node } = data.allContentfulFrontPage.edges[0]
-  const {
-    navbar,
-    hero,
-    secondList: { itemsList },
-    third,
-    products,
-    testemonials,
-    perks,
-    map,
-    findOutMore,
-    footer,
-  } = node
+    // Skip build, Browsers only
+    if (typeof window !== 'undefined') {
+      const langKey = getUserLangKey(['es', 'en'], 'en')
+      const homeUrl = withPrefix(`/${langKey}/`)
 
-  return (
-    <Container>
-      <SEO title="Home" />
-      <Header navbar={navbar} />
-      <Hero hero={hero} />
-      <SecondContentType items={itemsList} />
-      <ThirdContentType third={third} />
-      <Products products={products} />
-      <Testemonials testemonials={testemonials} />
-      <Perks perks={perks} />
-      <Map mapBoxes={map} countries={footer.countries} />
-      <FindOutMore findOutMore={findOutMore} />
-      <Footer footer={footer} />
-    </Container>
-  )
-}
-
-export default IndexPage
-
-export const query = graphql`
-  query FrontPageQuery {
-    allContentfulFrontPage(filter: { node_locale: { eq: "en-US" } }) {
-      edges {
-        node {
-          navbar {
-            bgColor
-            button
-            logo {
-              file {
-                url
-              }
-            }
-          }
-          hero {
-            bgColor
-            heroButton
-            heroDescription
-            heroText
-            heroColoredText
-            heroImageDesktop {
-              file {
-                url
-              }
-            }
-            heroImageMobile {
-              file {
-                url
-              }
-            }
-          }
-          secondList {
-            itemsList {
-              headerDescriptionSecond
-              headerLogo {
-                file {
-                  url
-                }
-              }
-              secondaryContentImage {
-                file {
-                  url
-                }
-              }
-              headerSubtitleFirst
-              headerDescriptionFirst
-              headerSubtitleSecond
-              headerTitle
-              leftBgColor
-            }
-          }
-          third {
-            imageWithTextList {
-              text
-              textBgColor
-              image {
-                file {
-                  url
-                }
-              }
-            }
-            mainText
-          }
-          products {
-            bgColor
-            description
-            imagesList {
-              text
-              image {
-                file {
-                  url
-                }
-              }
-            }
-          }
-          testemonials {
-            testemonialsList {
-              clientName
-              clientDetail
-              text
-              highlightWords
-            }
-            bgColor
-          }
-          perks {
-            imageWithTitleAndSubtitles {
-              image {
-                file {
-                  url
-                }
-              }
-              subtitle
-              title
-            }
-            title
-          }
-          grow {
-            bgColor
-            bgImage {
-              file {
-                url
-              }
-            }
-            text {
-              text
-            }
-          }
-          map {
-            mapBoxes {
-              boxElement {
-                bold
-                text
-              }
-            }
-          }
-          findOutMore {
-            title
-            subtitle
-            button
-            bgColor
-            bgImage {
-              file {
-                url
-              }
-            }
-          }
-          footer {
-            logo {
-              file {
-                url
-              }
-            }
-            getInTouchTitle
-            getInTouchElements {
-              icon {
-                file {
-                  url
-                }
-                title
-              }
-            }
-            countriesTitle
-            countries {
-              countryName
-              path
-            }
-            tradeMark
-            bottomLinks {
-              title
-              path
-            }
-          }
-        }
-      }
+      // I don`t think this is the best solution
+      // I would like to use Gatsby Redirects like:
+      // https://github.com/gatsbyjs/gatsby/tree/master/examples/using-redirects
+      // But Gatsby Redirects are static, they need to be specified at build time,
+      // This redirect is dynamic, It needs to know the user browser language.
+      // Any ideias? Join the issue: https://github.com/angeloocana/gatsby-starter-default-i18n/issues/4
+      window.history.replace(homeUrl)
     }
   }
-`
+
+  render() {
+    return <div />
+  }
+}
+
+export default RedirectIndex
