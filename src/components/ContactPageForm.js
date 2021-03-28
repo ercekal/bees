@@ -54,12 +54,8 @@ const ContactPageForm = ({ element }) => {
   const [values, setValues] = useState(initialValues)
   const [state, handleSubmit] = useForm('xnqlaovg')
 
-  console.log('values: ', values)
-
   const handleInputChange = e => {
-    console.log('e: ', e)
     const { name, value } = e.target
-    console.log('name, value: ', name, value)
     setValues({
       ...values,
       [name]: value,

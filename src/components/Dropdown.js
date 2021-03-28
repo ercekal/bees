@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { globalHistory as history } from '@reach/router'
 import { Link } from 'gatsby'
@@ -10,7 +10,6 @@ const Select = styled.select`
 
 const Dropdown = () => {
   const { location, navigate } = history
-  console.log('location: ', location)
 
   const [selectedLanguage, setSelectedLanguage] = useState(
     location.pathname === '/' ? 'en' : location.pathname.substring(1),
@@ -19,7 +18,7 @@ const Dropdown = () => {
   const languages = ['en', 'es']
 
   const getLink = val => {
-    if (location.pathname === '/es') {
+    if (location.pathname === '/es/') {
       if (val === 'es') {
         return null
       } else {
@@ -27,7 +26,7 @@ const Dropdown = () => {
       }
     } else if (location.pathname === '/') {
       if (val === 'en') return '/'
-      return val
+      return val + '/'
     }
   }
   return (

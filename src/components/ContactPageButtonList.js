@@ -38,7 +38,6 @@ const ContactPageButtonList = ({ list }) => {
   const [colorsList, setColorsList] = useState([])
 
   useEffect(() => {
-    console.log('list: ', list)
     const hList = list.map((t, i) => (
       <HoverElement
         image={`http:${t.hoverElement.file.url}`}
@@ -83,7 +82,6 @@ const ContactPageButtonList = ({ list }) => {
   }
 
   const isClicked = () => clickedNumber !== 0
-  console.log('isClicked: ', isClicked())
   const onHover = n => {
     if (!isClicked()) {
       setHoveredNumber(n)

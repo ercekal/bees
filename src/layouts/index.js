@@ -30,6 +30,7 @@ const Layout = ({ children, location, i18nMessages }) => {
           defaultLangKey,
         } = data.site.siteMetadata.languages
         const langKey = getCurrentLangKey(langs, defaultLangKey, url)
+        console.log('langKey: ', langKey)
         const homeLink = `/${langKey}/`.replace(
           `/${defaultLangKey}/`,
           '/',

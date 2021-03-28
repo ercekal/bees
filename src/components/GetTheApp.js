@@ -72,7 +72,6 @@ const CountryInfoBoxText = styled.div`
 
 const GetTheApp = ({ element }) => {
   const [selectedCountry, setSelectedCountry] = useState('')
-  console.log('selectedCountry: ', selectedCountry)
   const {
     mobileCheckButton,
     mobileCheckDescription,

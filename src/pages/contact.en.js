@@ -11,10 +11,9 @@ const ContactPage = ({ data }) => {
 
   const { node } = data.allContentfulContactPage.edges[0]
   const { contactPageButtonList, navbar, footer } = node
-  console.log('contactPageButtonList: ', contactPageButtonList)
   return (
     <div>
-      <Header navbar={navbar} />
+      <Header navbar={navbar} location={location} />
       <ContactPageButtonList list={contactPageButtonList} />
       <Footer footer={footer} />
     </div>

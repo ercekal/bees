@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link } from 'gatsby'
 import styled from 'styled-components'
-import BarlowText from './BarlowText'
 
 const Container = styled.button`
   background: #000000;
@@ -17,7 +16,6 @@ const Container = styled.button`
   font-family: Barlow Semi Condensed;
   letter-spacing: -0.05em;
   font-weight: 600;
-  margin-bottom: 20px;
 `
 const ButtonLink = styled(Link)`
   text-decoration: none;
