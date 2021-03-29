@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { useForm } from '@formspree/react'
 import axios from 'axios'
 import Button from './Button'
+import Chev from './Chevron'
 
 const FormInput = styled.div`
   display: flex;
@@ -46,21 +47,55 @@ const Input = styled.input`
 `
 
 const CountrySelect = styled.div`
-  height: 40px;
+  height: 50px;
   display: flex;
   align-items: center;
   margin-bottom: 10px;
 `
-
-const Select = styled.select`
-  border: 0;
-  border-bottom: 3px solid black;
-  width: 80%;
-  margin-left: 1rem;
+const SelectContainer = styled.div`
+  width: 100%;
 `
 
-const Option = styled.option`
-  background: red;
+const Select = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 0;
+  border-bottom: 3px solid black;
+  margin-left: 1rem;
+  font-size: 14px;
+  line-height: 24px;
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 600;
+  position: relative;
+  cursor: pointer;
+`
+
+const Option = styled.div`
+  font-size: 14px;
+  line-height: 24px;
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 600;
+  background-color: white;
+  padding: 0.5rem;
+  cursor: pointer;
+  &:hover {
+    background-color: gray;
+  }
+`
+const OptionList = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 150px;
+  overflow-y: scroll;
+  position: absolute;
+  margin: 0.5rem 0 0 1rem;
+  width: 100%;
+`
+
+const Chevron = styled(Chev)`
+  transform: rotate(${({ isOpen }) => (isOpen ? '270deg' : '90deg')});
+  transition: transform 0.6s ease;
 `
 
 const initialValues = {
@@ -74,17 +109,15 @@ const initialValues = {
 
 const ContactPageForm = ({ element }) => {
   const [values, setValues] = useState(initialValues)
-  console.log('values: ', values)
   const [state, handleSubmit] = useForm('xnqlaovg')
   const [countriesList, setCountriesList] = useState([])
-  const [selectedCountry, setSelectedCountry] = useState('')
-  console.log('countriesList: ', countriesList)
+  const [isOpen, setIsOpen] = useState(false)
 
   useEffect(async () => {
     const result = await axios('https://restcountries.eu/rest/v2/')
-    console.log('result: ', result.data)
     setCountriesList(Object.values(result.data))
   }, [])
+
   const handleInputChange = e => {
     const { name, value } = e.target
     setValues({
@@ -124,6 +157,16 @@ const ContactPageForm = ({ element }) => {
       )
     })
 
+  const toggleOpen = () => setIsOpen(!isOpen)
+
+  const handleCountrySelect = name => {
+    setIsOpen(false)
+    setValues({
+      ...values,
+      ['country']: name,
+    })
+  }
+
   return (
     <>
       <form onSubmit={handleSubmit}>
@@ -137,17 +180,27 @@ const ContactPageForm = ({ element }) => {
           <div style={{ width: '20%' }}>
             <Label>Country *</Label>
           </div>
-          <Select
-            onChange={handleInputChange}
-            name="country"
-            value={values.country}
-          >
-            {countriesList.map((c, i) => (
-              <Option value={c.name} key={i}>
-                {c.name}
-              </Option>
-            ))}
-          </Select>
+          <SelectContainer>
+            <Select onClick={toggleOpen}>
+              {values.country === ''
+                ? 'Select country'
+                : values.country}
+              <Chevron width={10} isOpen={isOpen} />
+            </Select>
+            {isOpen && (
+              <OptionList>
+                {countriesList.map((c, i) => (
+                  <Option
+                    value={c.name}
+                    key={i}
+                    onClick={() => handleCountrySelect(c.name)}
+                  >
+                    {c.name}
+                  </Option>
+                ))}
+              </OptionList>
+            )}
+          </SelectContainer>
         </CountrySelect>
         <div style={{ marginBottom: '20px' }}>
           {formElementsList()[4]}
