@@ -63,7 +63,7 @@ const Element = styled.div`
   }
 `
 
-const ContactPageButtonList = ({ list }) => {
+const ContactPageButtonList = ({ list, renderNavbar }) => {
   const [hoveredNumber, setHoveredNumber] = useState(0)
   const [clickedNumber, setClickedNumber] = useState(0)
   const [hovered, setHovered] = useState(false)
@@ -102,6 +102,24 @@ const ContactPageButtonList = ({ list }) => {
       return colorsList[clickedNumber]
     } else if (hovered) {
       return colorsList[hoveredNumber]
+    } else {
+      return 'white'
+    }
+  }
+
+  const getHeaderBgColor = () => {
+    if (isClicked()) {
+      return `linear-gradient(
+        to right,
+        ${colorsList[clickedNumber] || 'white'} 0%,
+        ${colorsList[clickedNumber] || 'white'} 40%,
+        white 0%,
+        white 100%
+        );`
+    } else if (hovered) {
+      return colorsList[hoveredNumber]
+    } else {
+      return 'white'
     }
   }
 
@@ -127,8 +145,15 @@ const ContactPageButtonList = ({ list }) => {
     }
   }
 
+  const headerSmallScreenBgColor = () => {
+    return isClicked()
+      ? colorsList[clickedNumber]
+      : colorsList[hoveredNumber]
+  }
+
   return (
     <Section className="clearfix">
+      {renderNavbar(getHeaderBgColor(), headerSmallScreenBgColor())}
       <Left bgColor={getBgColor()}>
         <Menu>
           {list.map((c, i) => (
