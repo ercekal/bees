@@ -1,21 +1,27 @@
-import * as React from 'react'
+import React from 'react'
 import { graphql } from 'gatsby'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 import ContactPageButtonList from '../components/ContactPageButtonList'
-import { globalHistory as history } from '@reach/router'
 
 const ContactPage = ({ data }) => {
-  const { location, navigate } = history
-  console.log('location: ', location)
-
   const { node } = data.allContentfulContactPage.edges[0]
   const { contactPageButtonList, navbar, footer } = node
-  console.log('contactPageButtonList: ', contactPageButtonList)
+  const renderNavbar = (desktopBgColor, smallDeviceBgColor) => {
+    return (
+      <Header
+        navbar={navbar}
+        desktopBgColor={desktopBgColor}
+        smallDeviceBgColor={smallDeviceBgColor}
+      />
+    )
+  }
   return (
     <div>
-      <Header navbar={navbar} />
-      <ContactPageButtonList list={contactPageButtonList} />
+      <ContactPageButtonList
+        list={contactPageButtonList}
+        renderNavbar={renderNavbar}
+      />
       <Footer footer={footer} />
     </div>
   )

@@ -4,8 +4,17 @@ import styled from 'styled-components'
 import Button from './Button'
 import Dropdown from './Dropdown'
 
+const HeaderContainer = styled.header`
+  height: '70px';
+  background: ${({ desktopBgColor, bgColor }) =>
+    desktopBgColor || bgColor};
+  @media only screen and (max-width: 960px) {
+    background: ${({ smallDeviceBgColor, bgColor }) =>
+      smallDeviceBgColor || bgColor};
+  }
+`
 const Container = styled.div`
-  padding: 2rem 2.5rem 1rem;
+  padding: 10px 40px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -15,7 +24,10 @@ const Image = styled.img`
   height: 30px;
 `
 
-const Header = ({ navbar }) => {
+const Header = ({ navbar, desktopBgColor, smallDeviceBgColor }) => {
+  console.log('smallDeviceBgColor: ', smallDeviceBgColor)
+  console.log('desktopBgColor: ', desktopBgColor)
+
   const {
     bgColor,
     button,
@@ -24,11 +36,10 @@ const Header = ({ navbar }) => {
     },
   } = navbar
   return (
-    <header
-      style={{
-        background: bgColor,
-        height: '80px',
-      }}
+    <HeaderContainer
+      desktopBgColor={desktopBgColor}
+      smallDeviceBgColor={smallDeviceBgColor}
+      bgColor={bgColor}
     >
       <Container>
         <Link to="/">
@@ -37,7 +48,7 @@ const Header = ({ navbar }) => {
         <Dropdown />
         <Button to="/contact">{button}</Button>
       </Container>
-    </header>
+    </HeaderContainer>
   )
 }
 

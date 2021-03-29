@@ -17,7 +17,6 @@ const Container = styled.button`
   font-family: Barlow Semi Condensed;
   letter-spacing: -0.05em;
   font-weight: 600;
-  margin-bottom: 20px;
 `
 const ButtonLink = styled(Link)`
   text-decoration: none;

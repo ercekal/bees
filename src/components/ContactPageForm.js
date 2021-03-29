@@ -1,12 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
+import { useForm } from '@formspree/react'
+import axios from 'axios'
 import Button from './Button'
-import { useForm, ValidationError } from '@formspree/react'
-
-const Container = styled.div`
-  padding-left: 160px;
-  width: 480px;
-`
+import Chev from './Chevron'
 
 const FormInput = styled.div`
   display: flex;
@@ -26,6 +23,13 @@ const Label = styled.label`
 const Textarea = styled.textarea`
   border: none;
   border-bottom: 3px solid black;
+  &::placeholder {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 24px;
+    padding-top: 32px;
+  }
 `
 
 const Input = styled.input`
@@ -34,7 +38,7 @@ const Input = styled.input`
   padding: 8px 4px;
   margin-bottom: 20px;
   &::placeholder {
-    font-size: 16px;
+    font-size: 14px;
     line-height: 24px;
     font-family: 'Work Sans', sans-serif;
     font-weight: 400;
@@ -42,10 +46,63 @@ const Input = styled.input`
   }
 `
 
+const CountrySelect = styled.div`
+  height: 50px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+`
+const SelectContainer = styled.div`
+  width: 100%;
+`
+
+const Select = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 0;
+  border-bottom: 3px solid black;
+  margin-left: 1rem;
+  font-size: 14px;
+  line-height: 24px;
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 600;
+  position: relative;
+  cursor: pointer;
+`
+
+const Option = styled.div`
+  font-size: 14px;
+  line-height: 24px;
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 600;
+  background-color: white;
+  padding: 0.5rem;
+  cursor: pointer;
+  &:hover {
+    background-color: gray;
+  }
+`
+const OptionList = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 150px;
+  overflow-y: scroll;
+  position: absolute;
+  margin: 0.5rem 0 0 1rem;
+  width: 100%;
+`
+
+const Chevron = styled(Chev)`
+  transform: rotate(${({ isOpen }) => (isOpen ? '270deg' : '90deg')});
+  transition: transform 0.6s ease;
+`
+
 const initialValues = {
   name: '',
   company: '',
   email: '',
+  country: '',
   phone: '',
   message: '',
 }
@@ -53,13 +110,16 @@ const initialValues = {
 const ContactPageForm = ({ element }) => {
   const [values, setValues] = useState(initialValues)
   const [state, handleSubmit] = useForm('xnqlaovg')
+  const [countriesList, setCountriesList] = useState([])
+  const [isOpen, setIsOpen] = useState(false)
 
-  console.log('values: ', values)
+  useEffect(async () => {
+    const result = await axios('https://restcountries.eu/rest/v2/')
+    setCountriesList(Object.values(result.data))
+  }, [])
 
   const handleInputChange = e => {
-    console.log('e: ', e)
     const { name, value } = e.target
-    console.log('name, value: ', name, value)
     setValues({
       ...values,
       [name]: value,
@@ -96,8 +156,19 @@ const ContactPageForm = ({ element }) => {
         </FormInput>
       )
     })
+
+  const toggleOpen = () => setIsOpen(!isOpen)
+
+  const handleCountrySelect = name => {
+    setIsOpen(false)
+    setValues({
+      ...values,
+      ['country']: name,
+    })
+  }
+
   return (
-    <Container>
+    <>
       <form onSubmit={handleSubmit}>
         <div>{formElementsList()[0]}</div>
         <div style={{ display: 'flex' }}>
@@ -105,15 +176,38 @@ const ContactPageForm = ({ element }) => {
           {formElementsList()[2]}
         </div>
         <div>{formElementsList()[3]}</div>
+        <CountrySelect>
+          <div style={{ width: '20%' }}>
+            <Label>Country *</Label>
+          </div>
+          <SelectContainer>
+            <Select onClick={toggleOpen}>
+              {values.country === ''
+                ? 'Select country'
+                : values.country}
+              <Chevron width={10} isOpen={isOpen} />
+            </Select>
+            {isOpen && (
+              <OptionList>
+                {countriesList.map((c, i) => (
+                  <Option
+                    value={c.name}
+                    key={i}
+                    onClick={() => handleCountrySelect(c.name)}
+                  >
+                    {c.name}
+                  </Option>
+                ))}
+              </OptionList>
+            )}
+          </SelectContainer>
+        </CountrySelect>
         <div style={{ marginBottom: '20px' }}>
           {formElementsList()[4]}
         </div>
-        {/* <button type="submit" to="#" onSubmit>
-          {element.button}
-        </button> */}
         <Button type="submit">{element.button}</Button>
       </form>
-    </Container>
+    </>
   )
 }
 
