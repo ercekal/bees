@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import ContactPageButton from './ContactPageButton'
 import HoverElement from './HoverElement'
 import ContactPageClickElement from './ContactPageClickElement'
+import './Contact.css'
 
 const Section = styled.section`
   height: 100vh;
@@ -16,6 +17,9 @@ const Left = styled.div`
   background-color: #ffb042;
   position: relative;
   background: ${({ bgColor }) => bgColor || 'white'};
+  @media only screen and (max-width: 960px) {
+    width: 100%;
+  }
 `
 
 const Right = styled.div`
@@ -24,6 +28,11 @@ const Right = styled.div`
   float: left;
   position: relative;
   background: ${({ bgColor }) => bgColor || 'white'};
+  @media only screen and (max-width: 960px) {
+    width: 100%;
+    padding: 80px 0;
+    height: auto;
+  }
 `
 
 const Menu = styled.div`
@@ -32,6 +41,9 @@ const Menu = styled.div`
   position: absolute;
   transform: translate(-50%, -50%);
   width: 64%;
+  @media only screen and (max-width: 960px) {
+    width: 80%;
+  }
 `
 
 const Element = styled.div`
@@ -41,6 +53,14 @@ const Element = styled.div`
   left: 50%;
   position: absolute;
   transform: translate(-50%, -50%);
+  @media only screen and (max-width: 960px) {
+    width: 80%;
+    position: relative;
+    top: 0;
+    left: 0;
+    transform: none;
+    margin: auto;
+  }
 `
 
 const ContactPageButtonList = ({ list }) => {

@@ -1,12 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import Button from './Button'
-import { useForm, ValidationError } from '@formspree/react'
-
-const Container = styled.div`
-  padding-left: 160px;
-  width: 480px;
-`
+import { useForm } from '@formspree/react'
 
 const FormInput = styled.div`
   display: flex;
@@ -54,12 +49,8 @@ const ContactPageForm = ({ element }) => {
   const [values, setValues] = useState(initialValues)
   const [state, handleSubmit] = useForm('xnqlaovg')
 
-  console.log('values: ', values)
-
   const handleInputChange = e => {
-    console.log('e: ', e)
     const { name, value } = e.target
-    console.log('name, value: ', name, value)
     setValues({
       ...values,
       [name]: value,
@@ -97,7 +88,7 @@ const ContactPageForm = ({ element }) => {
       )
     })
   return (
-    <Container>
+    <>
       <form onSubmit={handleSubmit}>
         <div>{formElementsList()[0]}</div>
         <div style={{ display: 'flex' }}>
@@ -108,12 +99,9 @@ const ContactPageForm = ({ element }) => {
         <div style={{ marginBottom: '20px' }}>
           {formElementsList()[4]}
         </div>
-        {/* <button type="submit" to="#" onSubmit>
-          {element.button}
-        </button> */}
         <Button type="submit">{element.button}</Button>
       </form>
-    </Container>
+    </>
   )
 }
 
