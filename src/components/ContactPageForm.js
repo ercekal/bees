@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import { useForm } from '@formspree/react'
 import axios from 'axios'
 import Button from './Button'
-import './Form.css'
 
 const FormInput = styled.div`
   display: flex;
@@ -23,6 +22,13 @@ const Label = styled.label`
 const Textarea = styled.textarea`
   border: none;
   border-bottom: 3px solid black;
+  &::placeholder {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 24px;
+    padding-top: 32px;
+  }
 `
 
 const Input = styled.input`
@@ -31,7 +37,7 @@ const Input = styled.input`
   padding: 8px 4px;
   margin-bottom: 20px;
   &::placeholder {
-    font-size: 16px;
+    font-size: 14px;
     line-height: 24px;
     font-family: 'Work Sans', sans-serif;
     font-weight: 400;
@@ -51,6 +57,10 @@ const Select = styled.select`
   border-bottom: 3px solid black;
   width: 80%;
   margin-left: 1rem;
+`
+
+const Option = styled.option`
+  background: red;
 `
 
 const initialValues = {
@@ -114,19 +124,6 @@ const ContactPageForm = ({ element }) => {
       )
     })
 
-  function renderListItems() {
-    var items = []
-    for (var i = 0; i < countriesList.length; i++) {
-      var item = countriesList[i]
-      items.push(
-        <div onClick={() => setSelectedCountry(item)}>
-          <span style={{ color: item.hex }}>{item.name}</span>
-          <i className="fa fa-check"></i>
-        </div>,
-      )
-    }
-    return items
-  }
   return (
     <>
       <form onSubmit={handleSubmit}>
@@ -146,9 +143,9 @@ const ContactPageForm = ({ element }) => {
             value={values.country}
           >
             {countriesList.map((c, i) => (
-              <option value={c.name} key={i}>
+              <Option value={c.name} key={i}>
                 {c.name}
-              </option>
+              </Option>
             ))}
           </Select>
         </CountrySelect>
