@@ -118,7 +118,15 @@ export const query = graphql`
             mainText
           }
           products {
-            bgColor
+            productsList {
+              title,
+              bgColor,
+              image {
+                file {
+                  url
+                }
+              }
+            }
             description
             imagesList {
               text
