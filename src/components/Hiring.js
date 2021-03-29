@@ -2,11 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 import Button from './Button'
 
-const Container = styled.div`
-  padding-left: 160px;
-  width: 480px;
-`
-
 const Title = styled.h3`
   font-size: 48px;
   line-height: 57px;
@@ -33,14 +28,14 @@ const PLink = styled(P)`
 const Hiring = ({ element }) => {
   const { title, description, button, link } = element
   return (
-    <Container>
+    <>
       <Title>{title}</Title>
       {description.map((el, i) => (
         <P key={i}>{el}</P>
       ))}
       <Button to="#">{button}</Button>
       <PLink>{link}</PLink>
-    </Container>
+    </>
   )
 }
 

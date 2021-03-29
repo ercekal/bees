@@ -5,7 +5,7 @@ import Button from './Button'
 import Dropdown from './Dropdown'
 
 const Container = styled.div`
-  padding: 2rem 2.5rem 1rem;
+  padding: 10px 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -27,7 +27,7 @@ const Header = ({ navbar }) => {
     <header
       style={{
         background: bgColor,
-        height: '80px',
+        height: '70px',
       }}
     >
       <Container>

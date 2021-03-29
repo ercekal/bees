@@ -2,11 +2,6 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import Button from './Button'
 
-const Container = styled.div`
-  padding-left: 160px;
-  width: 480px;
-`
-
 const Title = styled.h3`
   font-size: 48px;
   line-height: 57px;
@@ -72,7 +67,6 @@ const CountryInfoBoxText = styled.div`
 
 const GetTheApp = ({ element }) => {
   const [selectedCountry, setSelectedCountry] = useState('')
-  console.log('selectedCountry: ', selectedCountry)
   const {
     mobileCheckButton,
     mobileCheckDescription,
@@ -106,7 +100,7 @@ const GetTheApp = ({ element }) => {
   }
 
   return (
-    <Container>
+    <>
       <Title>{title}</Title>
       <CountriesList>
         {countries.map((c, i) => (
@@ -119,7 +113,7 @@ const GetTheApp = ({ element }) => {
         ))}
       </CountriesList>
       {renderClickedInfo()}
-    </Container>
+    </>
   )
 }
 

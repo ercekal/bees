@@ -1,0 +1,91 @@
+html,
+button,
+input,
+select,
+textarea {
+  color: #222;
+}
+html * {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+body {
+  overflow-x: hidden;
+}
+html {
+  font-size: 1em;
+  line-height: 1.4;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+.clearfix:before,
+.clearfix:after {
+  content: ' '; /* 1 */
+  display: table; /* 2 */
+}
+.clearfix:after {
+  clear: both;
+}
+/* For IE 6/7 only - Include this rule to trigger hasLayout and contain floats. */
+.clearfix {
+  *zoom: 1;
+}
+/* Remove the gap between images, videos, audio and canvas and the bottom of their containers: h5bp.com/i/440 */
+audio,
+canvas,
+img,
+video {
+  vertical-align: middle;
+}
+/* Remove default fieldset styles */
+fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+ul {
+  list-style: none;
+}
+/* Allow only vertical resizing of textareas. */
+textarea {
+  resize: vertical;
+}
+ul,
+li,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  padding: 0;
+  margin: 0;
+  font-weight: normal;
+}
+a {
+  text-decoration: none;
+}
+img {
+  max-width: 100%;
+}
+a img {
+  border: none;
+}
+*,
+*:after,
+*:before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.overflow-hidden {
+  overflow: hidden;
+}
+blockquote {
+  margin: 0;
+  padding: 0;
+}
