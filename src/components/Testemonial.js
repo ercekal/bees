@@ -10,6 +10,7 @@ const Container = styled.div`
   align-items: center;
   @media (min-width: 1024px) {
     height: auto;
+    min-height: 400px;
   }
 `
 const Quote = styled.div`
