@@ -5,7 +5,7 @@ import Button from './Button'
 import Dropdown from './Dropdown'
 
 const Container = styled.div`
-  padding: 10px 20px;
+  padding: 10px 40px;
   display: flex;
   align-items: center;
   justify-content: space-between;

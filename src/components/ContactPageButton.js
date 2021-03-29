@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import BarlowText from './BarlowText'
 import './Contact.css'
 
 const Container = styled.div`

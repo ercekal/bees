@@ -92,6 +92,8 @@ const ContactPageButtonList = ({ list }) => {
   useEffect(() => {
     if (clickedNumber !== 0) {
       setHovered(false)
+    } else if (clickedNumber === 0) {
+      setHoveredNumber(0)
     }
   }, [clickedNumber])
 
