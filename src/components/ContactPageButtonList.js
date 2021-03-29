@@ -97,7 +97,7 @@ const ContactPageButtonList = ({ list, renderNavbar }) => {
     }
   }, [clickedNumber])
 
-  const getBgColor = () => {
+  const getBgColorLeft = () => {
     if (isClicked()) {
       return colorsList[clickedNumber]
     } else if (hovered) {
@@ -107,7 +107,7 @@ const ContactPageButtonList = ({ list, renderNavbar }) => {
     }
   }
 
-  const getHeaderBgColor = () => {
+  const getHeaderDesktopBgColor = () => {
     if (isClicked()) {
       return `linear-gradient(
         to right,
@@ -145,7 +145,7 @@ const ContactPageButtonList = ({ list, renderNavbar }) => {
     }
   }
 
-  const headerSmallScreenBgColor = () => {
+  const getHeaderSmallScreenBgColor = () => {
     return isClicked()
       ? colorsList[clickedNumber]
       : colorsList[hoveredNumber]
@@ -153,8 +153,11 @@ const ContactPageButtonList = ({ list, renderNavbar }) => {
 
   return (
     <Section className="clearfix">
-      {renderNavbar(getHeaderBgColor(), headerSmallScreenBgColor())}
-      <Left bgColor={getBgColor()}>
+      {renderNavbar(
+        getHeaderDesktopBgColor(),
+        getHeaderSmallScreenBgColor(),
+      )}
+      <Left bgColor={getBgColorLeft()}>
         <Menu>
           {list.map((c, i) => (
             <ContactPageButton
