@@ -11,13 +11,11 @@ const Container = styled.div`
   padding: 8px 36px 12px 85px;
   background-position: 31px;
   margin-bottom: 12px;
-  width: 330px;
   cursor: pointer;
   @media only screen and (max-width: 1260px) {
     padding: 4px 36px 8px 60px;
     background-size: 16px;
     background-position: 25px;
-    width: 100%;
   }
 `
 
