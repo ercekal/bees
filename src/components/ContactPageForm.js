@@ -113,7 +113,6 @@ const initialValues = {
 }
 
 const ContactPageForm = ({ element }) => {
-  console.log('element: ', element)
   const { register, errors, handleSubmit } = useForm()
   const [values, setValues] = useState(initialValues)
   // const [state, handleSubmit] = useForm('xnqlaovg')
