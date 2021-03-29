@@ -31,6 +31,7 @@ const H2 = styled.h2`
   text-align: left;
   cursor: pointer;
 `
+
 const H3 = styled.h3`
   font-size: 36px;
   line-height: 56px;

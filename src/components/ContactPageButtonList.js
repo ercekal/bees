@@ -74,7 +74,6 @@ const ContactPageButtonList = ({ list }) => {
   const isClicked = () => clickedNumber !== 0
 
   useEffect(() => {
-    console.log('list: ', list)
     const hList = list.map((t, i) => (
       <HoverElement
         image={`http:${t.hoverElement.file.url}`}
