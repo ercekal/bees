@@ -43,9 +43,6 @@ const IndexPage = ({ data }) => {
       <ThirdContentType third={third} />
       <Products products={products} />
       <Testemonials testemonials={testemonials} />
-      <Perks perks={perks} />
-      <Map mapBoxes={map} countries={footer.countries} />
-      <FindOutMore findOutMore={findOutMore} />
       <Footer footer={footer} />
     </Container>
   )
