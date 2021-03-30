@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'gatsby'
 import styled from 'styled-components'
+import BarlowText from './BarlowText'
 
 const Container = styled.button`
   background: #000000;
