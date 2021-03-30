@@ -119,8 +119,8 @@ export const query = graphql`
           }
           products {
             productsList {
-              title,
-              bgColor,
+              title
+              bgColor
               image {
                 file {
                   url
@@ -182,6 +182,11 @@ export const query = graphql`
             button
             bgColor
             bgImage {
+              file {
+                url
+              }
+            }
+            bgImageShadow {
               file {
                 url
               }
