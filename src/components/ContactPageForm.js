@@ -33,6 +33,9 @@ const Textarea = styled.textarea`
     line-height: 24px;
     padding-top: 32px;
   }
+  &:focus {
+    outline-width: 0;
+  }
 `
 
 const Input = styled.input`
