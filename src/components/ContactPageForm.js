@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { useForm } from '@formspree/react'
 import axios from 'axios'
 import Button from './Button'
+import OptionsList from './OptionsList'
 import Chev from './Chevron'
 
 const FormInput = styled.div`
@@ -53,13 +54,14 @@ const CountrySelect = styled.div`
   margin-bottom: 10px;
 `
 const SelectContainer = styled.div`
-  width: 100%;
+  flex-grow: 1;
 `
 
 const Select = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-grow: 1;
   border: 0;
   border-bottom: 3px solid black;
   margin-left: 1rem;
@@ -69,28 +71,6 @@ const Select = styled.div`
   font-weight: 600;
   position: relative;
   cursor: pointer;
-`
-
-const Option = styled.div`
-  font-size: 14px;
-  line-height: 24px;
-  font-family: 'Work Sans', sans-serif;
-  font-weight: 600;
-  background-color: white;
-  padding: 0.5rem;
-  cursor: pointer;
-  &:hover {
-    background-color: gray;
-  }
-`
-const OptionList = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 150px;
-  overflow-y: scroll;
-  position: absolute;
-  margin: 0.5rem 0 0 1rem;
-  width: 100%;
 `
 
 const Chevron = styled(Chev)`
@@ -188,17 +168,11 @@ const ContactPageForm = ({ element }) => {
               <Chevron width={10} isOpen={isOpen} />
             </Select>
             {isOpen && (
-              <OptionList>
-                {countriesList.map((c, i) => (
-                  <Option
-                    value={c.name}
-                    key={i}
-                    onClick={() => handleCountrySelect(c.name)}
-                  >
-                    {c.name}
-                  </Option>
-                ))}
-              </OptionList>
+              <OptionsList
+                handleClose={() => setIsOpen(false)}
+                items={countriesList}
+                onClick={handleCountrySelect}
+              />
             )}
           </SelectContainer>
         </CountrySelect>
