@@ -182,7 +182,7 @@ const ContactPageForm = ({ element }) => {
             </Select>
             {isOpen && (
               <OptionsList
-                handleClose={() => setIsOpen(false)}
+                handleClose={setIsOpen}
                 items={countriesList}
                 onClick={handleCountrySelect}
               />
