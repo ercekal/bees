@@ -31,7 +31,6 @@ const SubHeader = styled.p`
   font-weight: 400;
   margin-bottom: 20px;
   @media (min-width: 1100px) {
-    margin-bottom: 0;
     text-align: left;
   }
 `
