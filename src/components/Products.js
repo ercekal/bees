@@ -11,6 +11,11 @@ const Container = styled.section`
   width: 100%;
   position: relative;
   min-height: 100vh;
+  flex-wrap: wrap;
+
+  @media (min-width: 768px) {
+    flex-wrap: nowrap;
+  }
 `
 
 const Left = styled.div`
@@ -35,7 +40,7 @@ const ProductImage = styled.div`
   max-height: 500px;
   background: url(${({ bgImage }) => 'https:' + bgImage}) no-repeat
     center bottom/contain;
-  margin-top: 80px;
+  margin-top: auto;
 `
 
 const List = styled.div`
@@ -48,6 +53,7 @@ const List = styled.div`
   top: 50%;
   height: 120px;
   transform: translateY(-50%);
+  position: absolute;
 
   @media screen and (min-width: 768px) {
     width: 50%;
