@@ -180,11 +180,12 @@ const SlideImage = styled.div`
 const SlideUpper = styled.div`
   display: flex;
   flex-direction: column;
-  margin-bottom: 3rem;
+  margin-bottom: 5rem;
   height: 150px;
   align-items: center;
 
   @media screen and (min-width: 768px) {
+    margin-bottom: 3rem;
     align-items: flex-start;
     width: 250px;
   }
@@ -472,7 +473,7 @@ const SecondContentType = ({ items }) => {
                   <SlideUpper>
                     <Logo src={item.headerLogo.file.url} />
                     <SlideAnimate>
-                      <BarlowText size="36px" lineHeight="43.2px">
+                      <BarlowText size="36px" lineHeight="42px">
                         {item.headerTitle}
                       </BarlowText>
                     </SlideAnimate>
@@ -489,7 +490,7 @@ const SecondContentType = ({ items }) => {
                         </WorkSans>
                       </Title>
                       <SlideAnimate>
-                        <WorkSans size="16px">
+                        <WorkSans size="16px" mobLineHeight="1.3">
                           {item.headerDescriptionFirst}
                         </WorkSans>
                       </SlideAnimate>
@@ -505,7 +506,7 @@ const SecondContentType = ({ items }) => {
                         </WorkSans>
                       </Title>
                       <SlideAnimate>
-                        <WorkSans size="16px">
+                        <WorkSans size="16px" mobLineHeight="1.3">
                           {item.headerDescriptionSecond}
                         </WorkSans>
                       </SlideAnimate>

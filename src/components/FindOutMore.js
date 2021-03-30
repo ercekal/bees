@@ -23,6 +23,8 @@ const P = styled.p`
 `
 
 const Section = styled.section`
+  max-width: 100vw;
+  overflow: hidden;
   @media (min-width: 768px) {
     padding-top: '50px';
   }

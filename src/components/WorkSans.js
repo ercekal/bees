@@ -20,9 +20,15 @@ const Text = styled.div`
       font-size: ${mobsize};
     }
   `}
+
+  ${({ mobLineHeight }) => mobLineHeight && `
+    @media screen and (max-width: 768px) {
+      line-height: ${mobLineHeight};
+    }
+  `}
 `
 
-const BarlowText = ({
+const WorkSans = ({
   children,
   color,
   mobsize,
@@ -30,6 +36,7 @@ const BarlowText = ({
   size,
   fontWeight,
   lineHeight,
+  mobLineHeight,
 }) => (
   <Text
     color={color}
@@ -38,9 +45,10 @@ const BarlowText = ({
     tabletsize={tabletsize}
     fontWeight={fontWeight}
     lineHeight={lineHeight}
+    mobLineHeight={mobLineHeight}
   >
     {children}
   </Text>
 )
 
-export default BarlowText
+export default WorkSans
