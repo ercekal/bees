@@ -1,7 +1,6 @@
 import React, { useState, useRef } from 'react'
 import styled from 'styled-components'
 import BarlowText from './BarlowText'
-import IconWithText from './IconWithText'
 import { gsap } from 'gsap'
 
 const Container = styled.section`
@@ -34,7 +33,8 @@ const ProductImage = styled.div`
   width: 100%;
   height: 50vh;
   max-height: 500px;
-  background: url(${({ bgImage }) => 'https:' + bgImage }) no-repeat center bottom/contain;
+  background: url(${({ bgImage }) => 'https:' + bgImage}) no-repeat
+    center bottom/contain;
   margin-top: 80px;
 `
 
@@ -63,7 +63,7 @@ const Product = styled.div`
   align-items: center;
 
   @media screen and (max-width: 767px) {
-    display: ${props => props.current ? 'block' : 'none'};
+    display: ${props => (props.current ? 'block' : 'none')};
   }
 `
 
@@ -97,7 +97,7 @@ const TitleHover = styled.div.attrs(props => ({
   }
 
   @media screen and (min-width: 768px) {
-    background: ${({ bgColor }) => bgColor || 'white'}
+    background: ${({ bgColor }) => bgColor || 'white'};
   }
 `
 
@@ -113,7 +113,7 @@ const NavButton = styled.button`
   right: ${({ right }) => right || 'auto'};
   border: 0;
   background: transparent;
-  transform: rotate(${props => props.left ? '90deg' : '270deg' });
+  transform: rotate(${props => (props.left ? '90deg' : '270deg')});
 
   @media screen and (min-width: 768px) {
     display: none;
@@ -127,42 +127,63 @@ const Chevron = styled.img`
 
 const Products = ({ products }) => {
   const { description, productsList } = products
-  const renderIconWithText = () =>
-    productsList.map((item, i) => <IconWithText item={item} key={i} />)
   const [currentProductIndex, setCurrentProductIndex] = useState(0)
   const [titleHoverWidth, setTitleHoverWidth] = useState('100%')
   const $image = useRef(null)
   const $left = useRef(null)
   const tl = gsap.timeline()
 
-  const titleSelect = (i) => {
+  const titleSelect = i => {
     if (i === currentProductIndex) return
     const tweenWidth = { value: '100%' }
-    tl.to(tweenWidth, { value: '0%', duration: 0.1, onUpdate: function() {
-      setTitleHoverWidth(this.targets()[0].value)
-    }})
+    tl.to(tweenWidth, {
+      value: '0%',
+      duration: 0.1,
+      onUpdate: function () {
+        setTitleHoverWidth(this.targets()[0].value)
+      },
+    })
     tl.to($image.current, { autoAlpha: 0, duration: 0.2 }, '<')
     tl.call(setCurrentProductIndex, [i], '>')
-    tl.to(tweenWidth, { value: '100%', duration: 0.5, ease: 'power2.out', onUpdate: function() {
-      setTitleHoverWidth(this.targets()[0].value)
-    }}, '<')
+    tl.to(
+      tweenWidth,
+      {
+        value: '100%',
+        duration: 0.5,
+        ease: 'power2.out',
+        onUpdate: function () {
+          setTitleHoverWidth(this.targets()[0].value)
+        },
+      },
+      '<',
+    )
     tl.to($image.current, { autoAlpha: 1 }, '-=0.5')
-    tl.to($left.current, { background: productsList[i].bgColor, duration: 0.5 }, '<')
+    tl.to(
+      $left.current,
+      { background: productsList[i].bgColor, duration: 0.5 },
+      '<',
+    )
   }
 
-  const changeCurrent = (dir) => {
+  const changeCurrent = dir => {
     let nextSlide = 0
     if (dir < 0) {
       // get previous slide
-      nextSlide = (currentProductIndex === 0) ? productsList.length - 1 : currentProductIndex - 1
+      nextSlide =
+        currentProductIndex === 0
+          ? productsList.length - 1
+          : currentProductIndex - 1
     } else if (typeof i === 'undefined') {
       // get next slide
-      nextSlide = (currentProductIndex === productsList.length - 1) ? 0 : currentProductIndex + 1
+      nextSlide =
+        currentProductIndex === productsList.length - 1
+          ? 0
+          : currentProductIndex + 1
     }
     titleSelect(nextSlide)
   }
 
-  const hoverTitle = (i) => {
+  const hoverTitle = i => {
     if (window.innerWidth >= 768) {
       titleSelect(i)
     }
@@ -170,7 +191,10 @@ const Products = ({ products }) => {
 
   return (
     <Container>
-      <Left ref={$left} bgColor={productsList[currentProductIndex].bgColor}>
+      <Left
+        ref={$left}
+        bgColor={productsList[currentProductIndex].bgColor}
+      >
         <div>
           <BarlowText size="3rem" lineHeight="58px">
             {description.split('.')[0] + '.'}
@@ -179,20 +203,33 @@ const Products = ({ products }) => {
             {description.split('.')[1]}
           </BarlowText>
         </div>
-        <ProductImage ref={$image} bgImage={productsList[currentProductIndex].image.file.url} />
+        <ProductImage
+          ref={$image}
+          bgImage={productsList[currentProductIndex].image.file.url}
+        />
       </Left>
       <List>
         <NavButton left="0" onClick={() => changeCurrent(-1)}>
           <Chevron src="../../chevron.svg" />
         </NavButton>
         {productsList.map((product, i) => (
-          <Product key={i} onMouseEnter={() => hoverTitle(i)} current={i === currentProductIndex}>
+          <Product
+            key={i}
+            onMouseEnter={() => hoverTitle(i)}
+            current={i === currentProductIndex}
+          >
             <BarlowText size="3rem" lineHeight="58px">
               <ProductTitle data-title={product.title}>
                 {product.title}
-                { i === currentProductIndex && (<TitleHover aria-hidden bgColor={product.bgColor} currentWidth={titleHoverWidth}>
-                  {product.title}
-                </TitleHover>)}
+                {i === currentProductIndex && (
+                  <TitleHover
+                    aria-hidden
+                    bgColor={product.bgColor}
+                    currentWidth={titleHoverWidth}
+                  >
+                    {product.title}
+                  </TitleHover>
+                )}
               </ProductTitle>
             </BarlowText>
           </Product>

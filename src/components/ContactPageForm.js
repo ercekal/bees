@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import { useForm } from '@formspree/react'
+// import { useForm } from '@formspree/react'
+import { useForm } from 'react-hook-form'
 import axios from 'axios'
 import Button from './Button'
 import OptionsList from './OptionsList'
@@ -19,6 +20,7 @@ const Label = styled.label`
   font-family: 'Work Sans', sans-serif;
   font-weight: 600;
   margin-bottom: 0;
+  color: ${({ hasError }) => (hasError ? 'red' : 'black')};
 `
 
 const Textarea = styled.textarea`
@@ -38,6 +40,9 @@ const Input = styled.input`
   border-bottom: 3px solid black;
   padding: 8px 4px;
   margin-bottom: 20px;
+  &:focus {
+    outline-width: 0;
+  }
   &::placeholder {
     font-size: 14px;
     line-height: 24px;
@@ -88,8 +93,9 @@ const initialValues = {
 }
 
 const ContactPageForm = ({ element }) => {
+  const { register, errors, handleSubmit } = useForm()
   const [values, setValues] = useState(initialValues)
-  const [state, handleSubmit] = useForm('xnqlaovg')
+  // const [state, handleSubmit] = useForm('xnqlaovg')
   const [countriesList, setCountriesList] = useState([])
   const [isOpen, setIsOpen] = useState(false)
 
@@ -105,12 +111,13 @@ const ContactPageForm = ({ element }) => {
       [name]: value,
     })
   }
+  console.log('errors: ', errors)
 
   const formElementsList = () =>
     element.inputsList.map((t, i) => {
       return (
         <FormInput rowEl={i === 1}>
-          <Label>
+          <Label hasError={errors[t.name]}>
             {t.label}
             {t.required && ' *'}
           </Label>
@@ -123,19 +130,25 @@ const ContactPageForm = ({ element }) => {
               type={t.type}
               onChange={handleInputChange}
               placeholder={t.placeholder}
+              ref={register({ required: t.required })}
             />
           ) : (
-            <Input
-              value={values[t.name]}
-              type={t.type}
-              name={t.name}
-              onChange={handleInputChange}
-              placeholder={t.placeholder}
-            />
+            <>
+              <Input
+                value={values[t.name]}
+                type={t.type}
+                name={t.name}
+                onChange={handleInputChange}
+                placeholder={t.placeholder}
+                ref={register({ required: t.required })}
+              />
+            </>
           )}
         </FormInput>
       )
     })
+
+  const onSubmit = data => console.log('data: ', data)
 
   const toggleOpen = () => setIsOpen(!isOpen)
 
@@ -149,7 +162,7 @@ const ContactPageForm = ({ element }) => {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div>{formElementsList()[0]}</div>
         <div style={{ display: 'flex' }}>
           {formElementsList()[1]}
@@ -158,7 +171,7 @@ const ContactPageForm = ({ element }) => {
         <div>{formElementsList()[3]}</div>
         <CountrySelect>
           <div style={{ width: '20%' }}>
-            <Label>Country *</Label>
+            <Label hasError={errors['country']}>Country *</Label>
           </div>
           <SelectContainer>
             <Select onClick={toggleOpen}>
@@ -179,6 +192,9 @@ const ContactPageForm = ({ element }) => {
         <div style={{ marginBottom: '20px' }}>
           {formElementsList()[4]}
         </div>
+        {/* Added country as a form input hidden element so that custom div can be validated */}
+        {/* custom country selector changes the values.country so that validation will always work */}
+        <div style={{ display: 'none' }}>{formElementsList()[5]}</div>
         <Button type="submit">{element.button}</Button>
       </form>
     </>
