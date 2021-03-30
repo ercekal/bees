@@ -12,7 +12,7 @@ gsap.registerPlugin(ScrollTrigger)
 gsap.registerPlugin(ScrollToPlugin)
 
 const Container = styled.section`
-  height: calc(100vh + 100px)
+  height: 600vh;
 `
 const Pin = styled.div.attrs(props => ({
   style: {
@@ -249,114 +249,154 @@ const SlideBody = styled.div`
 const SecondContentType = ({ items }) => {
   if (!items || items.length <= 0) return null
 
+  const [activeIndex, setActiveIndex] = useState(0)
+  const [progress, setProgress] = useState(0)
+  const [pinScrollTrigger, setPinScrollTrigger] = useState(null)
+  const [slideAnimation, setSlideAnimation] = useState(null)
+  const [currentImage, setCurrentImage] = useState(
+    items[activeIndex].secondaryContentImage.file.url,
+  )
   const total = items.length
   const $container = useRef(null)
   const $pin = useRef(null)
   const $image = useRef(null)
   const $slides = useRef(null)
   const windowSize = useWindowSize()
-  const initialGradient = `linear-gradient(
+  const prevIndex = usePrevious(activeIndex)
+  let initialGradient = `linear-gradient(
     to right,
-    ${items[0].leftBgColor || 'yellow'} 0%,
-    ${items[0].leftBgColor || 'yellow'} 0%,
+    ${items[activeIndex].leftBgColor || 'yellow'} 0%,
+    ${items[activeIndex].leftBgColor || 'yellow'} 0%,
     white 0%,
     white 100%
   )`
-
-  // set up state
   const [gradient, setGradient] = useState(initialGradient)
-  const [activeIndex, setActiveIndex] = useState(0)
-  //const prevIndex = usePrevious(activeIndex)
-  const [progress, setProgress] = useState(0)
-  const [locked, setLocked] = useState(false)
-  const [animating, setAnimating] = useState(false)
-  const [message, setMessage] = useState('initial')
-  const [timeline, setTimeline] = useState(gsap.timeline({paused: true}))
-  //const [currentImage, setCurrentImage] = useState(
-  //  items[activeIndex].secondaryContentImage.file.url,
-  //)
 
-
-  // Methods
   const pinProgress = (scroll, current) => {
-    lock()
+    const step = 1 / total
+    const velocity = scroll.getVelocity()
+    let nextActiveIndex = velocity > 0 ? activeIndex + 1 : activeIndex - 1
+    setProgress(i => scroll.progress)
+    if (nextActiveIndex === items.length) return false
+
+    // If progress is low perform initial tween
+    if (scroll.progress < 0.1) {
+      nextActiveIndex = 0
+    }
+
+    if (!gsap.isTweening(window) && (velocity > 100 || velocity < -100)) {
+
+      if (nextActiveIndex >= 0) {
+        setActiveIndex(nextActiveIndex)
+      }
+
+      const totalScrollable = scroll.end - scroll.start
+      let scrollTarget = totalScrollable * (step * (nextActiveIndex + 1)) + scroll.start
+
+      document.body.style.overflow = 'hidden'
+      document.body.style.height = '100%'
+
+      gsap.to(window, {
+        scrollTo: {y: scrollTarget, autoKill: false},
+        duration: 1
+      }).then(() => {
+
+        setTimeout(() => {
+          document.body.style.overflow = 'auto'
+          document.body.style.height = 'auto'
+        }, 500)
+      })
+    }
   }
 
-  const tweenGradient = (gradientVal, tweenWidth = true, tweenTiming = '>', index = activeIndex) => {
-    const currentGradient = { value: gradientVal }
+  // Animate slider background
+  useEffect(() => {
+    // Initial component in animation
+    let slideAnimationTl
+    if (slideAnimation) {
+       slideAnimationTl = slideAnimation
+    } else {
+      slideAnimationTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: $container.current,
+          start: 'top 95%',
+          scrub: false,
+          once: true,
+        },
+      })
+      setSlideAnimation(a => slideAnimationTl)
+    }
+    slideAnimationTl.clear()
+
+    // Animate slide coloured background
+    const currentGradient = { value: gradient }
+    const duration = gradient === initialGradient ? 1.5 : 0.5
     const gradientDirection = windowSize.width <= 768 ? 'bottom' : 'right'
     const gradientPercent = windowSize.width <= 768 ? '50%' : '38.8%'
 
-    timeline.to(currentGradient, {
+    if (prevIndex === activeIndex && prevIndex === 0) {
+      slideAnimationTl.set($image.current, { autoAlpha: 0, y: -30 }, 0)
+    }
+
+    slideAnimationTl.to(currentGradient, {
       value: `linear-gradient(
         to ${gradientDirection},
-        ${items[index].leftBgColor || 'yellow'} ${tweenWidth ? '0%' : gradientPercent},
-        ${items[index].leftBgColor || 'yellow'} ${gradientPercent},
+        ${items[activeIndex].leftBgColor || 'yellow'} 0%,
+        ${items[activeIndex].leftBgColor || 'yellow'} ${gradientPercent},
         white ${gradientPercent},
         white 100%
       )`,
-      duration: 1.5,
+      duration,
       ease: 'power4.inOut',
       onUpdate: () => {
         setGradient(g => currentGradient.value)
       },
-    }, tweenTiming)
-  }
+    }, 0)
 
-  const initialAnimation = () => {
-    if (!timeline) return false
-    timeline.call(animateIn, [])
-    timeline.play()
-  }
+    if (prevIndex !== activeIndex || prevIndex === 0) {
+      // Animate out current image
+      if (prevIndex !== activeIndex) {
+        slideAnimationTl.to($image.current, { autoAlpha: 0, y: -30, ease: 'power2.in', duration: 0.7 }, 0)
+        // Animate in next image
+        slideAnimationTl.call(
+          setCurrentImage,
+          [i => items[activeIndex].secondaryContentImage.file.url],
+          0.7,
+        )
+      }
+      slideAnimationTl.to(
+        $image.current,
+        {
+          y: 0,
+          autoAlpha: 1,
+          ease: 'power4.out',
+          duration: 1.5,
+        },
+        prevIndex === activeIndex ? 1 : 1,
+      )
 
-  const animateOut = (index) => {
-    console.log('🔴 run animate out')
-    if (!timeline) return false
-
-    // Image
-    timeline.to($image.current, { autoAlpha: 0, y: -30, duration: 0.2 })
-
-    // Text content
-    const $allAnimatable = $slides.current.querySelectorAll('.animate')
-    const $allStatic = $slides.current.querySelectorAll('.static')
-    timeline.to(
-      $allAnimatable,
-      { autoAlpha: 0, duration: 0.4 },
-      '<',
-    )
-    timeline.call(console.log, ['🟢 animate out finished'], '>')
-  }
-
-
-  const changeSlide = (index) => {
-    console.log('🔴 run change slide', index)
-    if (!timeline) return false
-    // Set new active index
-    timeline.call(setActiveIndex, [index], '>')
-    timeline.call(console.log, ['🟢 change slide finished:', activeIndex], '>')
-  }
-
-  const animateIn = (index) => {
-    console.log('🔴 run animate in')
-    if (!timeline) return false
-
-    // Background
-    tweenGradient(gradient, false, '-=1', index)
-
-    // Image
-    timeline.to($image.current, { autoAlpha: 1, y: 0, duration: 0.7 }, '-=0.5')
-
-    // Text content
-    const $allStatic = $slides.current.querySelectorAll('.static')
-    const slidesArray = $slides.current.children
+      // Animate out text content
+      const $allAnimatable = $slides.current.querySelectorAll(
+        '.animate',
+      )
+      const $allStatic = $slides.current.querySelectorAll(
+        '.static',
+      )
+      slideAnimationTl.to(
+        $allAnimatable,
+        { autoAlpha: 0, duration: 0.4 },
+        0.7,
+      )
+      // Animate in text content
+      const slidesArray = $slides.current.children
       if (slidesArray) {
         ;[...slidesArray].forEach((slide, index) => {
           if (index === activeIndex) {
             const $staticEls = slide.querySelectorAll('.static')
             const $animatedEls = slide.querySelectorAll('.animate')
-            timeline.set($allStatic, { autoAlpha: 0 }, '>')
-            timeline.set($staticEls, { autoAlpha: 1 }, '>')
-            timeline.to(
+            slideAnimationTl.set($allStatic, { autoAlpha: 0 }, '>')
+            slideAnimationTl.set($staticEls, { autoAlpha: 1 }, '>')
+            slideAnimationTl.to(
               $animatedEls,
               {
                 autoAlpha: 1,
@@ -369,116 +409,53 @@ const SecondContentType = ({ items }) => {
           }
         })
       }
-    timeline.call(console.log, ['🟢 animate in finished'], '>')
-  }
-
-  const containerScroll = (scroll) => {
-    //console.log(scroll.deltaY, locked, animating)
-    if (locked && !animating) {
-      console.log('WHEEL', scroll.deltaY)
-      setAnimating(a => true)
-      // Calc next slide
-      let nextSlide = scroll.deltaY > 0 ? activeIndex + 1 : activeIndex - 1
-      console.log('✨ nextslide:', nextSlide)
-      if (nextSlide < 0 || nextSlide > total - 1) {
-        unlock()
-        setAnimating(a => false)
-        return false
-      }
-
-      // Do animations
-      animateOut(nextSlide)
-      changeSlide(nextSlide)
-      animateIn(nextSlide)
-
-      if (timeline) {
-        timeline.call(() => {
-           console.log('🙅‍♂️ finish animation')
-          setAnimating(a => false)
-        }, [], '>')
-      } else {
-        console.log('no timeline')
-      }
     }
-  }
+  }, [activeIndex, windowSize, slideAnimation])
 
-  const lock = (direction) => {
-    console.log('lock')
-    setMessage('lock')
-    setLocked(l => true)
-    const $body = document.querySelector('body')
-    $body.style.overflow = 'hidden'
-    $body.style.height = '100%'
-
-    // reposition if necessary
-    //if ($container.currnt)
-    const position = $container.current.getBoundingClientRect().top
-    if (direction < 0 && position < 100 && position > -100) {
-      console.log('⚾️ catch', position, direction)
-      gsap.to(window, {scrollTo: $container.current})
-    } else {
-      console.log('⛳️ no catch', position, direction)
-    }
-  }
-
-  const unlock = () => {
-    console.log('🔓 unlock')
-    if (initialAnimation) {
-      setMessage('unlock')
-      setLocked(l => false)
-      const $body = document.querySelector('body')
-      $body.style.removeProperty('overflow')
-      $body.style.removeProperty('height')
-    }
-  }
-
-  // Apply/kill scrolltriggers
   useEffect(() => {
-    console.log('🎩 effect applied')
-    const initST = ScrollTrigger.create({
-      trigger: $container.current,
-      start: 'top 95%',
-      scrub: 0,
-      onEnter: () => {
-        initialAnimation()
-      }
-    })
-    const scrollPinST = ScrollTrigger.create({
-      trigger: $container.current,
-      pin: $pin.current,
-      start: 'top top',
-      end: 'bottom bottom',
-      scrub: 0,
-      onEnterBack: self => {
-        console.log('enter back')
-        lock(self.direction)
-      },
-      onEnter: self => {
-        console.log('enter', self)
-        lock(self.direction)
-      },
-      onLeave: self => {
-        console.log('leave', window.scrollY)
-        unlock()
-        console.log('leave2', window.scrollY)
-        //gsap.set(window, {scrollTo: 1300})
-        //setActiveIndex(i => total - 1)
-        //setProgress(p => 1)
-      },
-    })
     return () => {
-      console.log('effect removed')
-      if (initST) initST.kill()
-      if (scrollPinST) scrollPinST.kill()
+      if (slideAnimation && slideAnimation.scrollTrigger)
+        slideAnimation.scrollTrigger.kill()
     }
-  }, [])
+  }, [slideAnimation])
 
+  // Apply/kill scrolltrigger
+  useEffect(() => {
+    //if (!pinScrollTrigger) {
+      const scrollPin = ScrollTrigger.create({
+        trigger: $container.current,
+        anticipatePin: 1,
+        pin: $pin.current,
+        start: 'top top',
+        end: 'bottom bottom',
+        scrub: 2,
+        snap: 1 / (total),
+        onLeave: self => {
+          setActiveIndex(i => total - 1)
+          setProgress(p => 1)
+        },
+        onUpdate: self => {
+          pinProgress(self, activeIndex)
+        },
+      })
+
+      //setPinScrollTrigger(p => scrollPin)
+    //}
+    return () => {
+      if (scrollPin) scrollPin.kill()
+    }
+  }, [activeIndex])
+
+  /*useEffect(() => {
+    return () => {
+      if (pinScrollTrigger) pinScrollTrigger.kill()
+    }
+  }, [pinScrollTrigger])*/
 
   return (
-    <Container ref={$container} onWheel={(e) => containerScroll(e)}>
+    <Container ref={$container}>
       <Pin ref={$pin} gradient={gradient}>
-        { message }
-        <SlideImage ref={$image} image={items[activeIndex].secondaryContentImage.file.url} />
+        <SlideImage ref={$image} image={currentImage} />
         <Inner>
           <ProgressNav>
             <WorkSans>0{activeIndex + 1}</WorkSans>
