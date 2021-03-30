@@ -10,7 +10,10 @@ const H2 = styled.h2`
   font-family: 'Barlow Semi Condensed', sans-serif;
   font-weight: 600;
   margin-bottom: 24px;
-  text-align: left;
+  text-align: center;
+  @media (min-width: 1100px) {
+    text-align: left;
+  }
   cursor: pointer;
 `
 
@@ -19,7 +22,16 @@ const P = styled.p`
   line-height: 24px;
   font-family: 'Work Sans', sans-serif;
   font-weight: 400;
-  margin-top: 24px;
+  margin: 24px 0;
+`
+
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @media (min-width: 1100px) {
+    justify-content: flex-start;
+  }
 `
 
 const Section = styled.section`
@@ -44,7 +56,9 @@ const FindOutMore = ({ findOutMore }) => {
           <div className="text-area">
             <H2>{title}</H2>
             <P>{subtitle}</P>
-            <Button to="/contact">{button}</Button>
+            <ButtonContainer>
+              <Button to="/contact">{button}</Button>
+            </ButtonContainer>
           </div>
         </div>
 
