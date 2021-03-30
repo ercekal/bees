@@ -114,7 +114,6 @@ const ContactPageForm = ({ element }) => {
       [name]: value,
     })
   }
-  console.log('errors: ', errors)
 
   const formElementsList = () =>
     element.inputsList.map((t, i) => {

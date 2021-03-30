@@ -4,6 +4,8 @@ import './Map.css'
 import WorldMap from './WorldMap'
 
 const Section = styled.section`
+  height: 900px;
+
   @media (min-width: 1024px) {
     margin-bottom: 40px;
   }
@@ -28,13 +30,13 @@ const SubHeader = styled.p`
   margin-bottom: 0;
 `
 
-const H2 = styled.h2`
+const H4 = styled.h4`
   font-size: 36px;
-  line-height: 43.2px;
-  letter-spacing: -3px;
+  line-height: 56px;
+  letter-spacing: -2px;
   font-family: 'Barlow Semi Condensed', sans-serif;
   font-weight: 600;
-  margin-bottom: 0;
+  margin-bottom: -4px;
 `
 
 const P = styled.p`
@@ -74,7 +76,7 @@ const Card = styled.div`
 const Map = ({ mapBoxes }) => {
   const renderText = (item, i) => {
     const { text, bold } = item
-    return bold ? <H2 key={i}>{text}</H2> : <P key={i}>{text}</P>
+    return bold ? <H4 key={i}>{text}</H4> : <P key={i}>{text}</P>
   }
 
   const list = mapBoxes.mapBoxes.map((item, i) => {

@@ -25,9 +25,6 @@ const Image = styled.img`
 `
 
 const Header = ({ navbar, desktopBgColor, smallDeviceBgColor }) => {
-  console.log('smallDeviceBgColor: ', smallDeviceBgColor)
-  console.log('desktopBgColor: ', desktopBgColor)
-
   const {
     bgColor,
     button,

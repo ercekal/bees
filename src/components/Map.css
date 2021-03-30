@@ -1,24 +1,39 @@
-.boxes {
-  margin-top: 20px;
+section {
+  position: relative;
 }
-
+.box {
+  width: 49%;
+  float: left;
+  background-color: #ffff00;
+  margin-bottom: 8px;
+  padding: 8px 16px 20px;
+}
 .box:nth-of-type(1),
 .box:nth-of-type(3) {
   margin-right: 2%;
 }
-
-.interactive-maps {
-  display: none;
+.cols10 {
+  width: 41.66%;
+  float: left;
+}
+h4 {
+  font-size: 36px;
+  line-height: 56px;
+  letter-spacing: -2px;
+  font-family: 'Barlow Semi Condensed', sans-serif;
+  font-weight: 600;
+  margin-bottom: -4px;
 }
 
-@media screen and (min-width: 768px) {
-  .interactive-maps {
-    display: block;
-    position: absolute;
-    right: 0;
-    width: 55%;
-    text-align: right;
-  }
+.interactive-maps {
+  position: absolute;
+  right: 0;
+  width: 50%;
+  height: 900px;
+}
+
+.interactive-maps img {
+  height: 900px;
 }
 
 @media only screen and (max-width: 1100px) {
@@ -27,23 +42,18 @@
     display: block;
     padding: 100px 48px;
   }
-  .cols8 {
+  .cols10 {
     width: 100%;
   }
   .cols14 {
     width: 100%;
   }
-  h2 {
-    margin-bottom: 48px;
-    text-align: left;
+  .interactive-maps {
+    display: none;
   }
 }
 
 @media only screen and (max-width: 660px) {
-
-  h2 {
-    text-align: center;
-  }
   .container,
   .carousel {
     padding: 80px 24px;
@@ -52,5 +62,16 @@
   .photo-box:nth-of-type(3) {
     width: 100%;
     margin: 0 0px 28px 0px;
+  }
+  .box {
+    width: 100%;
+    text-align: center;
+  }
+  .cols10 h2 {
+    text-align: center;
+  }
+  .box:nth-of-type(1),
+  .box:nth-of-type(3) {
+    margin-right: 0%;
   }
 }

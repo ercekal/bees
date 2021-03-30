@@ -10,7 +10,6 @@ const Select = styled.select`
 
 const Dropdown = () => {
   const { location, navigate } = history
-  console.log('location: ', location)
 
   const [selectedLanguage, setSelectedLanguage] = useState(
     location.pathname === '/' ? 'en' : location.pathname.substring(1),
