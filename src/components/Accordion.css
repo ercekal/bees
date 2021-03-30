@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600&display=swap');
 
-/* Style the accordion section */
 .accordion__section {
   display: flex;
   flex-direction: column;
+  width: 100%;
+  padding: 10px 0;
 }
 
-/* Style the buttons that are used to open and close the accordion panel */
 .accordion {
   background-color: #f0ecfc;
   color: #444;
@@ -19,33 +19,21 @@
   transition: background-color 0.6s ease;
 }
 
-/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
-/* .accordion:hover,
-.active {
-  background-color: #f0ecfc;
-} */
-
-/* Style the accordion content title */
 .accordion__title {
-  font-family: 'Open Sans', sans-serif;
-  font-weight: 600;
-  font-size: 14px;
   text-align: left;
+  max-width: 50%;
 }
 
-/* Style the accordion chevron icon */
 .accordion__icon {
   margin-left: auto;
-  transform: rotate(270deg);
+  transform: rotate(90deg);
   transition: transform 0.6s ease;
 }
 
-/* Style to rotate icon when state is active */
 .rotate {
-  transform: rotate(90deg);
+  transform: rotate(270deg);
 }
 
-/* Style the accordion content panel. Note: hidden by default */
 .accordion__content {
   background-color: #f0ecfc;
   overflow: auto;
