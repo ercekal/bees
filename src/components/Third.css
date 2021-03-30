@@ -9,10 +9,6 @@
   width: 33.33%;
   float: left;
 }
-.cols8-map {
-  width: 33.33%;
-  float: left;
-}
 .cols14 {
   width: 58.33%;
   float: left;
@@ -48,7 +44,7 @@
   .cols14 {
     width: 100%;
   }
-  h2 {
+  .cols8 h2 {
     text-align: center;
     margin-bottom: 48px;
   }
