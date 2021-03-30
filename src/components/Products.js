@@ -112,12 +112,13 @@ const NavButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 40px;
-  width: 40px;
+  height: 80px;
+  width: 50px;
   position: absolute;
   left: ${({ left }) => left || 'auto'};
   right: ${({ right }) => right || 'auto'};
   border: 0;
+  padding: 0;
   background: transparent;
   transform: rotate(${props => (props.left ? '90deg' : '270deg')});
 
@@ -240,7 +241,7 @@ const Products = ({ products }) => {
             </BarlowText>
           </Product>
         ))}
-        <NavButton right="0" onClick={() => changeCurrent(-1)}>
+        <NavButton right="0" onClick={() => changeCurrent()}>
           <Chevron src="../../chevron.svg" />
         </NavButton>
       </List>
