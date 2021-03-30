@@ -7,6 +7,9 @@ import './Contact.css'
 
 const Section = styled.section`
   height: 100vh;
+  @media only screen and (max-width: 960px) {
+    height: auto;
+  }
 `
 
 const Left = styled.div`

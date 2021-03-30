@@ -31,19 +31,23 @@ const P = styled.p`
 
 const Country = styled.div`
   background: ${({ selected }) => (selected ? '#FFFF00' : '#f0ecfc')};
-  width: 200px;
+  width: 46%;
   height: 40px;
-  padding: 10px 20px;
-  font-size: 16px;
+  padding: 10px 15px;
+  font-size: 14px;
   line-height: 24px;
   font-family: 'Work Sans', sans-serif;
   font-weight: 600;
   margin: 0 10px 10px 0;
   cursor: pointer;
+  @media (min-width: 600px) {
+    font-size: 16px;
+    padding: 10px 20px;
+  }
 `
 
 const CountriesList = styled.div`
-  width: 650px;
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
 `
@@ -51,18 +55,24 @@ const CountriesList = styled.div`
 const CountryInfoBox = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 650px;
+  width: 100%;
 `
 
 const QRBox = styled.div`
-  display: flex;
-  flex-direction: column;
+  display: none;
+  @media (min-width: 768px) {
+    display: flex;
+    flex-direction: column;
+  }
 `
 
 const CountryInfoBoxText = styled.div`
   display: flex;
   flex-direction: column;
-  width: 40%;
+  width: 100%;
+  @media (min-width: 768px) {
+    width: 40%;
+  }
 `
 
 const GetTheApp = ({ element }) => {
