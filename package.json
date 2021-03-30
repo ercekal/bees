@@ -30,6 +30,7 @@
     "react-gsap": "^2.2.1",
     "react-helmet": "^6.1.0",
     "react-hook-form": "^6.15.5",
+    "react-onclickoutside": "^6.10.0",
     "react-select": "^4.3.0",
     "styled-components": "^5.2.1"
   },
