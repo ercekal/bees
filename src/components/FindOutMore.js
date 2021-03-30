@@ -1,18 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
+import Button from './Button'
 import './FindOutMore.css'
-
-const Button = styled.button`
-  font-size: 20px;
-  background-color: #000;
-  color: #ffff00;
-  letter-spacing: -1px;
-  font-family: 'Barlow Semi Condensed', sans-serif;
-  font-weight: 600;
-  padding: 8px 16px;
-  border: none;
-  margin-top: 24px;
-`
 
 const H2 = styled.h2`
   font-size: 48px;
@@ -30,6 +19,7 @@ const P = styled.p`
   line-height: 24px;
   font-family: 'Work Sans', sans-serif;
   font-weight: 400;
+  margin-top: 24px;
 `
 
 const Section = styled.section`
@@ -54,7 +44,7 @@ const FindOutMore = ({ findOutMore }) => {
           <div className="text-area">
             <H2>{title}</H2>
             <P>{subtitle}</P>
-            <Button>{button}</Button>
+            <Button to="/contact">{button}</Button>
           </div>
         </div>
 
