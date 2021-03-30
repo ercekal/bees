@@ -37,7 +37,6 @@ const IndexPage = ({ location, data }) => {
 
   return (
     <Container>
-      {/* Spanish page
       <SEO title="Home" />
       <Header navbar={navbar} />
       <Hero hero={hero} />
@@ -48,7 +47,7 @@ const IndexPage = ({ location, data }) => {
       <Perks perks={perks} />
       <Map mapBoxes={map} countries={footer.countries} />
       <FindOutMore findOutMore={findOutMore} />
-      <Footer footer={footer} /> */}
+      <Footer footer={footer} />
     </Container>
   )
 }
@@ -183,6 +182,11 @@ export const query = graphql`
             button
             bgColor
             bgImage {
+              file {
+                url
+              }
+            }
+            bgImageShadow {
               file {
                 url
               }
