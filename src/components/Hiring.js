@@ -19,12 +19,6 @@ const P = styled.p`
   margin-bottom: 16px;
 `
 
-const PLink = styled(P)`
-  text-decoration: underline;
-  font-weight: 600;
-  margin-top: 16px;
-`
-
 const Hiring = ({ element }) => {
   const { title, description, button, link } = element
   return (
@@ -34,7 +28,8 @@ const Hiring = ({ element }) => {
         <P key={i}>{el}</P>
       ))}
       <Button to="#">{button}</Button>
-      <PLink>{link}</PLink>
+      <br />
+      <Button>{link}</Button>
     </>
   )
 }
