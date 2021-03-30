@@ -41,9 +41,6 @@ const IndexPage = ({ data }) => {
       <Hero hero={hero} />
       <SecondContentType items={itemsList} />
       <ThirdContentType third={third} />
-      <Products products={products} />
-      <Testemonials testemonials={testemonials} />
-      <Footer footer={footer} />
     </Container>
   )
 }
