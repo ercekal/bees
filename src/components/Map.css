@@ -30,9 +30,11 @@ h4 {
   right: 0;
   width: 50%;
   height: 900px;
+  z-index: 1;
 }
 
 .interactive-maps img {
+  z-index: 1;
   height: 900px;
 }
 
