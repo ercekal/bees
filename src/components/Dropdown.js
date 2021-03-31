@@ -7,11 +7,12 @@ const Option = styled.div`
   line-height: 24px;
   font-family: 'Work Sans', sans-serif;
   font-weight: 600;
-  /* background-color: white; */
+  z-index: 101;
   padding: 0.5rem;
   cursor: pointer;
   &:hover {
-    background-color: gray;
+    background-color: black;
+    color: yellow;
   }
 `
 const List = styled.div`
