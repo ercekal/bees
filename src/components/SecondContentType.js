@@ -162,12 +162,11 @@ const SlideImage = styled.div`
   position: absolute;
   left: 50%;
   top: 45%;
-  width: 90%;
+  width: 70%;
   opacity: 0;
 
   @media screen and (min-width: 768px) {
     top: 50%;
-    width: 70%;
     height 70vh;
     left: calc(38.5% - 7vh);
   }
@@ -199,10 +198,12 @@ const SlideLower = styled.div`
   display: flex;
   flex-direction: row;
   margin-top: auto;
+  margin-bottom: 40px;
 
   @media screen and (min-width: 768px) {
     flex-direction: column;
     margin-top: 0;
+    margin-bottom: 0;
   }
 `
 
@@ -397,26 +398,25 @@ const SecondContentType = ({ items }) => {
   }
 
   const lock = (direction) => {
-    setLocked(l => true)
+    setLocked(true)
     const $body = document.querySelector('body')
     $body.style.overflow = 'hidden'
     $body.style.height = '100%'
   }
 
   const unlock = () => {
-    setLocked(l => false)
+    setLocked(false)
     const $body = document.querySelector('body')
     $body.style.removeProperty('overflow')
     $body.style.removeProperty('height')
   }
 
-  // Animate slider background
+
   useEffect(() => {
     if (!timeline) return () => {}
-
-    timeline.clear()
-
-    if (prevIndex !== activeIndex) {
+    if (prevIndex !== activeIndex && typeof prevIndex !== 'undefined') {
+      console.log('run', prevIndex, activeIndex)
+      timeline.clear()
       animateOut(activeIndex)
       changeSlide(activeIndex)
       animateIn(activeIndex)
@@ -460,7 +460,7 @@ const SecondContentType = ({ items }) => {
     return () => {
       if (initST) initST.kill()
     }
-  }, [])
+  }, [windowSize])
 
   return (
     <Container ref={$container}>
