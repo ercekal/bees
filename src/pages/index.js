@@ -16,7 +16,6 @@ import ThirdContentType from '../components/ThirdContentType'
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100%;
   width: 100%;
 `
 
@@ -38,7 +37,7 @@ const IndexPage = ({ data }) => {
   return (
     <Container>
       <SEO title="Home" />
-      <Header navbar={navbar} />
+      <Header navbar={navbar} indexPage />
       <Hero hero={hero} />
       <SecondContentType items={itemsList} />
       <ThirdContentType third={third} />

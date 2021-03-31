@@ -19,6 +19,7 @@ const Container = styled.section.attrs(props => ({
   align-items: center;
   padding: 5rem 2rem;
   height: auto;
+  min-height: 400px;
 
   @media (min-width: 768px) {
     padding: 200px 0 120px;
@@ -29,6 +30,7 @@ const Container = styled.section.attrs(props => ({
 const Arrows = styled.div`
   width: 100%;
   display: flex;
+  opacity: 0;
   justify-content: flex-end;
   @media (min-width: 768px) {
     max-width: 800px;
@@ -42,6 +44,7 @@ const Testemonials = ({ testemonials }) => {
   const { testemonialsList, bgColor } = testemonials
   const $container = useRef(null)
   const $wrapper = useRef(null)
+  const $arrows = useRef(null)
   const windowSize = useWindowSize()
   const gradientPercent = windowSize.width <= 768 ? '45%' : '38%'
   const initialGradient = `linear-gradient(
@@ -102,17 +105,11 @@ const Testemonials = ({ testemonials }) => {
     })
 
     introTl.fromTo(
-      $wrapper.current,
-      {
-        y: 30,
-        autoAlpha: 0
-      },
-      {
-        y: 0,
-        autoAlpha: 1
-      },
+      [$wrapper.current, $arrows.current],
+      {y: 30, autoAlpha: 0},
+      {y: 0, autoAlpha: 1},
       0.5
-     )
+    )
 
     return () => {
       if (introTl.scrollTrigger) {
@@ -151,7 +148,7 @@ const Testemonials = ({ testemonials }) => {
       <div ref={$wrapper}>
         {list[number]}
       </div>
-      <Arrows>
+      <Arrows ref={$arrows}>
         <Arrow degrees="0" onClick={() => changeSlide(-1)} />
         <Arrow degrees="180" onClick={() => changeSlide(1)} />
       </Arrows>

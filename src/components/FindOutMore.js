@@ -1,18 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
+import Button from './Button'
 import './FindOutMore.css'
-
-const Button = styled.button`
-  font-size: 20px;
-  background-color: #000;
-  color: #ffff00;
-  letter-spacing: -1px;
-  font-family: 'Barlow Semi Condensed', sans-serif;
-  font-weight: 600;
-  padding: 8px 16px;
-  border: none;
-  margin-top: 24px;
-`
 
 const H2 = styled.h2`
   font-size: 48px;
@@ -21,7 +10,10 @@ const H2 = styled.h2`
   font-family: 'Barlow Semi Condensed', sans-serif;
   font-weight: 600;
   margin-bottom: 24px;
-  text-align: left;
+  text-align: center;
+  @media (min-width: 1100px) {
+    text-align: left;
+  }
   cursor: pointer;
 `
 
@@ -30,9 +22,21 @@ const P = styled.p`
   line-height: 24px;
   font-family: 'Work Sans', sans-serif;
   font-weight: 400;
+  margin: 24px 0;
+`
+
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @media (min-width: 1100px) {
+    justify-content: flex-start;
+  }
 `
 
 const Section = styled.section`
+  max-width: 100vw;
+  overflow: hidden;
   @media (min-width: 768px) {
     padding-top: '50px';
   }
@@ -54,7 +58,9 @@ const FindOutMore = ({ findOutMore }) => {
           <div className="text-area">
             <H2>{title}</H2>
             <P>{subtitle}</P>
-            <Button>{button}</Button>
+            <ButtonContainer>
+              <Button to="/contact">{button}</Button>
+            </ButtonContainer>
           </div>
         </div>
 

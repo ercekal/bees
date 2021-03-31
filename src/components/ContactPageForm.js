@@ -10,6 +10,10 @@ import Chev from './Chevron'
 const FormInput = styled.div`
   display: flex;
   flex-direction: column;
+  @media only screen and (max-width: 450px) {
+    margin-right: 0;
+    width: ${({ shareRow }) => (shareRow ? '48%' : '100%')};
+  }
   margin-right: ${({ rowEl }) => (rowEl ? '40px' : '0')};
   width: 100%;
 `
@@ -33,6 +37,9 @@ const Textarea = styled.textarea`
     line-height: 24px;
     padding-top: 32px;
   }
+  &:focus {
+    outline-width: 0;
+  }
 `
 
 const Input = styled.input`
@@ -40,8 +47,8 @@ const Input = styled.input`
   border-bottom: 3px solid black;
   padding: 8px 4px;
   margin-bottom: 20px;
-  &:focus {
-    outline-width: 0;
+  @media only screen and (max-width: 450px) {
+    width: 100%;
   }
   &::placeholder {
     font-size: 14px;
@@ -111,12 +118,14 @@ const ContactPageForm = ({ element }) => {
       [name]: value,
     })
   }
-  console.log('errors: ', errors)
 
   const formElementsList = () =>
     element.inputsList.map((t, i) => {
+      console.log('i: ', i)
+      console.log('name : ', t.name)
+      console.log('i === 1 || 2: ', i === 1 || 2)
       return (
-        <FormInput rowEl={i === 1}>
+        <FormInput rowEl={i === 1} shareRow={i === 1 || i === 2}>
           <Label hasError={errors[t.name]}>
             {t.label}
             {t.required && ' *'}
@@ -138,6 +147,7 @@ const ContactPageForm = ({ element }) => {
                 value={values[t.name]}
                 type={t.type}
                 name={t.name}
+                shareRow={i === 1 || i === 2}
                 onChange={handleInputChange}
                 placeholder={t.placeholder}
                 ref={register({ required: t.required })}
@@ -164,7 +174,9 @@ const ContactPageForm = ({ element }) => {
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>{formElementsList()[0]}</div>
-        <div style={{ display: 'flex' }}>
+        <div
+          style={{ display: 'flex', justifyContent: 'space-between' }}
+        >
           {formElementsList()[1]}
           {formElementsList()[2]}
         </div>

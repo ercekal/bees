@@ -3,11 +3,10 @@ import styled from 'styled-components'
 import Chevron from './Chevron'
 import WorkSans from './WorkSans'
 import BarlowText from './BarlowText'
-
 import './Accordion.css'
 
 const Country = styled.div`
-  padding-bottom: 0.5rem;
+  padding: 1rem;
 `
 
 function Accordion({ countries, title }) {

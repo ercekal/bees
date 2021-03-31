@@ -8,9 +8,15 @@ const Container = styled.section`
   flex-direction: row;
   align-items: stretch;
   justify-content: stretch;
-  width: 100%;
+  width: 100vw;
+  overflow: hidden;
   position: relative;
   min-height: 100vh;
+  flex-wrap: wrap;
+
+  @media (min-width: 768px) {
+    flex-wrap: nowrap;
+  }
 `
 
 const Left = styled.div`
@@ -19,7 +25,7 @@ const Left = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  padding: 5rem 0 0;
+  padding: 100px 0 0;
   width: 100%;
   text-align: center;
 
@@ -35,7 +41,7 @@ const ProductImage = styled.div`
   max-height: 500px;
   background: url(${({ bgImage }) => 'https:' + bgImage}) no-repeat
     center bottom/contain;
-  margin-top: 80px;
+  margin-top: auto;
 `
 
 const List = styled.div`
@@ -48,6 +54,7 @@ const List = styled.div`
   top: 50%;
   height: 120px;
   transform: translateY(-50%);
+  position: absolute;
 
   @media screen and (min-width: 768px) {
     width: 50%;
@@ -106,12 +113,13 @@ const NavButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 40px;
-  width: 40px;
+  height: 80px;
+  width: 50px;
   position: absolute;
   left: ${({ left }) => left || 'auto'};
   right: ${({ right }) => right || 'auto'};
   border: 0;
+  padding: 0;
   background: transparent;
   transform: rotate(${props => (props.left ? '90deg' : '270deg')});
 
@@ -196,10 +204,10 @@ const Products = ({ products }) => {
         bgColor={productsList[currentProductIndex].bgColor}
       >
         <div>
-          <BarlowText size="3rem" lineHeight="58px">
+          <BarlowText size="48px" lineHeight="58px">
             {description.split('.')[0] + '.'}
           </BarlowText>
-          <BarlowText size="3rem" lineHeight="58px">
+          <BarlowText size="48px" lineHeight="58px">
             {description.split('.')[1]}
           </BarlowText>
         </div>
@@ -212,29 +220,31 @@ const Products = ({ products }) => {
         <NavButton left="0" onClick={() => changeCurrent(-1)}>
           <Chevron src="../../chevron.svg" />
         </NavButton>
-        {productsList.map((product, i) => (
-          <Product
-            key={i}
-            onMouseEnter={() => hoverTitle(i)}
-            current={i === currentProductIndex}
-          >
-            <BarlowText size="3rem" lineHeight="58px">
-              <ProductTitle data-title={product.title}>
-                {product.title}
-                {i === currentProductIndex && (
-                  <TitleHover
-                    aria-hidden
-                    bgColor={product.bgColor}
-                    currentWidth={titleHoverWidth}
-                  >
-                    {product.title}
-                  </TitleHover>
-                )}
-              </ProductTitle>
-            </BarlowText>
-          </Product>
-        ))}
-        <NavButton right="0" onClick={() => changeCurrent(-1)}>
+        <div style={{ padding: '20px 0' }}>
+          {productsList.map((product, i) => (
+            <Product
+              key={i}
+              onMouseEnter={() => hoverTitle(i)}
+              current={i === currentProductIndex}
+            >
+              <BarlowText size="4rem" lineHeight="77px">
+                <ProductTitle data-title={product.title}>
+                  {product.title}
+                  {i === currentProductIndex && (
+                    <TitleHover
+                      aria-hidden
+                      bgColor={product.bgColor}
+                      currentWidth={titleHoverWidth}
+                    >
+                      {product.title}
+                    </TitleHover>
+                  )}
+                </ProductTitle>
+              </BarlowText>
+            </Product>
+          ))}
+        </div>
+        <NavButton right="0" onClick={() => changeCurrent()}>
           <Chevron src="../../chevron.svg" />
         </NavButton>
       </List>
