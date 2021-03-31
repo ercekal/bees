@@ -162,11 +162,12 @@ const SlideImage = styled.div`
   position: absolute;
   left: 50%;
   top: 45%;
-  width: 70%;
+  width: 90%;
   opacity: 0;
 
   @media screen and (min-width: 768px) {
     top: 50%;
+    width: 70%;
     height 70vh;
     left: calc(38.5% - 7vh);
   }
@@ -198,12 +199,10 @@ const SlideLower = styled.div`
   display: flex;
   flex-direction: row;
   margin-top: auto;
-  margin-bottom: 40px;
 
   @media screen and (min-width: 768px) {
     flex-direction: column;
     margin-top: 0;
-    margin-bottom: 0;
   }
 `
 
@@ -215,15 +214,6 @@ const Logo = styled.img.attrs(props => ({
   margin-bottom: 1rem;
 `
 
-const UpperTitle = styled.div`
-  text-align: center;
-  padding: 0 15px;
-
-  @media screen and (min-width: 768px) {
-    text-align: left;
-    padding: 0;
-  }
-`
 const Title = styled.div.attrs(props => ({
   className: 'static',
 }))`
@@ -260,10 +250,9 @@ const SecondContentType = ({ items }) => {
   if (!items || items.length <= 0) return null
 
   const [activeIndex, setActiveIndex] = useState(0)
-  const [timeline, setTimeline] = useState(gsap.timeline())
   const [progress, setProgress] = useState(0)
   const [pinScrollTrigger, setPinScrollTrigger] = useState(null)
-  const [locked, setLocked] = useState(false)
+  const [slideAnimation, setSlideAnimation] = useState(null)
   const [currentImage, setCurrentImage] = useState(
     items[activeIndex].secondaryContentImage.file.url,
   )
@@ -291,98 +280,123 @@ const SecondContentType = ({ items }) => {
     if (nextActiveIndex === items.length) return false
 
     // If progress is low perform initial tween
-    /*if (scroll.progress < 0.1) {
+    if (scroll.progress < 0.1) {
       nextActiveIndex = 0
-    }*/
-    if (!locked && (velocity > 100 || velocity < -100) && nextActiveIndex >= 0) {
+    }
 
-      if (nextActiveIndex === 1 && scroll.progress < step) {
-        nextActiveIndex = 0
+    if (!gsap.isTweening(window) && (velocity > 100 || velocity < -100)) {
+
+      if (nextActiveIndex >= 0) {
+        setActiveIndex(nextActiveIndex)
       }
-
-      setActiveIndex(nextActiveIndex)
-      lock()
 
       const totalScrollable = scroll.end - scroll.start
       let scrollTarget = totalScrollable * (step * (nextActiveIndex + 1)) + scroll.start
 
+      document.body.style.overflow = 'hidden'
+      document.body.style.height = '100%'
+
       gsap.to(window, {
-        scrollTo: {y: scrollTarget},
+        scrollTo: {y: scrollTarget, autoKill: false},
         duration: 1
       }).then(() => {
 
         setTimeout(() => {
-          unlock()
+          document.body.style.overflow = 'auto'
+          document.body.style.height = 'auto'
         }, 500)
       })
     }
   }
 
-  const tweenGradient = (gradientVal, tweenWidth = true, tweenTiming = '>', index = activeIndex) => {
-    const currentGradient = { value: gradientVal }
-    const gradientDirection = window.innerWidth <= 768 ? 'bottom' : 'right'
-    const gradientPercent = window.innerHeight <= 768 ? '50%' : '38.8%'
+  // Animate slider background
+  useEffect(() => {
+    // Initial component in animation
+    let slideAnimationTl
+    if (slideAnimation) {
+       slideAnimationTl = slideAnimation
+    } else {
+      slideAnimationTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: $container.current,
+          start: 'top 95%',
+          scrub: false,
+          once: true,
+        },
+      })
+      setSlideAnimation(a => slideAnimationTl)
+    }
+    slideAnimationTl.clear()
 
-    timeline.to(currentGradient, {
+    // Animate slide coloured background
+    const currentGradient = { value: gradient }
+    const duration = gradient === initialGradient ? 1.5 : 0.5
+    const gradientDirection = windowSize.width <= 768 ? 'bottom' : 'right'
+    const gradientPercent = windowSize.width <= 768 ? '50%' : '38.8%'
+
+    if (prevIndex === activeIndex && prevIndex === 0) {
+      slideAnimationTl.set($image.current, { autoAlpha: 0, y: -30 }, 0)
+    }
+
+    slideAnimationTl.to(currentGradient, {
       value: `linear-gradient(
         to ${gradientDirection},
-        ${items[index].leftBgColor || 'yellow'} ${tweenWidth ? '0%' : gradientPercent},
-        ${items[index].leftBgColor || 'yellow'} ${gradientPercent},
+        ${items[activeIndex].leftBgColor || 'yellow'} 0%,
+        ${items[activeIndex].leftBgColor || 'yellow'} ${gradientPercent},
         white ${gradientPercent},
         white 100%
       )`,
-      duration: 1.5,
+      duration,
       ease: 'power4.inOut',
       onUpdate: () => {
         setGradient(g => currentGradient.value)
       },
-    }, tweenTiming)
-  }
+    }, 0)
 
-  const animateOut = (index) => {
-    if (!timeline) return false
+    if (prevIndex !== activeIndex || prevIndex === 0) {
+      // Animate out current image
+      if (prevIndex !== activeIndex) {
+        slideAnimationTl.to($image.current, { autoAlpha: 0, y: -30, ease: 'power2.in', duration: 0.7 }, 0)
+        // Animate in next image
+        slideAnimationTl.call(
+          setCurrentImage,
+          [i => items[activeIndex].secondaryContentImage.file.url],
+          0.7,
+        )
+      }
+      slideAnimationTl.to(
+        $image.current,
+        {
+          y: 0,
+          autoAlpha: 1,
+          ease: 'power4.out',
+          duration: 1.5,
+        },
+        prevIndex === activeIndex ? 1 : 1,
+      )
 
-    // Image
-    timeline.to($image.current, { autoAlpha: 0, y: -30, duration: 0.2 })
-
-    // Text content
-    const $allAnimatable = $slides.current.querySelectorAll('.animate')
-    const $allStatic = $slides.current.querySelectorAll('.static')
-    timeline.to(
-      $allAnimatable,
-      { autoAlpha: 0, duration: 0.4 },
-      '<',
-    )
-  }
-
-
-  const changeSlide = (index) => {
-    if (!timeline) return false
-    // Set new active index
-    //timeline.call(setActiveIndex, [index], '>')
-    timeline.call(setCurrentImage, [items[index].secondaryContentImage.file.url], '>')
-  }
-
-  const animateIn = (index) => {
-    if (!timeline) return false
-
-    // Background
-    tweenGradient(gradient, false, '-=1', index)
-
-    // Image
-    timeline.to($image.current, { autoAlpha: 1, y: 0, duration: 0.7 }, '-=0.5')
-
-    // Text content
-    const $allStatic = $slides.current.querySelectorAll('.static')
-    const slidesArray = $slides.current.children
+      // Animate out text content
+      const $allAnimatable = $slides.current.querySelectorAll(
+        '.animate',
+      )
+      const $allStatic = $slides.current.querySelectorAll(
+        '.static',
+      )
+      slideAnimationTl.to(
+        $allAnimatable,
+        { autoAlpha: 0, duration: 0.4 },
+        0.7,
+      )
+      // Animate in text content
+      const slidesArray = $slides.current.children
       if (slidesArray) {
         ;[...slidesArray].forEach((slide, index) => {
           if (index === activeIndex) {
             const $staticEls = slide.querySelectorAll('.static')
             const $animatedEls = slide.querySelectorAll('.animate')
-            timeline.set($allStatic, { autoAlpha: 0 }, '>')
-            timeline.set($staticEls, { autoAlpha: 1 }, '>')
-            timeline.to(
+            slideAnimationTl.set($allStatic, { autoAlpha: 0 }, '>')
+            slideAnimationTl.set($staticEls, { autoAlpha: 1 }, '>')
+            slideAnimationTl.to(
               $animatedEls,
               {
                 autoAlpha: 1,
@@ -395,73 +409,48 @@ const SecondContentType = ({ items }) => {
           }
         })
       }
-  }
-
-  const lock = (direction) => {
-    setLocked(true)
-    const $body = document.querySelector('body')
-    $body.style.overflow = 'hidden'
-    $body.style.height = '100%'
-  }
-
-  const unlock = () => {
-    setLocked(false)
-    const $body = document.querySelector('body')
-    $body.style.removeProperty('overflow')
-    $body.style.removeProperty('height')
-  }
-
+    }
+  }, [activeIndex, windowSize, slideAnimation])
 
   useEffect(() => {
-    if (!timeline) return () => {}
-    if (prevIndex !== activeIndex && typeof prevIndex !== 'undefined') {
-      console.log('run', prevIndex, activeIndex)
-      timeline.clear()
-      animateOut(activeIndex)
-      changeSlide(activeIndex)
-      animateIn(activeIndex)
+    return () => {
+      if (slideAnimation && slideAnimation.scrollTrigger)
+        slideAnimation.scrollTrigger.kill()
     }
-  }, [activeIndex, windowSize])
-
+  }, [slideAnimation])
 
   // Apply/kill scrolltrigger
   useEffect(() => {
-    const scrollPinST = ScrollTrigger.create({
-      trigger: $container.current,
-      anticipatePin: 1,
-      pin: $pin.current,
-      start: 'top top',
-      end: 'bottom bottom',
-      scrub: 2,
-      onLeave: self => {
-        setActiveIndex(i => total - 1)
-        setProgress(p => 1)
-      },
-      onUpdate: self => {
-        pinProgress(self, activeIndex)
-      },
-    })
+    //if (!pinScrollTrigger) {
+      const scrollPin = ScrollTrigger.create({
+        trigger: $container.current,
+        anticipatePin: 1,
+        pin: $pin.current,
+        start: 'top top',
+        end: 'bottom bottom',
+        scrub: 2,
+        snap: 1 / (total),
+        onLeave: self => {
+          setActiveIndex(i => total - 1)
+          setProgress(p => 1)
+        },
+        onUpdate: self => {
+          pinProgress(self, activeIndex)
+        },
+      })
 
+      //setPinScrollTrigger(p => scrollPin)
+    //}
     return () => {
-      console.log('kill pin')
-      if (scrollPinST) scrollPinST.kill()
+      if (scrollPin) scrollPin.kill()
     }
-  }, [activeIndex, locked])
+  }, [activeIndex])
 
-  useEffect(() => {
-    const initST = ScrollTrigger.create({
-      trigger: $container.current,
-      start: 'top 95%',
-      scrub: 0,
-      once: true,
-      onEnter: () => {
-        animateIn(activeIndex)
-      }
-    })
+  /*useEffect(() => {
     return () => {
-      if (initST) initST.kill()
+      if (pinScrollTrigger) pinScrollTrigger.kill()
     }
-  }, [])
+  }, [pinScrollTrigger])*/
 
   return (
     <Container ref={$container}>
@@ -484,11 +473,9 @@ const SecondContentType = ({ items }) => {
                   <SlideUpper>
                     <Logo src={item.headerLogo.file.url} />
                     <SlideAnimate>
-                      <UpperTitle>
-                        <BarlowText size="36px" lineHeight="42px">
-                          {item.headerTitle}
-                        </BarlowText>
-                      </UpperTitle>
+                      <BarlowText size="36px" lineHeight="42px">
+                        {item.headerTitle}
+                      </BarlowText>
                     </SlideAnimate>
                   </SlideUpper>
                   <SlideLower>
