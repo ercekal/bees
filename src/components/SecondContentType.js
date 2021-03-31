@@ -12,7 +12,7 @@ gsap.registerPlugin(ScrollTrigger)
 gsap.registerPlugin(ScrollToPlugin)
 
 const Container = styled.section`
-  height: calc(100vh + 100px)
+  height: 600vh;
 `
 const Pin = styled.div.attrs(props => ({
   style: {
@@ -214,6 +214,15 @@ const Logo = styled.img.attrs(props => ({
   margin-bottom: 1rem;
 `
 
+const UpperTitle = styled.div`
+  text-align: center;
+  padding: 0 15px;
+
+  @media screen and (min-width: 768px) {
+    text-align: left;
+    padding: 0;
+  }
+`
 const Title = styled.div.attrs(props => ({
   className: 'static',
 }))`
@@ -249,37 +258,63 @@ const SlideBody = styled.div`
 const SecondContentType = ({ items }) => {
   if (!items || items.length <= 0) return null
 
+  const [activeIndex, setActiveIndex] = useState(0)
+  const [timeline, setTimeline] = useState(gsap.timeline())
+  const [progress, setProgress] = useState(0)
+  const [pinScrollTrigger, setPinScrollTrigger] = useState(null)
+  const [locked, setLocked] = useState(false)
+  const [currentImage, setCurrentImage] = useState(
+    items[activeIndex].secondaryContentImage.file.url,
+  )
   const total = items.length
   const $container = useRef(null)
   const $pin = useRef(null)
   const $image = useRef(null)
   const $slides = useRef(null)
   const windowSize = useWindowSize()
-  const initialGradient = `linear-gradient(
+  const prevIndex = usePrevious(activeIndex)
+  let initialGradient = `linear-gradient(
     to right,
-    ${items[0].leftBgColor || 'yellow'} 0%,
-    ${items[0].leftBgColor || 'yellow'} 0%,
+    ${items[activeIndex].leftBgColor || 'yellow'} 0%,
+    ${items[activeIndex].leftBgColor || 'yellow'} 0%,
     white 0%,
     white 100%
   )`
-
-  // set up state
   const [gradient, setGradient] = useState(initialGradient)
-  const [activeIndex, setActiveIndex] = useState(0)
-  //const prevIndex = usePrevious(activeIndex)
-  const [progress, setProgress] = useState(0)
-  const [locked, setLocked] = useState(false)
-  const [animating, setAnimating] = useState(false)
-  const [message, setMessage] = useState('initial')
-  const [timeline, setTimeline] = useState(gsap.timeline({paused: true}))
-  //const [currentImage, setCurrentImage] = useState(
-  //  items[activeIndex].secondaryContentImage.file.url,
-  //)
 
-
-  // Methods
   const pinProgress = (scroll, current) => {
-    lock()
+    const step = 1 / total
+    const velocity = scroll.getVelocity()
+    let nextActiveIndex = velocity > 0 ? activeIndex + 1 : activeIndex - 1
+    setProgress(i => scroll.progress)
+    if (nextActiveIndex === items.length) return false
+
+    // If progress is low perform initial tween
+    /*if (scroll.progress < 0.1) {
+      nextActiveIndex = 0
+    }*/
+    if (!locked && (velocity > 100 || velocity < -100) && nextActiveIndex >= 0) {
+
+      if (nextActiveIndex === 1 && scroll.progress < step) {
+        nextActiveIndex = 0
+      }
+
+      setActiveIndex(nextActiveIndex)
+      lock()
+
+      const totalScrollable = scroll.end - scroll.start
+      let scrollTarget = totalScrollable * (step * (nextActiveIndex + 1)) + scroll.start
+
+      gsap.to(window, {
+        scrollTo: {y: scrollTarget},
+        duration: 1
+      }).then(() => {
+
+        setTimeout(() => {
+          unlock()
+        }, 500)
+      })
+    }
   }
 
   const tweenGradient = (gradientVal, tweenWidth = true, tweenTiming = '>', index = activeIndex) => {
@@ -303,14 +338,7 @@ const SecondContentType = ({ items }) => {
     }, tweenTiming)
   }
 
-  const initialAnimation = () => {
-    if (!timeline) return false
-    timeline.call(animateIn, [])
-    timeline.play()
-  }
-
   const animateOut = (index) => {
-    console.log('🔴 run animate out')
     if (!timeline) return false
 
     // Image
@@ -324,20 +352,17 @@ const SecondContentType = ({ items }) => {
       { autoAlpha: 0, duration: 0.4 },
       '<',
     )
-    timeline.call(console.log, ['🟢 animate out finished'], '>')
   }
 
 
   const changeSlide = (index) => {
-    console.log('🔴 run change slide', index)
     if (!timeline) return false
     // Set new active index
-    timeline.call(setActiveIndex, [index], '>')
-    timeline.call(console.log, ['🟢 change slide finished:', activeIndex], '>')
+    //timeline.call(setActiveIndex, [index], '>')
+    timeline.call(setCurrentImage, [items[index].secondaryContentImage.file.url], '>')
   }
 
   const animateIn = (index) => {
-    console.log('🔴 run animate in')
     if (!timeline) return false
 
     // Background
@@ -369,116 +394,78 @@ const SecondContentType = ({ items }) => {
           }
         })
       }
-    timeline.call(console.log, ['🟢 animate in finished'], '>')
-  }
-
-  const containerScroll = (scroll) => {
-    //console.log(scroll.deltaY, locked, animating)
-    if (locked && !animating) {
-      console.log('WHEEL', scroll.deltaY)
-      setAnimating(a => true)
-      // Calc next slide
-      let nextSlide = scroll.deltaY > 0 ? activeIndex + 1 : activeIndex - 1
-      console.log('✨ nextslide:', nextSlide)
-      if (nextSlide < 0 || nextSlide > total - 1) {
-        unlock()
-        setAnimating(a => false)
-        return false
-      }
-
-      // Do animations
-      animateOut(nextSlide)
-      changeSlide(nextSlide)
-      animateIn(nextSlide)
-
-      if (timeline) {
-        timeline.call(() => {
-           console.log('🙅‍♂️ finish animation')
-          setAnimating(a => false)
-        }, [], '>')
-      } else {
-        console.log('no timeline')
-      }
-    }
   }
 
   const lock = (direction) => {
-    console.log('lock')
-    setMessage('lock')
     setLocked(l => true)
     const $body = document.querySelector('body')
     $body.style.overflow = 'hidden'
     $body.style.height = '100%'
-
-    // reposition if necessary
-    //if ($container.currnt)
-    const position = $container.current.getBoundingClientRect().top
-    if (direction < 0 && position < 100 && position > -100) {
-      console.log('⚾️ catch', position, direction)
-      gsap.to(window, {scrollTo: $container.current})
-    } else {
-      console.log('⛳️ no catch', position, direction)
-    }
   }
 
   const unlock = () => {
-    console.log('🔓 unlock')
-    if (initialAnimation) {
-      setMessage('unlock')
-      setLocked(l => false)
-      const $body = document.querySelector('body')
-      $body.style.removeProperty('overflow')
-      $body.style.removeProperty('height')
-    }
+    setLocked(l => false)
+    const $body = document.querySelector('body')
+    $body.style.removeProperty('overflow')
+    $body.style.removeProperty('height')
   }
 
-  // Apply/kill scrolltriggers
+  // Animate slider background
   useEffect(() => {
-    console.log('🎩 effect applied')
+    if (!timeline) return () => {}
+
+    timeline.clear()
+
+    if (prevIndex !== activeIndex) {
+      animateOut(activeIndex)
+      changeSlide(activeIndex)
+      animateIn(activeIndex)
+    }
+  }, [activeIndex, windowSize])
+
+
+  // Apply/kill scrolltrigger
+  useEffect(() => {
+    const scrollPinST = ScrollTrigger.create({
+      trigger: $container.current,
+      anticipatePin: 1,
+      pin: $pin.current,
+      start: 'top top',
+      end: 'bottom bottom',
+      scrub: 2,
+      onLeave: self => {
+        setActiveIndex(i => total - 1)
+        setProgress(p => 1)
+      },
+      onUpdate: self => {
+        pinProgress(self, activeIndex)
+      },
+    })
+
+    return () => {
+      if (scrollPinST) scrollPinST.kill()
+    }
+  }, [activeIndex, locked])
+
+  useEffect(() => {
     const initST = ScrollTrigger.create({
       trigger: $container.current,
       start: 'top 95%',
       scrub: 0,
+      once: true,
       onEnter: () => {
-        initialAnimation()
+        animateIn(0)
       }
     })
-    const scrollPinST = ScrollTrigger.create({
-      trigger: $container.current,
-      pin: $pin.current,
-      start: 'top top',
-      end: 'bottom bottom',
-      scrub: 0,
-      onEnterBack: self => {
-        console.log('enter back')
-        lock(self.direction)
-      },
-      onEnter: self => {
-        console.log('enter', self)
-        lock(self.direction)
-      },
-      onLeave: self => {
-        console.log('leave', window.scrollY)
-        unlock()
-        console.log('leave2', window.scrollY)
-        //gsap.set(window, {scrollTo: 1300})
-        //setActiveIndex(i => total - 1)
-        //setProgress(p => 1)
-      },
-    })
     return () => {
-      console.log('effect removed')
       if (initST) initST.kill()
-      if (scrollPinST) scrollPinST.kill()
     }
   }, [])
 
-
   return (
-    <Container ref={$container} onWheel={(e) => containerScroll(e)}>
+    <Container ref={$container}>
       <Pin ref={$pin} gradient={gradient}>
-        { message }
-        <SlideImage ref={$image} image={items[activeIndex].secondaryContentImage.file.url} />
+        <SlideImage ref={$image} image={currentImage} />
         <Inner>
           <ProgressNav>
             <WorkSans>0{activeIndex + 1}</WorkSans>
@@ -496,9 +483,11 @@ const SecondContentType = ({ items }) => {
                   <SlideUpper>
                     <Logo src={item.headerLogo.file.url} />
                     <SlideAnimate>
-                      <BarlowText size="36px" lineHeight="42px">
-                        {item.headerTitle}
-                      </BarlowText>
+                      <UpperTitle>
+                        <BarlowText size="36px" lineHeight="42px">
+                          {item.headerTitle}
+                        </BarlowText>
+                      </UpperTitle>
                     </SlideAnimate>
                   </SlideUpper>
                   <SlideLower>
