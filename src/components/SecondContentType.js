@@ -415,7 +415,6 @@ const SecondContentType = ({ items }) => {
   useEffect(() => {
     if (!timeline) return () => {}
     if (prevIndex !== activeIndex && typeof prevIndex !== 'undefined') {
-      console.log('run', prevIndex, activeIndex)
       timeline.clear()
       animateOut(activeIndex)
       changeSlide(activeIndex)
@@ -443,7 +442,6 @@ const SecondContentType = ({ items }) => {
     })
 
     return () => {
-      console.log('kill pin')
       if (scrollPinST) scrollPinST.kill()
     }
   }, [activeIndex, locked])
