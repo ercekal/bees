@@ -7,11 +7,14 @@ import Chev from './Chevron'
 
 const HeaderContainer = styled.header`
   height: '70px';
-  background: ${({ desktopBgColor, bgColor }) =>
-    desktopBgColor || bgColor};
+  position: ${({ indexPage }) => (indexPage ? 'fixed' : 'initial')};
+  top: ${({ indexPage }) => (indexPage ? 0 : undefined)};
+  width: 100%;
+  background: ${({ indexPage, desktopBgColor, bgColor }) =>
+    indexPage ? '' : desktopBgColor || bgColor};
   @media only screen and (max-width: 960px) {
-    background: ${({ smallDeviceBgColor, bgColor }) =>
-      smallDeviceBgColor || bgColor};
+    background: ${({ indexPage, smallDeviceBgColor, bgColor }) =>
+      indexPage ? '' : smallDeviceBgColor || bgColor};
   }
 `
 const Container = styled.div`
@@ -54,7 +57,12 @@ const Chevron = styled(Chev)`
   transition: transform 0.6s ease;
 `
 
-const Header = ({ navbar, desktopBgColor, smallDeviceBgColor }) => {
+const Header = ({
+  navbar,
+  desktopBgColor,
+  smallDeviceBgColor,
+  indexPage,
+}) => {
   const [isOpen, setIsOpen] = useState(false)
   const [selectedCountry, setSelectedCountry] = useState('En')
   const {
@@ -76,6 +84,7 @@ const Header = ({ navbar, desktopBgColor, smallDeviceBgColor }) => {
       desktopBgColor={desktopBgColor}
       smallDeviceBgColor={smallDeviceBgColor}
       bgColor={bgColor}
+      indexPage={indexPage}
     >
       <Container>
         <Link to="/">

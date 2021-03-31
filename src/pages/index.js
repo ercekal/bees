@@ -37,7 +37,7 @@ const IndexPage = ({ data }) => {
   return (
     <Container>
       <SEO title="Home" />
-      <Header navbar={navbar} />
+      <Header navbar={navbar} indexPage />
       <Hero hero={hero} />
       <SecondContentType items={itemsList} />
       <ThirdContentType third={third} />
