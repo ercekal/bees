@@ -38,7 +38,6 @@ const SubHeader = styled.p`
 const H4 = styled.h4`
   font-size: 36px;
   line-height: 56px;
-  letter-spacing: -2px;
   font-family: 'Barlow Semi Condensed', sans-serif;
   font-weight: 600;
   margin-bottom: -4px;
