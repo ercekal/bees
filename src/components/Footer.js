@@ -86,7 +86,7 @@ const CountriesList = styled.div`
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  height: 90px;
+  height: 60px;
   width: 350px;
 `
 
@@ -109,7 +109,7 @@ const LinkItem = styled(Link)`
 
 const Image = styled.img`
   padding: 2rem 0;
-  width: 100px;
+  width: 150px;
 `
 
 const ListTitle = styled.div`
@@ -177,18 +177,22 @@ const Footer = ({ footer }) => {
         <Container>
           <MobileTopContainer>
             <Upper>
-              <Image src={'http:' + logo.file.url} />
+              <Link to="/">
+                <Image src={'http:' + logo.file.url} />
+              </Link>
             </Upper>
             <Middle>
               <List>
                 <ListTitle>
-                  <BarlowText
-                    size="18px"
-                    lineHeight="22px"
-                    color="#FFFFFF"
-                  >
-                    {countriesTitle}
-                  </BarlowText>
+                  <div style={{ marginBottom: '16px' }}>
+                    <BarlowText
+                      size="24px"
+                      lineHeight="22px"
+                      color="#FFFFFF"
+                    >
+                      {countriesTitle}
+                    </BarlowText>
+                  </div>
                 </ListTitle>
                 {rendercountries()}
               </List>
