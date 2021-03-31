@@ -454,7 +454,8 @@ const SecondContentType = ({ items }) => {
       scrub: 0,
       once: true,
       onEnter: () => {
-        animateIn(0)
+        timeline.clear()
+        animateIn(activeIndex)
       }
     })
     return () => {
