@@ -320,8 +320,8 @@ const SecondContentType = ({ items }) => {
 
   const tweenGradient = (gradientVal, tweenWidth = true, tweenTiming = '>', index = activeIndex) => {
     const currentGradient = { value: gradientVal }
-    const gradientDirection = windowSize.width <= 768 ? 'bottom' : 'right'
-    const gradientPercent = windowSize.width <= 768 ? '50%' : '38.8%'
+    const gradientDirection = window.innerWidth <= 768 ? 'bottom' : 'right'
+    const gradientPercent = window.innerHeight <= 768 ? '50%' : '38.8%'
 
     timeline.to(currentGradient, {
       value: `linear-gradient(
@@ -443,6 +443,7 @@ const SecondContentType = ({ items }) => {
     })
 
     return () => {
+      console.log('kill pin')
       if (scrollPinST) scrollPinST.kill()
     }
   }, [activeIndex, locked])
@@ -454,14 +455,13 @@ const SecondContentType = ({ items }) => {
       scrub: 0,
       once: true,
       onEnter: () => {
-        timeline.clear()
         animateIn(activeIndex)
       }
     })
     return () => {
       if (initST) initST.kill()
     }
-  }, [windowSize])
+  }, [])
 
   return (
     <Container ref={$container}>
